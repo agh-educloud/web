@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Main Panel Demo Page'),
     );
   }
 }
@@ -27,35 +27,41 @@ class MyHomePage extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (choose the "Toggle Debug Paint" action
-          // from the Flutter Inspector in Android Studio, or the "Toggle Debug
-          // Paint" command in Visual Studio Code) to see the wireframe for each
-          // widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hello, World!',
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          GradientAppBar(title),
+
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class GradientAppBar extends StatelessWidget {
+  final String title;
+  final double barHeight = 50.0;
+
+  GradientAppBar(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    final double statusbarHeight = MediaQuery.of(context).padding.top;
+
+    return new Container(
+      padding: new EdgeInsets.only(top: statusbarHeight),
+      height: statusbarHeight + barHeight,
+      decoration: new BoxDecoration(
+        gradient: new LinearGradient(
+          colors: [new Color(0xffADA996), new Color(0xffeaeaea)],
+          begin: const FractionalOffset(0.5, 0.5),
+          end: const FractionalOffset(0.5, 1.5),
+        ),
+      ),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[Icon(Icons.cloud_queue, size: 20)],
+      ),
     );
   }
 }
