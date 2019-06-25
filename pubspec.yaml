@@ -1,6 +1,8 @@
 name: web
+
 flutter:
   uses-material-design: true
+
 
 description: An app built using Flutter for web
 
