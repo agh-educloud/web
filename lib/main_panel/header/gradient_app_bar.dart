@@ -3,6 +3,8 @@ import 'package:flutter_web/material.dart';
 
 class GradientAppBar extends StatelessWidget {
   final double barHeight;
+  final Color gradientStartColor = const Color(0xffADA996);
+  final Color gradientEndColor = const Color(0xffeaeaea);
 
   const GradientAppBar({Key key, this.barHeight}) : super(key: key);
 
@@ -12,9 +14,9 @@ class GradientAppBar extends StatelessWidget {
         height: barHeight,
         decoration: new BoxDecoration(
           gradient: new LinearGradient(
-            colors: [new Color(0xffADA996), new Color(0xffeaeaea)],
-            begin: const FractionalOffset(0.5, 0.5),
-            end: const FractionalOffset(0.5, 1.5),
+            colors: [gradientStartColor, gradientEndColor],
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
           ),
         ),
         child: Container(
@@ -22,7 +24,11 @@ class GradientAppBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Icon(Icons.cloud_queue, size: 30),
+              Icon(
+                Icons.cloud_queue,
+                size: 35,
+                color: Colors.white70,
+              ),
               FlatButton(
                 onPressed: () => {},
                 padding: EdgeInsets.all(10.0),
@@ -31,11 +37,12 @@ class GradientAppBar extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.flight_takeoff,
+                      color: Colors.white,
                       size: 17,
                     ),
                     Text(
                       "WYLOGUJ",
-                      style: new TextStyle(fontSize: 10, color: Colors.white),
+                      style: new TextStyle(fontSize: 11, color: Colors.black54),
                     )
                   ],
                 ),
