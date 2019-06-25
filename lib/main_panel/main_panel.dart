@@ -26,6 +26,10 @@ class MainPanel extends StatelessWidget {
 }
 
 class MainPanelBody extends StatelessWidget {
+
+  final double buttonHeight = 268.0;
+  final double buttonWidth = 369.0;
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -34,73 +38,86 @@ class MainPanelBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              height: 100.0,
-              width: 200.0,
-              color: Colors.transparent,
-              child: new Container(
-                decoration: new BoxDecoration(
-                  gradient: new LinearGradient(
-                    colors: [new Color(0xffADA996), new Color(0xffeaeaea)],
-                    begin: const FractionalOffset(0.5, 0.5),
-                    end: const FractionalOffset(0.5, 1.5),
-                  ),
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(10.0),
-                      topRight: const Radius.circular(10.0),
-                      bottomLeft: const Radius.circular(10.0),
-                      bottomRight: const Radius.circular(10.0)),
-                ),
-//
-                child: new FlatButton(
-                  color: Colors.transparent,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: Text("BLABLA"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: CustomPaint(painter: Drawhorizontalline()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                  onPressed: null,
-                ),
-              ),
-            ),
-            ButtonTheme(
-              minWidth: 200.0,
-              height: 100.0,
-              child: new RaisedButton(
-                  child: new Text("Press Me"),
-                  onPressed: null,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0))),
-            ),
-            ButtonTheme(
-              minWidth: 200.0,
-              height: 100.0,
-              child: new RaisedButton(
-                  child: new Text("Press Me"),
-                  onPressed: null,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0))),
-            ),
+            MainPanelButton(
+                height: buttonHeight,
+                width: buttonWidth,
+                text: 'Stwórz prezentacje',
+                imagePath: '/images/main_panel/create_presentation.png'),
+            MainPanelButton(
+                height: buttonHeight,
+                width: buttonWidth,
+                text: 'Rozpocznij prezentacje',
+                imagePath: '/images/main_panel/start_presentation.png'),
+            MainPanelButton(
+                height: buttonHeight,
+                width: buttonWidth,
+                text: 'Historia Prezentacji',
+                imagePath: '/images/main_panel/presentations_history.png'),
           ]),
     );
   }
 }
 
-class Drawhorizontalline extends CustomPainter {
+class MainPanelButton extends StatelessWidget {
+  final double height;
+  final double width;
+  final String text;
+  final String imagePath;
+
+  const MainPanelButton(
+      {Key key, this.height, this.width, this.text, this.imagePath})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      color: Colors.transparent,
+      child: new Container(
+        decoration: new BoxDecoration(
+          gradient: new LinearGradient(
+            colors: [new Color(0xffADA996), new Color(0xffeaeaea)],
+            begin: const FractionalOffset(0.5, 0.5),
+            end: const FractionalOffset(0.5, 1.5),
+          ),
+          borderRadius: new BorderRadius.only(
+              topLeft: const Radius.circular(10.0),
+              topRight: const Radius.circular(10.0),
+              bottomLeft: const Radius.circular(10.0),
+              bottomRight: const Radius.circular(10.0)),
+        ),
+        child: new FlatButton(
+          color: Colors.transparent,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(text, style: TextStyle(fontSize: 26, color: Colors.white),),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: CustomPaint(painter: DrawHorizontalLine()),
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.contain,
+                  )),
+            ],
+          ),
+          onPressed: null,
+        ),
+      ),
+    );
+  }
+}
+
+class DrawHorizontalLine extends CustomPainter {
   Paint _paint;
 
-  Drawhorizontalline() {
+  DrawHorizontalLine() {
     _paint = Paint()
       ..color = Colors.white
       ..strokeWidth = 1
@@ -109,7 +126,7 @@ class Drawhorizontalline extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawLine(Offset(-90.0, 0.0), Offset(90.0, 0.0), _paint);
+    canvas.drawLine(Offset(-184.5, 0.0), Offset(184.5, 0.0), _paint);
   }
 
   @override
