@@ -3,6 +3,10 @@ import 'package:flutter_web/material.dart';
 import 'package:web/create_presentation/footer/gradient_footer_bar.dart';
 import 'package:web/create_presentation/header/gradient_app_bar.dart';
 
+import 'forms/basic_data_form.dart';
+import 'forms/presentation_assigment_form.dart';
+import 'forms/presentation_file_form.dart';
+
 class CreatePresentationPanel extends StatelessWidget {
   CreatePresentationPanel({Key key}) : super(key: key);
 
@@ -27,8 +31,6 @@ class CreatePresentationPanel extends StatelessWidget {
 }
 
 class CreatePresentationPanelBody extends StatelessWidget {
-  final double buttonHeight = 268.0;
-  final double buttonWidth = 369.0;
 
   final Color gradientStartColor = const Color(0xffffffff);
   final Color gradientEndColor = const Color(0xffE5E5E5);
@@ -37,9 +39,14 @@ class CreatePresentationPanelBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       height: MediaQuery.of(context).size.height,
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          BasicDataForm(),
+          PresentationAssigmentForm(),
+          PresentationFileForm()
+        ],
       ),
       decoration: new BoxDecoration(
           gradient: new LinearGradient(
@@ -50,3 +57,4 @@ class CreatePresentationPanelBody extends StatelessWidget {
     );
   }
 }
+
