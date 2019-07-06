@@ -1,9 +1,10 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
 import 'package:web/create_presentation/footer/gradient_footer_bar.dart';
+import 'package:web/create_presentation/forms/basic_data_form/basic_data_form.dart';
 import 'package:web/create_presentation/header/gradient_app_bar.dart';
 
-import 'forms/basic_data_form.dart';
+import 'create_presentation_submit_button.dart';
 import 'forms/presentation_assigment_form.dart';
 import 'forms/presentation_file_form.dart';
 
@@ -23,7 +24,7 @@ class CreatePresentationPanel extends StatelessWidget {
             ),
           )),
       body: CreatePresentationPanelBody(),
-      bottomNavigationBar: new BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         child: GradientFooterBar(),
       ),
     );
@@ -31,25 +32,25 @@ class CreatePresentationPanel extends StatelessWidget {
 }
 
 class CreatePresentationPanelBody extends StatelessWidget {
-
   final Color gradientStartColor = const Color(0xffffffff);
   final Color gradientEndColor = const Color(0xffE5E5E5);
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           BasicDataForm(),
           PresentationAssigmentForm(),
-          PresentationFileForm()
+          PresentationFileForm(),
+          CreatePresentationSubmitButton()
         ],
       ),
-      decoration: new BoxDecoration(
-          gradient: new LinearGradient(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
         colors: [gradientStartColor, gradientEndColor],
         begin: FractionalOffset.topCenter,
         end: FractionalOffset.bottomCenter,
@@ -57,4 +58,5 @@ class CreatePresentationPanelBody extends StatelessWidget {
     );
   }
 }
+
 

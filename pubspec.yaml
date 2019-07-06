@@ -2,8 +2,7 @@ name: web
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/main_panel/
+
 
 description: An app built using Flutter for web
 
