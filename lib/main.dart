@@ -1,5 +1,5 @@
 import 'package:flutter_web/material.dart';
-import 'package:web/create_presentation/create_presentation.dart';
+import 'package:web/main_panel/main_panel.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CreatePresentationPanel(),
+      home: MainPanel(),
     );
   }
 }
