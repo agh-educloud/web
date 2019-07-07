@@ -1,5 +1,6 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
+import 'package:web/create_presentation/create_presentation.dart';
 
 class MainPanelButton extends StatelessWidget {
   final double height;
@@ -17,20 +18,20 @@ class MainPanelButton extends StatelessWidget {
       height: height,
       width: width,
       color: Colors.transparent,
-      child: new Container(
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
-            colors: [new Color(0xff3E5151), new Color(0xffDECBA4)],
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [ Color(0xff3E5151), Color(0xffDECBA4)],
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter,
           ),
-          borderRadius: new BorderRadius.only(
+          borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(10.0),
               topRight: const Radius.circular(10.0),
               bottomLeft: const Radius.circular(10.0),
               bottomRight: const Radius.circular(10.0)),
         ),
-        child: new FlatButton(
+        child: FlatButton(
           color: Colors.transparent,
           child: Column(
             children: <Widget>[
@@ -53,7 +54,12 @@ class MainPanelButton extends StatelessWidget {
                   )),
             ],
           ),
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CreatePresentationPanel()));
+          },
         ),
       ),
     );

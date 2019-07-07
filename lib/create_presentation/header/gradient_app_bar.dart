@@ -10,10 +10,10 @@ class GradientAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
         height: barHeight,
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
             colors: [gradientStartColor, gradientEndColor],
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter,
@@ -42,7 +42,7 @@ class GradientAppBar extends StatelessWidget {
                     ),
                     Text(
                       "WYLOGUJ",
-                      style: new TextStyle(fontSize: 11, color: Colors.black54),
+                      style: TextStyle(fontSize: 11, color: Colors.black54),
                     )
                   ],
                 ),

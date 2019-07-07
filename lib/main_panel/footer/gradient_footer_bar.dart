@@ -10,7 +10,7 @@ class GradientFooterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
         height: barHeight,
         color: footerColor,
         child: Container(
@@ -24,14 +24,14 @@ class GradientFooterBar extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   child: Text(
                     "Informacje",
-                    style: new TextStyle(fontSize: 18, color: footerItemColor),
+                    style: TextStyle(fontSize: 18, color: footerItemColor),
                   )),
               FlatButton(
                   onPressed: () => {},
                   padding: EdgeInsets.all(15.0),
                   child: Text(
                     "Kontakt",
-                    style: new TextStyle(fontSize: 18, color: Colors.black54),
+                    style: TextStyle(fontSize: 18, color: Colors.black54),
                   ))
             ],
           ),
