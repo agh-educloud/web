@@ -21,7 +21,7 @@ class MainPanel extends StatelessWidget {
             ),
           )),
       body: MainPanelBody(),
-      bottomNavigationBar: new BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         child: GradientFooterBar(),
       ),
     );
@@ -37,7 +37,7 @@ class MainPanelBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       height: MediaQuery.of(context).size.height,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -59,8 +59,8 @@ class MainPanelBody extends StatelessWidget {
                 text: 'Historia Prezentacji',
                 imagePath: '/images/main_panel/presentations_history.png'),
           ]),
-      decoration: new BoxDecoration(
-          gradient: new LinearGradient(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
         colors: [gradientStartColor, gradientEndColor],
         begin: FractionalOffset.topCenter,
         end: FractionalOffset.bottomCenter,
