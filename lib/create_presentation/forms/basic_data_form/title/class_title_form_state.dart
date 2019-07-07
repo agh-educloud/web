@@ -3,7 +3,7 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
 
-import 'basic_data_form.dart';
+import 'class_title.dart';
 
 class ClassTitleFormState extends State<ClassTitleForm> {
   // and allows validation of the form.
@@ -14,19 +14,15 @@ class ClassTitleFormState extends State<ClassTitleForm> {
 
   @override
   Widget build(BuildContext context) {
-    EdgeInsets margin =
-        EdgeInsets.only(left: (MediaQuery.of(context).size.width * 0.01));
 
     // Build a Form widget using the _formKey created above.
     return Container(
-      margin: margin,
       height: MediaQuery.of(context).size.height * 0.06,
       width: MediaQuery.of(context).size.width * 0.15,
       color: Colors.white,
       child: Form(
         key: _formKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TextFormField(
               validator: (value) {

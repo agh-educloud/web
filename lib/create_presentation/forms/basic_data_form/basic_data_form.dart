@@ -1,9 +1,9 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
-import 'package:web/create_presentation/forms/basic_data_form/class_title_form_state.dart';
+import 'package:web/create_presentation/forms/basic_data_form/title/class_title.dart';
 import 'package:web/create_presentation/forms/container/create_presentation_form_container.dart';
 
-import 'class_description_form_state.dart';
+import 'description/class_description.dart';
 
 class BasicDataForm extends StatelessWidget {
   @override
@@ -12,27 +12,12 @@ class BasicDataForm extends StatelessWidget {
         title: "Podstawowe dane",
         height: MediaQuery.of(context).size.height * 0.3,
         child: Container(
+            alignment: Alignment.topLeft,
             child: Column(
-          children: <Widget>[
-            Text("Tytul zajec"),
-            ClassTitleForm(),
-            Text("Opis zajec"),
-            ClassDescriptionForm(),
-          ],
-        )));
+              children: <Widget>[ClassTitle(), ClassDescription()],
+            )));
   }
 }
 
-class ClassDescriptionForm extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return ClassDescriptionFormState();
-  }
-}
 
-class ClassTitleForm extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return ClassTitleFormState();
-  }
-}
+
