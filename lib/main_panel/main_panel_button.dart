@@ -1,6 +1,7 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
 import 'package:web/create_presentation/create_presentation.dart';
+import 'package:web/utils/draw_horizontal_line.dart';
 
 class MainPanelButton extends StatelessWidget {
   final double height;
@@ -63,27 +64,5 @@ class MainPanelButton extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class DrawHorizontalLine extends CustomPainter {
-  Paint _paint;
-  final double width;
-
-  DrawHorizontalLine(this.width) {
-    _paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 1
-      ..strokeCap = StrokeCap.round;
-  }
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawLine(Offset(width / 2, 0.0), Offset(width / 2, 0.0), _paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
