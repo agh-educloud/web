@@ -1,19 +1,22 @@
 import 'package:flutter_web/cupertino.dart';
+import 'package:flutter_web/material.dart';
 
-class DrawHorizontalLine extends CustomPainter {
+class DrawLine extends CustomPainter {
   Paint _paint;
-  final double width;
+  final Offset p1;
+  final Offset p2;
+  final Color color;
 
-  DrawHorizontalLine(this.width) {
+  DrawLine(this.p1, this.p2, this.color) {
     _paint = Paint()
-      ..color = Color(0xfffffff)
+      ..color = color
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.round;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawLine(Offset(width / 2, 0.0), Offset(width / 2, 0.0), _paint);
+    canvas.drawLine(p1, p2, _paint);
   }
 
   @override
