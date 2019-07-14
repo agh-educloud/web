@@ -1,8 +1,8 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
-import 'package:web/create_presentation/footer/gradient_footer_bar.dart';
 import 'package:web/create_presentation/forms/basic_data_form/basic_data_form.dart';
-import 'package:web/create_presentation/header/gradient_app_bar.dart';
+import 'package:web/utils/footer/gradient_footer_bar.dart';
+import 'package:web/utils/header/gradient_app_bar.dart';
 
 import 'create_presentation_submit_button.dart';
 import 'forms/presentation_assigment_form.dart';

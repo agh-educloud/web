@@ -1,7 +1,7 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
-import 'package:web/main_panel/footer/gradient_footer_bar.dart';
-import 'package:web/main_panel/header/gradient_app_bar.dart';
+import 'package:web/utils/footer/gradient_footer_bar.dart';
+import 'package:web/utils/header/gradient_app_bar.dart';
 
 import 'main_panel_button.dart';
 
