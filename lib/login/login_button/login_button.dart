@@ -1,5 +1,6 @@
 import 'package:flutter_web/cupertino.dart';
 import 'package:flutter_web/material.dart';
+import 'package:web/main_panel/main_panel.dart';
 import 'package:web/utils/draw_line.dart';
 
 class LoginWithGoogleButton extends StatelessWidget {
@@ -52,7 +53,12 @@ class LoginWithGoogleButton extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainPanel()),
+            );
+          },
         ),
         decoration: BoxDecoration(
           color: Colors.white,
