@@ -47,17 +47,17 @@ class MainPanelBody extends StatelessWidget {
                 height: buttonHeight,
                 width: buttonWidth,
                 text: 'Stwórz prezentacje',
-                imagePath: '/images/main_panel/create_presentation.png'),
+                imagePath: 'create_presentation.png'),
             MainPanelButton(
                 height: buttonHeight,
                 width: buttonWidth,
                 text: 'Rozpocznij prezentacje',
-                imagePath: '/images/main_panel/start_presentation.png'),
+                imagePath: 'start_presentation.png'),
             MainPanelButton(
                 height: buttonHeight,
                 width: buttonWidth,
                 text: 'Historia Prezentacji',
-                imagePath: '/images/main_panel/presentations_history.png'),
+                imagePath: 'presentations_history.png'),
           ]),
       decoration: BoxDecoration(
           gradient: LinearGradient(

@@ -11,6 +11,7 @@ class ClassTitleFormState extends State<ClassTitleForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   static final _formKey = GlobalKey<FormState>();
+  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class ClassTitleFormState extends State<ClassTitleForm> {
         child: Column(
           children: <Widget>[
             TextFormField(
+              controller: controller,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Wpisz tutaj';

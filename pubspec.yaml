@@ -3,8 +3,10 @@ name: web
 flutter:
   uses-material-design: true
   assets:
-    - images/main_panel/
-    - images/login/
+    - create_presentation.png
+    - google_icon.png
+    - presentations_history.png
+    - start_presentation.png
 
 description: An app built using Flutter for web
 

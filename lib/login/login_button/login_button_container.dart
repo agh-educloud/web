@@ -12,7 +12,7 @@ class LoginButtonContainer extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height * 0.37;
     final double width = MediaQuery.of(context).size.width * 0.35;
 
-    final String imagePath = '/images/login/google_icon.png';
+    final String imagePath = 'google_icon.png';
 
     return Container(
       height: height,

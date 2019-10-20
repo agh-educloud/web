@@ -10,6 +10,7 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
   //
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
+  final controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   // and allows validation of the form.
@@ -29,6 +30,7 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TextFormField(
+              controller: controller,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Wpisz tutaj';

@@ -4,6 +4,7 @@ import 'package:web/create_presentation/forms/basic_data_form/title/class_title_
 class ClassTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String classTitle = "";
     EdgeInsets margin = EdgeInsets.only(
         left: (MediaQuery.of(context).size.width * 0.01),
         top: (MediaQuery.of(context).size.height * 0.02));

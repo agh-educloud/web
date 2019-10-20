@@ -61,7 +61,7 @@ class PresentationAssigmentFormButtonStateful
   final dOptionController = TextEditingController();
   final rightOptionController = TextEditingController();
 
-  List<QuizQuestion> quizQuestions;
+  List<QuizQuestion> quizQuestions = List(100);
 
   @override
   void dispose() {
@@ -88,7 +88,7 @@ class PresentationAssigmentFormButtonStateful
           ),
           children: <TextSpan>[
             TextSpan(
-                text: "add question like before - " + questionController.text,
+                text: "Kliknij aby dodac pytanie",
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
@@ -173,8 +173,6 @@ class PresentationAssigmentFormButtonStateful
                         child: RaisedButton(
                             child: Text("Add"),
                             onPressed: () {
-                              debugPrint('Helo');
-                              debugPrint('Helo' + questionController.text);
                               var options = [Option()
                                 ..value = aOptionController.text,
                                 Option()
@@ -192,7 +190,7 @@ class PresentationAssigmentFormButtonStateful
                               quizQuestions.add(question);
 
                               debugPrint('added question with q: ${question
-                                  .question}');
+                                  .question.toLowerCase()}');
                               Navigator.of(context).pop();
                             }),
                       )
