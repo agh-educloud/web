@@ -12,8 +12,6 @@ class LoginButtonContainer extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height * 0.37;
     final double width = MediaQuery.of(context).size.width * 0.35;
 
-    final String imagePath = 'google_icon.png';
-
     return Container(
       height: height,
       width: width,
@@ -49,7 +47,7 @@ class LoginButtonContainer extends StatelessWidget {
                       Offset(-width / 2, 0.0), Colors.white),
                 ),
               ),
-              LoginWithGoogleButton(imagePath: imagePath),
+              LoginWithGoogleButton(imagePath: 'google_icon.png'),
               RegisterRedirectButton(),
             ],
           ),

@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../create_presentation.dart';
 import 'class_description.dart';
 
 class ClassDescriptionFormState extends State<ClassDescriptionForm> {
@@ -13,8 +14,7 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
   final controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  // and allows validation of the form.
-  //
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +36,9 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
                   return 'Wpisz tutaj';
                 }
                 return null;
+              },
+              onChanged: (text) {
+                appData.classDescription = text;
               },
             ),
           ],

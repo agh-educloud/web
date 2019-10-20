@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'class_description_form_state.dart';
 
 class ClassDescription extends StatelessWidget {
-  String classDescription = "";
 
-  @override
   Widget build(BuildContext context) {
     EdgeInsets margin = EdgeInsets.only(
         left: (MediaQuery.of(context).size.width * 0.01),
@@ -33,8 +31,12 @@ class ClassDescription extends StatelessWidget {
 }
 
 class ClassDescriptionForm extends StatefulWidget {
+  String classDescription;
+
   @override
   State<StatefulWidget> createState() {
     return ClassDescriptionFormState();
   }
+
+
 }

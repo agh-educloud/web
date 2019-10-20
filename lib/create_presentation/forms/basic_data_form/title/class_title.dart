@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:web/create_presentation/forms/basic_data_form/title/class_title_form_state.dart';
 
 class ClassTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String classTitle = "";
     EdgeInsets margin = EdgeInsets.only(
         left: (MediaQuery.of(context).size.width * 0.01),
         top: (MediaQuery.of(context).size.height * 0.02));
@@ -17,7 +17,7 @@ class ClassTitle extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Container(
                   child: Text(
-                'Tytul zajec',
+                'Tytul zajec ',
                 style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
               ))),
           Container(

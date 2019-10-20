@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../create_presentation.dart';
 import 'class_title.dart';
 
 class ClassTitleFormState extends State<ClassTitleForm> {
@@ -32,6 +33,9 @@ class ClassTitleFormState extends State<ClassTitleForm> {
                   return 'Wpisz tutaj';
                 }
                 return null;
+              },
+              onChanged: (text) {
+                appData.className = text;
               },
             ),
           ],

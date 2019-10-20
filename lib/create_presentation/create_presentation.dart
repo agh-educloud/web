@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/create_presentation/forms/basic_data_form/basic_data_form.dart';
+import 'package:web/generated/quiz.pb.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
@@ -32,19 +33,19 @@ class CreatePresentationPanel extends StatelessWidget {
 }
 
 class CreatePresentationPanelBody extends StatelessWidget {
-  final Color gradientStartColor = const Color(0xffffffff);
-  final Color gradientEndColor = const Color(0xffE5E5E5);
 
-  @override
   Widget build(BuildContext context) {
+    final Color gradientStartColor = const Color(0xffffffff);
+    final Color gradientEndColor = const Color(0xffE5E5E5);
+
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        children: <StatefulWidget>[
           BasicDataForm(),
-          PresentationAssigmentForm(),
+          PresentationAssigmentFormButton(),
           PresentationFileForm(),
           CreatePresentationSubmitButton()
         ],
@@ -60,3 +61,16 @@ class CreatePresentationPanelBody extends StatelessWidget {
 }
 
 
+class AppData {
+  static final AppData _appData = AppData._internal();
+
+  String className = "";
+  String classDescription = "";
+  List<QuizQuestion> quizQuestions = [];
+
+  factory AppData() {
+    return _appData;
+  }
+  AppData._internal();
+}
+final appData = AppData();

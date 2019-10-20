@@ -5,7 +5,15 @@ import 'package:web/create_presentation/forms/container/create_presentation_form
 
 import 'description/class_description.dart';
 
-class BasicDataForm extends StatelessWidget {
+class BasicDataForm extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return BasicDataFormState();
+  }
+}
+
+class BasicDataFormState extends State<BasicDataForm> {
+
   @override
   Widget build(BuildContext context) {
     return CreatePresentationFormContainer(
@@ -17,6 +25,7 @@ class BasicDataForm extends StatelessWidget {
               children: <Widget>[ClassTitle(), ClassDescription()],
             )));
   }
+
 }
 
 
