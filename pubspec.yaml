@@ -16,7 +16,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  grpc: ^2.0.0
+  grpc:
+    git:
+      url: https://github.com/grpc/grpc-dart
+      ref: grpc-web
+      resolved-ref: af63deb
   protobuf: ^0.13.15
 
 dev_dependencies:

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/service/class.dart';
 
 import 'create_presentation.dart';
 
@@ -40,9 +41,7 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
             ),
           ),
           onPressed: () {
-            // For now show info about grpc request
-            // TODO send this to backend!
-            _ackAlert(context);
+            ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions);
           },
         ),
         decoration: BoxDecoration(
@@ -56,24 +55,4 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
       ),
     );
   }
-}
-
-Future<void> _ackAlert(BuildContext context) {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Almost to send'),
-        content: Text('Class name: ' + appData.className + '\nClass description: ' + appData.classDescription+ '\n 1st question name' + appData.quizQuestions.first.question),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Ok'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
 }
