@@ -1,5 +1,5 @@
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:web/register/register_button/register_with_google_button.dart';
 import 'package:web/register/token/token.dart';
 import 'package:web/utils/draw_line.dart';

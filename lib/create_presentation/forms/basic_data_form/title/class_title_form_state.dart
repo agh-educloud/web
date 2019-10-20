@@ -1,7 +1,7 @@
 // Create a corresponding State class.
 // This class holds data related to the form.
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'class_title.dart';
 
@@ -10,7 +10,7 @@ class ClassTitleFormState extends State<ClassTitleForm> {
   //
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

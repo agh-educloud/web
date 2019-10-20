@@ -1,5 +1,5 @@
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class DrawLine extends CustomPainter {
   Paint _paint;

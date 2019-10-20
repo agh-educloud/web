@@ -1,4 +1,4 @@
-import 'package:flutter_web/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:web/create_presentation/forms/basic_data_form/title/class_title_form_state.dart';
 
 class ClassTitle extends StatelessWidget {

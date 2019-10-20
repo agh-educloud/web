@@ -1,7 +1,7 @@
 // Create a corresponding State class.
 // This class holds data related to the form.
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'class_description.dart';
 

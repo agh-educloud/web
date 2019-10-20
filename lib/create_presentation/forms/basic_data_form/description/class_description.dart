@@ -1,4 +1,4 @@
-import 'package:flutter_web/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'class_description_form_state.dart';
 

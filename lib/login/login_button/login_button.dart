@@ -1,5 +1,5 @@
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:web/main_panel/main_panel.dart';
 import 'package:web/utils/draw_line.dart';
 
