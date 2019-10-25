@@ -35,13 +35,13 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
               ),
               children: <TextSpan>[
                 TextSpan(
-                    text: 'Stworz prezentacje',
+                    text: 'Stwórz prezentacje',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
-          onPressed: () {
-            ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions);
+          onPressed: () async {
+            await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions, appData.presentationBytes);
           },
         ),
         decoration: BoxDecoration(

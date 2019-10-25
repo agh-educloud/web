@@ -197,6 +197,8 @@ class ClassCreationResponse extends $pb.GeneratedMessage {
   $core.bool hasError() => $_has(2);
 
   void clearError() => clearField(3);
+
+  $core.int getClassUuid() {return classUuid;}
 }
 
 class ClassUpdateRequest extends $pb.GeneratedMessage {

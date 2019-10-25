@@ -11,7 +11,7 @@ class LoginWithGoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 0.12;
-    final double width = MediaQuery.of(context).size.width * 0.25;
+    final double width = MediaQuery.of(context).size.width * 0.28;
 
     EdgeInsets margin =
         EdgeInsets.only(top: (MediaQuery.of(context).size.height * 0.055));
@@ -28,7 +28,6 @@ class LoginWithGoogleButton extends StatelessWidget {
                 padding: EdgeInsets.only(right: width * 0.03),
                 child: Image.asset(
                   imagePath,
-                  scale: 1.4,
                   fit: BoxFit.contain,
                 ),
               ),

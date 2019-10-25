@@ -7,7 +7,6 @@ import 'package:web/utils/header/gradient_app_bar.dart';
 
 import 'create_presentation_submit_button.dart';
 import 'forms/presentation_assigment_form.dart';
-import 'forms/presentation_file_form.dart';
 
 class CreatePresentationPanel extends StatelessWidget {
   CreatePresentationPanel({Key key}) : super(key: key);
@@ -46,7 +45,7 @@ class CreatePresentationPanelBody extends StatelessWidget {
         children: <StatefulWidget>[
           BasicDataForm(),
           PresentationAssigmentFormButton(),
-          PresentationFileForm(),
+//          PresentationFileForm(),
           CreatePresentationSubmitButton()
         ],
       ),
@@ -67,6 +66,7 @@ class AppData {
   String className = "";
   String classDescription = "";
   List<QuizQuestion> quizQuestions = [];
+  List<int> presentationBytes = [];
 
   factory AppData() {
     return _appData;

@@ -61,7 +61,6 @@ class PresentationFileFormButton extends StatelessWidget {
             ],
           ),
         ),
-        onPressed: null,
       ),
       decoration: BoxDecoration(
         color: Color(0xfffFFfff),
