@@ -29,6 +29,23 @@ class ClassService{
 
   }
 
+  Future<List<Class>> getClasses() async {
+
+    debugPrint("Getting classes");
+//    final response = await http.get('http://localhost:8080/class');
+
+//    return [Class.fromJson("{ \"name\": \"class1\" }"),Class.fromJson("{ \"name\": \"class2\" }")];
+//    return Class.fromJson(i)
+    Class rqClass = Class()
+      ..name = 'hehe'
+      ..topic = 'desc';
+    Class rqClass2 = Class()
+      ..name = 'hehe1'
+      ..topic = 'desc2';
+
+    return [rqClass,rqClass2];
+  }
+
   Future<void> updateClass(String id, String name, String description, List<QuizQuestion> questions) async {
     Class rqClass = Class()
       ..name = name
