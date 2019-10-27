@@ -4,6 +4,10 @@ import 'class_description_form_state.dart';
 
 class ClassDescription extends StatelessWidget {
 
+  final String topicToHint;
+
+  const ClassDescription({Key key, this.topicToHint}) : super(key: key);
+
   Widget build(BuildContext context) {
     EdgeInsets margin = EdgeInsets.only(
         left: (MediaQuery.of(context).size.width * 0.01),
@@ -22,7 +26,7 @@ class ClassDescription extends StatelessWidget {
               ))),
           Container(
             alignment: Alignment.centerLeft,
-            child: ClassDescriptionForm(),
+            child: ClassDescriptionForm(topicToHint: topicToHint,),
           )
         ],
       ),
@@ -31,11 +35,13 @@ class ClassDescription extends StatelessWidget {
 }
 
 class ClassDescriptionForm extends StatefulWidget {
-  String classDescription;
+  final String topicToHint;
+
+  const ClassDescriptionForm({Key key, this.topicToHint}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return ClassDescriptionFormState();
+    return ClassDescriptionFormState(topicToHint);
   }
 
 

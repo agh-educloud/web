@@ -1,21 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web/create_presentation/forms/quiz/quiz.dart';
 import 'package:web/generated/quiz.pb.dart';
 import 'package:web/generated/quiz.pbgrpc.dart';
+import 'package:web/presentation/forms/quiz/quiz.dart';
 
 import '../create_presentation.dart';
 import 'container/create_presentation_form_container.dart';
 
 class PresentationAssigmentFormButton extends StatefulWidget {
+  final List<QuizQuestion> questionsToHint;
+
+  const PresentationAssigmentFormButton({Key key, this.questionsToHint}) : super(key: key);
+
   @override
-  createState() => PresentationAssigmentFormButtonStateful();
+  createState() => PresentationAssigmentFormButtonStateful(questionsToHint);
 }
 
 class PresentationAssigmentFormButtonStateful
     extends State<PresentationAssigmentFormButton> {
+
+  final List<QuizQuestion> questionsToHint;
+
+  PresentationAssigmentFormButtonStateful(this.questionsToHint);
+
   @override
   Widget build(BuildContext context) {
+    if(questionsToHint != null){
+      appData.quizQuestions.addAll(questionsToHint);
+    }
+
     final double height = MediaQuery.of(context).size.height * 0.2;
     final double width = MediaQuery.of(context).size.width * 0.18;
     final EdgeInsets margin =
@@ -44,7 +57,7 @@ class PresentationAssigmentFormButtonStateful
                           ),
                           children: <TextSpan>[
                             TextSpan(
-                                text: 'Kliknij aby dodac pytanie',
+                                text: 'Kliknij aby dodać pytanie',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         )),

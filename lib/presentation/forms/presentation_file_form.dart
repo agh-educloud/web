@@ -56,7 +56,7 @@ class PresentationFileFormButton extends StatelessWidget {
             ),
             children: <TextSpan>[
               TextSpan(
-                  text: 'Kliknij aby dodac prezentacje',
+                  text: 'Kliknij aby dodać prezentacje',
                   style: TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),

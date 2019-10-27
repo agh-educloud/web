@@ -4,15 +4,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../create_presentation.dart';
-import 'class_title.dart';
+import 'class_description.dart';
 
-class ClassTitleFormState extends State<ClassTitleForm> {
+class ClassDescriptionFormState extends State<ClassDescriptionForm> {
   // and allows validation of the form.
   //
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
-  static final _formKey = GlobalKey<FormState>();
   final controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final String topicToHint;
+
+  ClassDescriptionFormState(this.topicToHint);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +30,13 @@ class ClassTitleFormState extends State<ClassTitleForm> {
       child: Form(
         key: _formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TextFormField(
+              decoration: InputDecoration(
+                hintStyle: TextStyle(fontSize: 13),
+                hintText: topicToHint == null || topicToHint.isEmpty ? 'Wpisz tematyke klasy' : topicToHint,
+              ),
               controller: controller,
               validator: (value) {
                 if (value.isEmpty) {
@@ -35,7 +45,7 @@ class ClassTitleFormState extends State<ClassTitleForm> {
                 return null;
               },
               onChanged: (text) {
-                appData.className = text;
+                appData.classDescription = text;
               },
             ),
           ],

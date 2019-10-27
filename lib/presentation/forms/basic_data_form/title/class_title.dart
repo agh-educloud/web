@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web/create_presentation/forms/basic_data_form/title/class_title_form_state.dart';
+
+import 'class_title_form_state.dart';
 
 class ClassTitle extends StatelessWidget {
+  final String nameToHint;
+
+  const ClassTitle({Key key, this.nameToHint}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     EdgeInsets margin = EdgeInsets.only(
@@ -18,11 +23,11 @@ class ClassTitle extends StatelessWidget {
               child: Container(
                   child: Text(
                 'Tytul zajec ',
-                style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ))),
           Container(
             alignment: Alignment.centerLeft,
-            child: ClassTitleForm(),
+            child: ClassTitleForm(nameToHint: nameToHint,),
           )
         ],
       ),
@@ -31,8 +36,12 @@ class ClassTitle extends StatelessWidget {
 }
 
 class ClassTitleForm extends StatefulWidget {
+  final String nameToHint;
+
+  const ClassTitleForm({Key key, this.nameToHint}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    return ClassTitleFormState();
+    return ClassTitleFormState(nameToHint);
   }
 }

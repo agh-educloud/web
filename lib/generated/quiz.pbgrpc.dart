@@ -81,7 +81,6 @@ abstract class PresenterQuizServiceBase extends $grpc.Service {
 
   $async.Future<$0.Status> delegateQuizQuestion(
       $grpc.ServiceCall call, QuizQuestion request);
-
   $async.Stream<QuizQuestionStatistics> getQuizQuestionStatistics(
       $grpc.ServiceCall call, QuizQuestion request);
 }

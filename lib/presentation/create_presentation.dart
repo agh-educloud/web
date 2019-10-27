@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web/create_presentation/forms/basic_data_form/basic_data_form.dart';
+import 'package:web/generated/class.pb.dart';
 import 'package:web/generated/quiz.pb.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
 import 'create_presentation_submit_button.dart';
+import 'forms/basic_data_form/basic_data_form.dart';
 import 'forms/presentation_assigment_form.dart';
 
 class CreatePresentationPanel extends StatelessWidget {
-  CreatePresentationPanel({Key key}) : super(key: key);
+  CreatePresentationPanel({Key key, this.classToHint}) : super(key: key);
 
   final double barHeight = 50.0;
+  final ClassWithUuid classToHint;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CreatePresentationPanel extends StatelessWidget {
               barHeight: barHeight,
             ),
           )),
-      body: CreatePresentationPanelBody(),
+      body: CreatePresentationPanelBody(classToHint: classToHint,),
       bottomNavigationBar: BottomAppBar(
         child: GradientFooterBar(),
       ),
@@ -32,6 +34,10 @@ class CreatePresentationPanel extends StatelessWidget {
 }
 
 class CreatePresentationPanelBody extends StatelessWidget {
+
+  final ClassWithUuid classToHint;
+
+  const CreatePresentationPanelBody({Key key, this.classToHint}) : super(key: key);
 
   Widget build(BuildContext context) {
     final Color gradientStartColor = const Color(0xffffffff);
@@ -43,10 +49,10 @@ class CreatePresentationPanelBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <StatefulWidget>[
-          BasicDataForm(),
-          PresentationAssigmentFormButton(),
+          classToHint == null ? BasicDataForm() : BasicDataForm(nameToHint: classToHint.class_2.name,topicToHint: classToHint.class_2.topic,) ,
+          classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: classToHint.class_2.quizQuestion,),
 //          PresentationFileForm(),
-          CreatePresentationSubmitButton()
+          CreatePresentationSubmitButton(classUuid: classToHint != null ? classToHint.classUuid : null,)
         ],
       ),
       decoration: BoxDecoration(
@@ -72,5 +78,12 @@ class AppData {
     return _appData;
   }
   AppData._internal();
+
+  void flush() {
+    className = "";
+    classDescription = "";
+    quizQuestions = [];
+    presentationBytes = [];
+  }
 }
 final appData = AppData();

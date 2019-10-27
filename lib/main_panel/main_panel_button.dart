@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web/create_presentation/create_presentation.dart';
 import 'package:web/utils/draw_line.dart';
 
 class MainPanelButton extends StatelessWidget {
@@ -8,9 +7,15 @@ class MainPanelButton extends StatelessWidget {
   final double width;
   final String text;
   final String imagePath;
+  final StatelessWidget statelessWidget;
 
   const MainPanelButton(
-      {Key key, this.height, this.width, this.text, this.imagePath})
+      {Key key,
+      this.height,
+      this.width,
+      this.text,
+      this.imagePath,
+      this.statelessWidget})
       : super(key: key);
 
   @override
@@ -37,13 +42,14 @@ class MainPanelButton extends StatelessWidget {
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
                   text,
-                  style: TextStyle(fontSize: 26, color: Colors.white),
+                  style: TextStyle(fontSize: 22, color: Colors.white),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: CustomPaint(painter: DrawLine(Offset(width / 2, 0.0),
-                    Offset(-width / 2, 0.0), Colors.white)),
+                child: CustomPaint(
+                    painter: DrawLine(Offset(width / 2, 0.0),
+                        Offset(-width / 2, 0.0), Colors.white)),
               ),
               Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -54,10 +60,11 @@ class MainPanelButton extends StatelessWidget {
             ],
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CreatePresentationPanel()));
+            if (statelessWidget != null) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => statelessWidget));
+            }
+
           },
         ),
       ),

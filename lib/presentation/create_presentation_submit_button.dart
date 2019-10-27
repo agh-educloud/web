@@ -5,13 +5,21 @@ import 'package:web/service/class.dart';
 import 'create_presentation.dart';
 
 class CreatePresentationSubmitButton extends StatefulWidget {
+  final int classUuid;
+
+  const CreatePresentationSubmitButton({Key key, this.classUuid}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    return CreatePresentationSubmitButtonState();
+    return CreatePresentationSubmitButtonState(classUuid);
   }
 }
 
 class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmitButton>{
+  final int classUuid;
+
+  CreatePresentationSubmitButtonState(this.classUuid);
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 0.05;
@@ -35,13 +43,21 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
               ),
               children: <TextSpan>[
                 TextSpan(
-                    text: 'Stwórz prezentacje',
+                    text:  classUuid != null ? 'Edytuj prezentacje' : 'Stwórz prezentacje',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
           onPressed: () async {
-            await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions, appData.presentationBytes);
+            if(classUuid != null){
+              await ClassService().updateClass(classUuid, appData.className, appData.classDescription, appData.quizQuestions);
+              appData.flush();
+              Navigator.pop(context);
+            }else{
+              await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions, appData.presentationBytes);
+              appData.flush();
+              Navigator.pop(context);
+            }
           },
         ),
         decoration: BoxDecoration(
