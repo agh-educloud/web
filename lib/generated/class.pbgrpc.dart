@@ -9,9 +9,9 @@ import 'dart:core' as $core show int, String, List;
 
 import 'package:grpc/service_api.dart' as $grpc;
 
-import 'chat.pb.dart' as $2;
+import 'chat.pb.dart' as $1;
 import 'class.pb.dart';
-import 'feedback.pb.dart' as $3;
+import 'feedback.pb.dart' as $2;
 import 'status.pb.dart' as $0;
 
 export 'class.pb.dart';
@@ -28,19 +28,25 @@ class PresenterClassServiceClient extends $grpc.Client {
           '/PresenterClassService/UpdateClass',
           (ClassUpdateRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.Status.fromBuffer(value));
-  static final _$deleteClass =
-      $grpc.ClientMethod<ClassDeleteRequest, $0.Status>(
-          '/PresenterClassService/DeleteClass',
-          (ClassDeleteRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $0.Status.fromBuffer(value));
-  static final _$startClass =
-      $grpc.ClientMethod<ClassStartRequest, $2.ChatMessage>(
-          '/PresenterClassService/StartClass',
-          (ClassStartRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $2.ChatMessage.fromBuffer(value));
-  static final _$endClass = $grpc.ClientMethod<ClassEndRequest, $0.Status>(
+  static final _$deleteClass = $grpc.ClientMethod<ClassUuid, $0.Status>(
+      '/PresenterClassService/DeleteClass',
+      (ClassUuid value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.Status.fromBuffer(value));
+  static final _$getClass = $grpc.ClientMethod<ClassUuid, Class>(
+      '/PresenterClassService/GetClass',
+      (ClassUuid value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => Class.fromBuffer(value));
+  static final _$getClasses = $grpc.ClientMethod<Empty, GetClassesResponse>(
+      '/PresenterClassService/GetClasses',
+      (Empty value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => GetClassesResponse.fromBuffer(value));
+  static final _$startClass = $grpc.ClientMethod<ClassUuid, $1.ChatMessage>(
+      '/PresenterClassService/StartClass',
+      (ClassUuid value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.ChatMessage.fromBuffer(value));
+  static final _$endClass = $grpc.ClientMethod<ClassUuid, $0.Status>(
       '/PresenterClassService/EndClass',
-      (ClassEndRequest value) => value.writeToBuffer(),
+      (ClassUuid value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.Status.fromBuffer(value));
 
   PresenterClassServiceClient($grpc.ClientChannel channel,
@@ -64,7 +70,7 @@ class PresenterClassServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.Status> deleteClass(ClassDeleteRequest request,
+  $grpc.ResponseFuture<$0.Status> deleteClass(ClassUuid request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$deleteClass, $async.Stream.fromIterable([request]),
@@ -72,7 +78,22 @@ class PresenterClassServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseStream<$2.ChatMessage> startClass(ClassStartRequest request,
+  $grpc.ResponseFuture<Class> getClass(ClassUuid request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$getClass, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<GetClassesResponse> getClasses(Empty request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getClasses, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseStream<$1.ChatMessage> startClass(ClassUuid request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$startClass, $async.Stream.fromIterable([request]),
@@ -80,7 +101,7 @@ class PresenterClassServiceClient extends $grpc.Client {
     return $grpc.ResponseStream(call);
   }
 
-  $grpc.ResponseFuture<$0.Status> endClass(ClassEndRequest request,
+  $grpc.ResponseFuture<$0.Status> endClass(ClassUuid request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$endClass, $async.Stream.fromIterable([request]),
         options: options);
@@ -106,26 +127,40 @@ abstract class PresenterClassServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => ClassUpdateRequest.fromBuffer(value),
         ($0.Status value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<ClassDeleteRequest, $0.Status>(
+    $addMethod($grpc.ServiceMethod<ClassUuid, $0.Status>(
         'DeleteClass',
         deleteClass_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => ClassDeleteRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
         ($0.Status value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<ClassStartRequest, $2.ChatMessage>(
+    $addMethod($grpc.ServiceMethod<ClassUuid, Class>(
+        'GetClass',
+        getClass_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
+        (Class value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<Empty, GetClassesResponse>(
+        'GetClasses',
+        getClasses_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => Empty.fromBuffer(value),
+        (GetClassesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<ClassUuid, $1.ChatMessage>(
         'StartClass',
         startClass_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => ClassStartRequest.fromBuffer(value),
-        ($2.ChatMessage value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<ClassEndRequest, $0.Status>(
+        ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
+        ($1.ChatMessage value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<ClassUuid, $0.Status>(
         'EndClass',
         endClass_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => ClassEndRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
         ($0.Status value) => value.writeToBuffer()));
   }
 
@@ -144,9 +179,19 @@ abstract class PresenterClassServiceBase extends $grpc.Service {
     return deleteClass(call, await request);
   }
 
-  $async.Stream<$2.ChatMessage> startClass_Pre(
+  $async.Future<Class> getClass_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return getClass(call, await request);
+  }
+
+  $async.Future<GetClassesResponse> getClasses_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return getClasses(call, await request);
+  }
+
+  $async.Stream<$1.ChatMessage> startClass_Pre(
       $grpc.ServiceCall call, $async.Future request) async* {
-    yield* startClass(call, (await request) as ClassStartRequest);
+    yield* startClass(call, (await request) as ClassUuid);
   }
 
   $async.Future<$0.Status> endClass_Pre(
@@ -156,18 +201,16 @@ abstract class PresenterClassServiceBase extends $grpc.Service {
 
   $async.Future<ClassCreationResponse> createClass(
       $grpc.ServiceCall call, ClassCreationRequest request);
-
   $async.Future<$0.Status> updateClass(
       $grpc.ServiceCall call, ClassUpdateRequest request);
-
   $async.Future<$0.Status> deleteClass(
-      $grpc.ServiceCall call, ClassDeleteRequest request);
-
-  $async.Stream<$2.ChatMessage> startClass(
-      $grpc.ServiceCall call, ClassStartRequest request);
-
-  $async.Future<$0.Status> endClass(
-      $grpc.ServiceCall call, ClassEndRequest request);
+      $grpc.ServiceCall call, ClassUuid request);
+  $async.Future<Class> getClass($grpc.ServiceCall call, ClassUuid request);
+  $async.Future<GetClassesResponse> getClasses(
+      $grpc.ServiceCall call, Empty request);
+  $async.Stream<$1.ChatMessage> startClass(
+      $grpc.ServiceCall call, ClassUuid request);
+  $async.Future<$0.Status> endClass($grpc.ServiceCall call, ClassUuid request);
 }
 
 class UserClassServiceClient extends $grpc.Client {
@@ -181,13 +224,13 @@ class UserClassServiceClient extends $grpc.Client {
           (JoinAssigmentLoopRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => Assigment.fromBuffer(value));
   static final _$sendMessageToPresenter =
-      $grpc.ClientMethod<$2.ChatMessage, $0.Status>(
+      $grpc.ClientMethod<$1.ChatMessage, $0.Status>(
           '/UserClassService/SendMessageToPresenter',
-          ($2.ChatMessage value) => value.writeToBuffer(),
+          ($1.ChatMessage value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.Status.fromBuffer(value));
-  static final _$sendFeedback = $grpc.ClientMethod<$3.Feedback, $0.Status>(
+  static final _$sendFeedback = $grpc.ClientMethod<$2.Feedback, $0.Status>(
       '/UserClassService/SendFeedback',
-      ($3.Feedback value) => value.writeToBuffer(),
+      ($2.Feedback value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.Status.fromBuffer(value));
 
   UserClassServiceClient($grpc.ClientChannel channel,
@@ -210,7 +253,7 @@ class UserClassServiceClient extends $grpc.Client {
     return $grpc.ResponseStream(call);
   }
 
-  $grpc.ResponseFuture<$0.Status> sendMessageToPresenter($2.ChatMessage request,
+  $grpc.ResponseFuture<$0.Status> sendMessageToPresenter($1.ChatMessage request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$sendMessageToPresenter, $async.Stream.fromIterable([request]),
@@ -218,7 +261,7 @@ class UserClassServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.Status> sendFeedback($3.Feedback request,
+  $grpc.ResponseFuture<$0.Status> sendFeedback($2.Feedback request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$sendFeedback, $async.Stream.fromIterable([request]),
@@ -246,19 +289,19 @@ abstract class UserClassServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             JoinAssigmentLoopRequest.fromBuffer(value),
         (Assigment value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$2.ChatMessage, $0.Status>(
+    $addMethod($grpc.ServiceMethod<$1.ChatMessage, $0.Status>(
         'SendMessageToPresenter',
         sendMessageToPresenter_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $2.ChatMessage.fromBuffer(value),
+        ($core.List<$core.int> value) => $1.ChatMessage.fromBuffer(value),
         ($0.Status value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$3.Feedback, $0.Status>(
+    $addMethod($grpc.ServiceMethod<$2.Feedback, $0.Status>(
         'SendFeedback',
         sendFeedback_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $3.Feedback.fromBuffer(value),
+        ($core.List<$core.int> value) => $2.Feedback.fromBuffer(value),
         ($0.Status value) => value.writeToBuffer()));
   }
 
@@ -284,13 +327,10 @@ abstract class UserClassServiceBase extends $grpc.Service {
 
   $async.Future<$0.Status> joinClass(
       $grpc.ServiceCall call, JoinClassRequest request);
-
   $async.Stream<Assigment> joinAssigmentLoop(
       $grpc.ServiceCall call, JoinAssigmentLoopRequest request);
-
   $async.Future<$0.Status> sendMessageToPresenter(
-      $grpc.ServiceCall call, $2.ChatMessage request);
-
+      $grpc.ServiceCall call, $1.ChatMessage request);
   $async.Future<$0.Status> sendFeedback(
-      $grpc.ServiceCall call, $3.Feedback request);
+      $grpc.ServiceCall call, $2.Feedback request);
 }

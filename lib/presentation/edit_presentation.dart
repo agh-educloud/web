@@ -61,7 +61,7 @@ class EditPanelButton extends StatelessWidget {
             ],
           ),
           onPressed: () async {
-            await getPresentationsOptions(context).then((Class p) => {
+            await getPresentationsOptions(context).then((ClassWithUuid p) => {
               Navigator.push(context,
               MaterialPageRoute(builder: (context) => CreatePresentationPanel(classToHint: p)))
             });
@@ -72,10 +72,10 @@ class EditPanelButton extends StatelessWidget {
   }
 }
 
-Future<Class> getPresentationsOptions(BuildContext context) async {
+Future<ClassWithUuid> getPresentationsOptions(BuildContext context) async {
   var list = await ClassService().getClasses();
   var chosenClass;
-  return showDialog<Class>(
+  return showDialog<ClassWithUuid>(
       context: context,
       barrierDismissible: false, // user must tap button for close dialog!
       builder: (BuildContext context) {
@@ -98,11 +98,11 @@ Future<Class> getPresentationsOptions(BuildContext context) async {
               },
             ),
           ],
-          content: DropdownButton<Class>(
-            items: list.map((Class presentation) =>
-                DropdownMenuItem<Class>(
-                  value: presentation,
-                  child: Text(presentation.name),
+          content: DropdownButton<ClassWithUuid>(
+            items: list.map((ClassWithUuid classWithUuid) =>
+                DropdownMenuItem<ClassWithUuid>(
+                  value: classWithUuid,
+                  child: Text(classWithUuid.class_2.name),
                 )).toList(),
             iconSize: 24,
             value: chosenClass,

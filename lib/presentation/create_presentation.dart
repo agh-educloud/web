@@ -13,7 +13,7 @@ class CreatePresentationPanel extends StatelessWidget {
   CreatePresentationPanel({Key key, this.classToHint}) : super(key: key);
 
   final double barHeight = 50.0;
-  final Class classToHint;
+  final ClassWithUuid classToHint;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class CreatePresentationPanel extends StatelessWidget {
 
 class CreatePresentationPanelBody extends StatelessWidget {
 
-  final Class classToHint;
+  final ClassWithUuid classToHint;
 
   const CreatePresentationPanelBody({Key key, this.classToHint}) : super(key: key);
 
@@ -49,10 +49,10 @@ class CreatePresentationPanelBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <StatefulWidget>[
-          classToHint == null ? BasicDataForm() : BasicDataForm(nameToHint: classToHint.name,topicToHint: classToHint.topic,) ,
-          classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: classToHint.quizQuestion,),
+          classToHint == null ? BasicDataForm() : BasicDataForm(nameToHint: classToHint.class_2.name,topicToHint: classToHint.class_2.topic,) ,
+          classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: classToHint.class_2.quizQuestion,),
 //          PresentationFileForm(),
-          CreatePresentationSubmitButton(update: classToHint != null,)
+          CreatePresentationSubmitButton(classUuid: classToHint != null ? classToHint.classUuid : null,)
         ],
       ),
       decoration: BoxDecoration(
@@ -78,5 +78,12 @@ class AppData {
     return _appData;
   }
   AppData._internal();
+
+  void flush() {
+    className = "";
+    classDescription = "";
+    quizQuestions = [];
+    presentationBytes = [];
+  }
 }
 final appData = AppData();
