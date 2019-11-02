@@ -70,4 +70,9 @@ class ClassService {
     debugPrint('Deleting class with id: ' + chosenClass.classUuid.toString());
     await http.delete('http://localhost:8080/class/' + chosenClass.classUuid.toString());
   }
+
+  Future<void> delegateQuizQuestion( String classUuid,QuizQuestion selected,) async {
+
+//    await http.post('http://localhost:8080/class/' + classUuid.classUuid.toString(), body: body);
+  }
 }
