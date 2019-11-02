@@ -64,6 +64,7 @@ class StartPanelButton extends StatelessWidget {
             if(list.isNotEmpty) {
               await getPresentationsOptions(context, list).then((ClassWithUuid p) => {
                 if(p != null){
+                  ClassService().startClass(p.classUuid.toString()),
                   Navigator.push(context, MaterialPageRoute(builder: (context) =>
                           StartPresentationPanel(classToStart: p)))
                 }
