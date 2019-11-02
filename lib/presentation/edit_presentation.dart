@@ -61,10 +61,18 @@ class EditPanelButton extends StatelessWidget {
             ],
           ),
           onPressed: () async {
-            await getPresentationsOptions(context).then((ClassWithUuid p) => {
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreatePresentationPanel(classToHint: p)))
-            });
+            var list = await ClassService().getClasses();
+            if(list.isNotEmpty) {
+              await getPresentationsOptions(context, list).then((
+                  ClassWithUuid p) =>
+              {
+                if(p != null){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) =>
+                          CreatePresentationPanel(classToHint: p)))
+                }
+              });
+            }
           },
         ),
       ),
@@ -72,9 +80,8 @@ class EditPanelButton extends StatelessWidget {
   }
 }
 
-Future<ClassWithUuid> getPresentationsOptions(BuildContext context) async {
-  var list = await ClassService().getClasses();
-  var chosenClass;
+Future<ClassWithUuid> getPresentationsOptions(BuildContext context, List<ClassWithUuid> list) async {
+  ClassWithUuid chosenClass;
   return showDialog<ClassWithUuid>(
       context: context,
       barrierDismissible: false, // user must tap button for close dialog!
@@ -91,10 +98,19 @@ Future<ClassWithUuid> getPresentationsOptions(BuildContext context) async {
             ),
             FlatButton(
               textColor: Colors.white,
+              color: Colors.red,
+              child: Text('Usuń'),
+              onPressed: () {
+                ClassService().deleteClass(chosenClass);
+                return Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              textColor: Colors.white,
               child: Text('Anuluj'),
               color: Colors.black38,
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(null);
               },
             ),
           ],
