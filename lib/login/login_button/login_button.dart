@@ -1,5 +1,6 @@
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:web/main_panel/main_panel.dart';
 import 'package:web/utils/draw_line.dart';
 
 class LoginWithGoogleButton extends StatelessWidget {
@@ -10,7 +11,7 @@ class LoginWithGoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 0.12;
-    final double width = MediaQuery.of(context).size.width * 0.25;
+    final double width = MediaQuery.of(context).size.width * 0.28;
 
     EdgeInsets margin =
         EdgeInsets.only(top: (MediaQuery.of(context).size.height * 0.055));
@@ -27,7 +28,6 @@ class LoginWithGoogleButton extends StatelessWidget {
                 padding: EdgeInsets.only(right: width * 0.03),
                 child: Image.asset(
                   imagePath,
-                  scale: 1.4,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -52,7 +52,12 @@ class LoginWithGoogleButton extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainPanel()),
+            );
+          },
         ),
         decoration: BoxDecoration(
           color: Colors.white,

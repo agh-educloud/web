@@ -1,6 +1,6 @@
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/gestures.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:web/register/register_panel.dart';
 import 'package:web/utils/draw_line.dart';
 
@@ -11,8 +11,6 @@ class LoginButtonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height * 0.37;
     final double width = MediaQuery.of(context).size.width * 0.35;
-
-    final String imagePath = '/images/login/google_icon.png';
 
     return Container(
       height: height,
@@ -49,7 +47,7 @@ class LoginButtonContainer extends StatelessWidget {
                       Offset(-width / 2, 0.0), Colors.white),
                 ),
               ),
-              LoginWithGoogleButton(imagePath: imagePath),
+              LoginWithGoogleButton(imagePath: 'google_icon.png'),
               RegisterRedirectButton(),
             ],
           ),

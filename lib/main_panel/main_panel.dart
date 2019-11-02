@@ -1,5 +1,7 @@
-import 'package:flutter_web/cupertino.dart';
-import 'package:flutter_web/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:web/presentation/create_presentation.dart';
+import 'package:web/presentation/edit_presentation.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
@@ -30,7 +32,7 @@ class MainPanel extends StatelessWidget {
 
 class MainPanelBody extends StatelessWidget {
   final double buttonHeight = 268.0;
-  final double buttonWidth = 369.0;
+  final double buttonWidth = 300.0;
 
   final Color gradientStartColor = const Color(0xffffffff);
   final Color gradientEndColor = const Color(0xffE5E5E5);
@@ -44,20 +46,28 @@ class MainPanelBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             MainPanelButton(
-                height: buttonHeight,
-                width: buttonWidth,
-                text: 'Stwórz prezentacje',
-                imagePath: '/images/main_panel/create_presentation.png'),
+              height: buttonHeight,
+              width: buttonWidth,
+              text: 'Stwórz prezentacje',
+              imagePath: 'create_presentation.png',
+              statelessWidget: CreatePresentationPanel(classToHint: null),
+            ),
+            EditPanelButton(
+              height: buttonHeight,
+              width: buttonWidth,
+              text: 'Edytuj prezentacje',
+              imagePath: 'edit_presentation.png',
+            ),
             MainPanelButton(
                 height: buttonHeight,
                 width: buttonWidth,
                 text: 'Rozpocznij prezentacje',
-                imagePath: '/images/main_panel/start_presentation.png'),
+                imagePath: 'start_presentation.png'),
             MainPanelButton(
                 height: buttonHeight,
                 width: buttonWidth,
                 text: 'Historia Prezentacji',
-                imagePath: '/images/main_panel/presentations_history.png'),
+                imagePath: 'presentations_history.png'),
           ]),
       decoration: BoxDecoration(
           gradient: LinearGradient(
