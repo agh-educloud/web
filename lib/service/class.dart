@@ -57,4 +57,22 @@ class ClassService {
       throw Exception('Failed to update class');
     }
   }
+
+  Future<void> startClass(String classUuid) async {
+    ClassUuid classUuid2 = ClassUuid()
+        ..classUuid = int.parse(classUuid);
+
+    debugPrint('Starting class with id: ' + classUuid);
+    await http.post('http://localhost:8080/class/' + classUuid, body: classUuid2.writeToJson());
+  }
+
+  Future<void> deleteClass(ClassWithUuid chosenClass) async {
+    debugPrint('Deleting class with id: ' + chosenClass.classUuid.toString());
+    await http.delete('http://localhost:8080/class/' + chosenClass.classUuid.toString());
+  }
+
+  Future<void> delegateQuizQuestion( String classUuid,QuizQuestion selected,) async {
+
+//    await http.post('http://localhost:8080/class/' + classUuid.classUuid.toString(), body: body);
+  }
 }

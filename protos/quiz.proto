@@ -16,6 +16,7 @@ message QuizQuestion {
     string question = 2;
     string hint = 3;
     repeated Option option = 4;
+    Option rightAnswer = 5;
 }
 
 message Option {

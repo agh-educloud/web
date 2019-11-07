@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
+import 'package:web/presentation/start_presentation/start_presentation_panel.dart';
 import 'package:web/service/class.dart';
 import 'package:web/utils/draw_line.dart';
 
-import 'create_presentation.dart';
-
-class EditPanelButton extends StatelessWidget {
+class StartPanelButton extends StatelessWidget {
   final double height;
   final double width;
   final String text;
   final String imagePath;
 
-  const EditPanelButton({Key key,
+  const StartPanelButton({Key key,
     this.height,
     this.width,
     this.text,
@@ -63,22 +62,20 @@ class EditPanelButton extends StatelessWidget {
           onPressed: () async {
             var list = await ClassService().getClasses();
             if(list.isNotEmpty) {
-              await getPresentationsOptions(context, list).then((
-                  ClassWithUuid p) =>
-              {
+              await getPresentationsOptions(context, list).then((ClassWithUuid p) => {
                 if(p != null){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>
-                          CreatePresentationPanel(classToHint: p)))
+                  ClassService().startClass(p.classUuid.toString()),
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          StartPresentationPanel(classToStart: p)))
                 }
               });
-            }
-          },
+            }          },
         ),
       ),
     );
   }
 }
+
 
 Future<ClassWithUuid> getPresentationsOptions(BuildContext context, List<ClassWithUuid> list) async {
   ClassWithUuid chosenClass;
@@ -90,19 +87,10 @@ Future<ClassWithUuid> getPresentationsOptions(BuildContext context, List<ClassWi
           actions: <Widget>[
             FlatButton(
               textColor: Colors.white,
-              child: Text('Edytuj'),
+              child: Text('Rozpocznij'),
               color: Colors.green,
               onPressed: () {
                 return Navigator.of(context).pop(chosenClass);
-              },
-            ),
-            FlatButton(
-              textColor: Colors.white,
-              color: Colors.red,
-              child: Text('Usuń'),
-              onPressed: () {
-                ClassService().deleteClass(chosenClass);
-                return Navigator.of(context).pop();
               },
             ),
             FlatButton(
