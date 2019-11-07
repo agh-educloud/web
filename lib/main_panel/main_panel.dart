@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/presentation/create_presentation.dart';
 import 'package:web/presentation/edit_presentation.dart';
+import 'package:web/presentation/presentation_history/presentation_history.dart';
 import 'package:web/presentation/start_presentation/start_presentation.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
@@ -64,7 +65,7 @@ class MainPanelBody extends StatelessWidget {
                 width: buttonWidth,
                 text: 'Rozpocznij prezentacje',
                 imagePath: 'start_presentation.png'),
-            MainPanelButton(
+            PresentationHistoryButton(
                 height: buttonHeight,
                 width: buttonWidth,
                 text: 'Historia Prezentacji',

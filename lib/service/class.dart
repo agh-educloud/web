@@ -75,4 +75,8 @@ class ClassService {
 
 //    await http.post('http://localhost:8080/class/' + classUuid.classUuid.toString(), body: body);
   }
+
+  getPresentedClasses() {
+    return getClasses();
+  }
 }
