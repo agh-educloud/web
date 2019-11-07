@@ -14,12 +14,12 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.75,
+      height: MediaQuery.of(context).size.height * 0.7,
       width: MediaQuery.of(context).size.width * 0.4,
       child: Column(
         children: <Widget>[
           StartPresentationPanelContainer(
-            height: MediaQuery.of(context).size.height * 0.65,
+            height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width * 0.4,
             body: ListView(),
             text: "Pytania od uczniów",

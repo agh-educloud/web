@@ -22,19 +22,74 @@ class StartPresentationPanel extends StatelessWidget {
               barHeight: barHeight,
             ),
           )),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <StatefulWidget>[
-            QuizQuestionListPanel(classToStart: classToStart,),
-            QuestionsToPresenterPanel()
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      QuizQuestionListPanel(classToStart: classToStart,),
+                      QuestionsToPresenterPanel(),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height*0.05,
+            child: EndPresentationButton(),
+            alignment: Alignment.centerLeft
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: GradientFooterBar(),
+      ),
+    );
+  }
+}
+
+class EndPresentationButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height * 0.05;
+    final double width = MediaQuery.of(context).size.width * 0.22;
+
+    EdgeInsets margin =
+    EdgeInsets.only(left: (MediaQuery.of(context).size.width * 0.085));
+
+    return Container(
+      height: height,
+      width: width,
+      child: Container(
+        margin: margin,
+        child: FlatButton(
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                    text:'Zakończ prezentacje',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          onPressed: () {},
+        ),
+        decoration: BoxDecoration(
+          color: Colors.redAccent,
+          borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(10.0),
+              topRight: const Radius.circular(10.0),
+              bottomLeft: const Radius.circular(10.0),
+              bottomRight: const Radius.circular(10.0)),
+        ),
       ),
     );
   }

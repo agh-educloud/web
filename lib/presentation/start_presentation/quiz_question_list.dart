@@ -38,7 +38,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
       height: MediaQuery
           .of(context)
           .size
-          .height * 0.75,
+          .height * 0.7,
       width: MediaQuery
           .of(context)
           .size
@@ -49,7 +49,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
             height: MediaQuery
                 .of(context)
                 .size
-                .height * 0.65,
+                .height * 0.6,
             width: MediaQuery
                 .of(context)
                 .size
