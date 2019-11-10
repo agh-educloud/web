@@ -3,23 +3,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/presentation/start_presentation/start_presentation_panel_container.dart';
 
-class QuestionsToPresenterPanel extends StatefulWidget {
+class AskedQuestionList  extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return QuestionsToPresenterPanelState();
+    return AskedQuestionListState();
   }
 }
 
-class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
+class AskedQuestionListState extends State<AskedQuestionList>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.75,
       width: MediaQuery.of(context).size.width * 0.4,
       child: Column(
         children: <Widget>[
           StartPresentationPanelContainer(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.65,
             width: MediaQuery.of(context).size.width * 0.4,
             body: ListView(),
             text: "Pytania od uczniów",
@@ -35,7 +35,6 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                       color: Colors.green,
                       child: Text("Odpowiedz"),
                       onPressed: () {
-                        Navigator.pop(context);
                       }),
                 ),
                 Padding(
@@ -45,7 +44,6 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                       color: Colors.blueAccent,
                       child: Text("Szczegóły"),
                       onPressed: () {
-                        Navigator.pop(context);
                       }),
                 ),
               ],
@@ -55,4 +53,5 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
       ),
     );
   }
+
 }
