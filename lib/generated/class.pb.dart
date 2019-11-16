@@ -6,35 +6,32 @@
 
 import 'dart:core' as $core show bool, Deprecated, double, int, List, Map, override, String;
 
-import 'package:json_annotation/json_annotation.dart';
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'homework.pb.dart' as $4;
-import 'quiz.pb.dart' as $3;
+import 'homework.pb.dart' as $3;
 import 'status.pb.dart' as $0;
-import 'user.pb.dart' as $5;
 
-class Class extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Class')
+class RestClass extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestClass')
     ..aOS(1, 'name')
     ..aOS(2, 'topic')
-    ..pc<$3.QuizQuestion>(3, 'quizQuestion', $pb.PbFieldType.PM,$3.QuizQuestion.create)
-    ..pc<$4.Homework>(4, 'homework', $pb.PbFieldType.PM,$4.Homework.create)
+    ..pc<QuizQuestionCreation>(3, 'quizQuestion', $pb.PbFieldType.PM,QuizQuestionCreation.create)
+    ..pc<$3.RestHomework>(4, 'homework', $pb.PbFieldType.PM,$3.RestHomework.create)
     ..a<$core.List<$core.int>>(5, 'presentation', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
-  Class() : super();
-  Class.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Class.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Class clone() => Class()..mergeFromMessage(this);
-  Class copyWith(void Function(Class) updates) => super.copyWith((message) => updates(message as Class));
+  RestClass() : super();
+  RestClass.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestClass.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestClass clone() => RestClass()..mergeFromMessage(this);
+  RestClass copyWith(void Function(RestClass) updates) => super.copyWith((message) => updates(message as RestClass));
   $pb.BuilderInfo get info_ => _i;
-  static Class create() => Class();
-  Class createEmptyInstance() => create();
-  static $pb.PbList<Class> createRepeated() => $pb.PbList<Class>();
-  static Class getDefault() => _defaultInstance ??= create()..freeze();
-  static Class _defaultInstance;
+  static RestClass create() => RestClass();
+  RestClass createEmptyInstance() => create();
+  static $pb.PbList<RestClass> createRepeated() => $pb.PbList<RestClass>();
+  static RestClass getDefault() => _defaultInstance ??= create()..freeze();
+  static RestClass _defaultInstance;
 
   $core.String get name => $_getS(0, '');
   set name($core.String v) { $_setString(0, v); }
@@ -46,9 +43,9 @@ class Class extends $pb.GeneratedMessage {
   $core.bool hasTopic() => $_has(1);
   void clearTopic() => clearField(2);
 
-  $core.List<$3.QuizQuestion> get quizQuestion => $_getList(2);
+  $core.List<QuizQuestionCreation> get quizQuestion => $_getList(2);
 
-  $core.List<$4.Homework> get homework => $_getList(3);
+  $core.List<$3.RestHomework> get homework => $_getList(3);
 
   $core.List<$core.int> get presentation => $_getN(4);
   set presentation($core.List<$core.int> v) { $_setBytes(4, v); }
@@ -56,10 +53,102 @@ class Class extends $pb.GeneratedMessage {
   void clearPresentation() => clearField(5);
 }
 
-@JsonSerializable(nullable: false)
+class QuizQuestionCreation extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('QuizQuestionCreation')
+    ..a<$core.int>(1, 'uuid', $pb.PbFieldType.O3)
+    ..a<RestQuizQuestion>(2, 'question', $pb.PbFieldType.OM, RestQuizQuestion.getDefault, RestQuizQuestion.create)
+    ..hasRequiredFields = false
+  ;
+
+  QuizQuestionCreation() : super();
+  QuizQuestionCreation.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  QuizQuestionCreation.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  QuizQuestionCreation clone() => QuizQuestionCreation()..mergeFromMessage(this);
+  QuizQuestionCreation copyWith(void Function(QuizQuestionCreation) updates) => super.copyWith((message) => updates(message as QuizQuestionCreation));
+  $pb.BuilderInfo get info_ => _i;
+  static QuizQuestionCreation create() => QuizQuestionCreation();
+  QuizQuestionCreation createEmptyInstance() => create();
+  static $pb.PbList<QuizQuestionCreation> createRepeated() => $pb.PbList<QuizQuestionCreation>();
+  static QuizQuestionCreation getDefault() => _defaultInstance ??= create()..freeze();
+  static QuizQuestionCreation _defaultInstance;
+
+  $core.int get uuid => $_get(0, 0);
+  set uuid($core.int v) { $_setSignedInt32(0, v); }
+  $core.bool hasUuid() => $_has(0);
+  void clearUuid() => clearField(1);
+
+  RestQuizQuestion get question => $_getN(1);
+  set question(RestQuizQuestion v) { setField(2, v); }
+  $core.bool hasQuestion() => $_has(1);
+  void clearQuestion() => clearField(2);
+}
+
+class RestQuizQuestion extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestQuizQuestion')
+    ..aOS(1, 'question')
+    ..aOS(2, 'hint')
+    ..pc<RestOption>(3, 'option', $pb.PbFieldType.PM,RestOption.create)
+    ..a<RestOption>(4, 'answer', $pb.PbFieldType.OM, RestOption.getDefault, RestOption.create)
+    ..hasRequiredFields = false
+  ;
+
+  RestQuizQuestion() : super();
+  RestQuizQuestion.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestQuizQuestion.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestQuizQuestion clone() => RestQuizQuestion()..mergeFromMessage(this);
+  RestQuizQuestion copyWith(void Function(RestQuizQuestion) updates) => super.copyWith((message) => updates(message as RestQuizQuestion));
+  $pb.BuilderInfo get info_ => _i;
+  static RestQuizQuestion create() => RestQuizQuestion();
+  RestQuizQuestion createEmptyInstance() => create();
+  static $pb.PbList<RestQuizQuestion> createRepeated() => $pb.PbList<RestQuizQuestion>();
+  static RestQuizQuestion getDefault() => _defaultInstance ??= create()..freeze();
+  static RestQuizQuestion _defaultInstance;
+
+  $core.String get question => $_getS(0, '');
+  set question($core.String v) { $_setString(0, v); }
+  $core.bool hasQuestion() => $_has(0);
+  void clearQuestion() => clearField(1);
+
+  $core.String get hint => $_getS(1, '');
+  set hint($core.String v) { $_setString(1, v); }
+  $core.bool hasHint() => $_has(1);
+  void clearHint() => clearField(2);
+
+  $core.List<RestOption> get option => $_getList(2);
+
+  RestOption get answer => $_getN(3);
+  set answer(RestOption v) { setField(4, v); }
+  $core.bool hasAnswer() => $_has(3);
+  void clearAnswer() => clearField(4);
+}
+
+class RestOption extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestOption')
+    ..aOS(1, 'value')
+    ..hasRequiredFields = false
+  ;
+
+  RestOption() : super();
+  RestOption.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestOption.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestOption clone() => RestOption()..mergeFromMessage(this);
+  RestOption copyWith(void Function(RestOption) updates) => super.copyWith((message) => updates(message as RestOption));
+  $pb.BuilderInfo get info_ => _i;
+  static RestOption create() => RestOption();
+  RestOption createEmptyInstance() => create();
+  static $pb.PbList<RestOption> createRepeated() => $pb.PbList<RestOption>();
+  static RestOption getDefault() => _defaultInstance ??= create()..freeze();
+  static RestOption _defaultInstance;
+
+  $core.String get value => $_getS(0, '');
+  set value($core.String v) { $_setString(0, v); }
+  $core.bool hasValue() => $_has(0);
+  void clearValue() => clearField(1);
+}
+
 class ClassCreationRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ClassCreationRequest')
-    ..a<Class>(1, 'class_1', $pb.PbFieldType.OM, Class.getDefault, Class.create)
+    ..a<RestClass>(1, 'class_1', $pb.PbFieldType.OM, RestClass.getDefault, RestClass.create)
     ..hasRequiredFields = false
   ;
 
@@ -75,8 +164,8 @@ class ClassCreationRequest extends $pb.GeneratedMessage {
   static ClassCreationRequest getDefault() => _defaultInstance ??= create()..freeze();
   static ClassCreationRequest _defaultInstance;
 
-  Class get class_1 => $_getN(0);
-  set class_1(Class v) { setField(1, v); }
+  RestClass get class_1 => $_getN(0);
+  set class_1(RestClass v) { setField(1, v); }
   $core.bool hasClass_1() => $_has(0);
   void clearClass_1() => clearField(1);
 }
@@ -85,7 +174,7 @@ class ClassCreationResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ClassCreationResponse')
     ..a<$core.int>(1, 'classUuid', $pb.PbFieldType.O3)
     ..a<$core.int>(2, 'secretCode', $pb.PbFieldType.O3)
-    ..a<$0.Status>(3, 'error', $pb.PbFieldType.OM, $0.Status.getDefault, $0.Status.create)
+    ..a<$0.RestStatus>(3, 'error', $pb.PbFieldType.OM, $0.RestStatus.getDefault, $0.RestStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -111,8 +200,8 @@ class ClassCreationResponse extends $pb.GeneratedMessage {
   $core.bool hasSecretCode() => $_has(1);
   void clearSecretCode() => clearField(2);
 
-  $0.Status get error => $_getN(2);
-  set error($0.Status v) { setField(3, v); }
+  $0.RestStatus get error => $_getN(2);
+  set error($0.RestStatus v) { setField(3, v); }
   $core.bool hasError() => $_has(2);
   void clearError() => clearField(3);
 }
@@ -120,7 +209,7 @@ class ClassCreationResponse extends $pb.GeneratedMessage {
 class ClassUpdateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ClassUpdateRequest')
     ..a<$core.int>(1, 'classUuid', $pb.PbFieldType.O3)
-    ..a<Class>(2, 'class_2', $pb.PbFieldType.OM, Class.getDefault, Class.create)
+    ..a<RestClass>(2, 'class_2', $pb.PbFieldType.OM, RestClass.getDefault, RestClass.create)
     ..hasRequiredFields = false
   ;
 
@@ -141,8 +230,8 @@ class ClassUpdateRequest extends $pb.GeneratedMessage {
   $core.bool hasClassUuid() => $_has(0);
   void clearClassUuid() => clearField(1);
 
-  Class get class_2 => $_getN(1);
-  set class_2(Class v) { setField(2, v); }
+  RestClass get class_2 => $_getN(1);
+  set class_2(RestClass v) { setField(2, v); }
   $core.bool hasClass_2() => $_has(1);
   void clearClass_2() => clearField(2);
 }
@@ -195,7 +284,7 @@ class GetClassesResponse extends $pb.GeneratedMessage {
 class ClassWithUuid extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ClassWithUuid')
     ..a<$core.int>(1, 'classUuid', $pb.PbFieldType.O3)
-    ..a<Class>(2, 'class_2', $pb.PbFieldType.OM, Class.getDefault, Class.create)
+    ..a<RestClass>(2, 'class_2', $pb.PbFieldType.OM, RestClass.getDefault, RestClass.create)
     ..hasRequiredFields = false
   ;
 
@@ -216,8 +305,8 @@ class ClassWithUuid extends $pb.GeneratedMessage {
   $core.bool hasClassUuid() => $_has(0);
   void clearClassUuid() => clearField(1);
 
-  Class get class_2 => $_getN(1);
-  set class_2(Class v) { setField(2, v); }
+  RestClass get class_2 => $_getN(1);
+  set class_2(RestClass v) { setField(2, v); }
   $core.bool hasClass_2() => $_has(1);
   void clearClass_2() => clearField(2);
 }
@@ -238,104 +327,5 @@ class Empty extends $pb.GeneratedMessage {
   static $pb.PbList<Empty> createRepeated() => $pb.PbList<Empty>();
   static Empty getDefault() => _defaultInstance ??= create()..freeze();
   static Empty _defaultInstance;
-}
-
-class JoinClassRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('JoinClassRequest')
-    ..a<$core.int>(1, 'secretCode', $pb.PbFieldType.O3)
-    ..a<$5.User>(2, 'user', $pb.PbFieldType.OM, $5.User.getDefault, $5.User.create)
-    ..hasRequiredFields = false
-  ;
-
-  JoinClassRequest() : super();
-  JoinClassRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  JoinClassRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  JoinClassRequest clone() => JoinClassRequest()..mergeFromMessage(this);
-  JoinClassRequest copyWith(void Function(JoinClassRequest) updates) => super.copyWith((message) => updates(message as JoinClassRequest));
-  $pb.BuilderInfo get info_ => _i;
-  static JoinClassRequest create() => JoinClassRequest();
-  JoinClassRequest createEmptyInstance() => create();
-  static $pb.PbList<JoinClassRequest> createRepeated() => $pb.PbList<JoinClassRequest>();
-  static JoinClassRequest getDefault() => _defaultInstance ??= create()..freeze();
-  static JoinClassRequest _defaultInstance;
-
-  $core.int get secretCode => $_get(0, 0);
-  set secretCode($core.int v) { $_setSignedInt32(0, v); }
-  $core.bool hasSecretCode() => $_has(0);
-  void clearSecretCode() => clearField(1);
-
-  $5.User get user => $_getN(1);
-  set user($5.User v) { setField(2, v); }
-  $core.bool hasUser() => $_has(1);
-  void clearUser() => clearField(2);
-}
-
-enum Assigment_Event {
-  quizQuestion, 
-  homework, 
-  notSet
-}
-
-class Assigment extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, Assigment_Event> _Assigment_EventByTag = {
-    1 : Assigment_Event.quizQuestion,
-    2 : Assigment_Event.homework,
-    0 : Assigment_Event.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Assigment')
-    ..a<$3.QuizQuestion>(1, 'quizQuestion', $pb.PbFieldType.OM, $3.QuizQuestion.getDefault, $3.QuizQuestion.create)
-    ..a<$4.Homework>(2, 'homework', $pb.PbFieldType.OM, $4.Homework.getDefault, $4.Homework.create)
-    ..oo(0, [1, 2])
-    ..hasRequiredFields = false
-  ;
-
-  Assigment() : super();
-  Assigment.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Assigment.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Assigment clone() => Assigment()..mergeFromMessage(this);
-  Assigment copyWith(void Function(Assigment) updates) => super.copyWith((message) => updates(message as Assigment));
-  $pb.BuilderInfo get info_ => _i;
-  static Assigment create() => Assigment();
-  Assigment createEmptyInstance() => create();
-  static $pb.PbList<Assigment> createRepeated() => $pb.PbList<Assigment>();
-  static Assigment getDefault() => _defaultInstance ??= create()..freeze();
-  static Assigment _defaultInstance;
-
-  Assigment_Event whichEvent() => _Assigment_EventByTag[$_whichOneof(0)];
-  void clearEvent() => clearField($_whichOneof(0));
-
-  $3.QuizQuestion get quizQuestion => $_getN(0);
-  set quizQuestion($3.QuizQuestion v) { setField(1, v); }
-  $core.bool hasQuizQuestion() => $_has(0);
-  void clearQuizQuestion() => clearField(1);
-
-  $4.Homework get homework => $_getN(1);
-  set homework($4.Homework v) { setField(2, v); }
-  $core.bool hasHomework() => $_has(1);
-  void clearHomework() => clearField(2);
-}
-
-class JoinAssigmentLoopRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('JoinAssigmentLoopRequest')
-    ..a<$5.User>(1, 'user', $pb.PbFieldType.OM, $5.User.getDefault, $5.User.create)
-    ..hasRequiredFields = false
-  ;
-
-  JoinAssigmentLoopRequest() : super();
-  JoinAssigmentLoopRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  JoinAssigmentLoopRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  JoinAssigmentLoopRequest clone() => JoinAssigmentLoopRequest()..mergeFromMessage(this);
-  JoinAssigmentLoopRequest copyWith(void Function(JoinAssigmentLoopRequest) updates) => super.copyWith((message) => updates(message as JoinAssigmentLoopRequest));
-  $pb.BuilderInfo get info_ => _i;
-  static JoinAssigmentLoopRequest create() => JoinAssigmentLoopRequest();
-  JoinAssigmentLoopRequest createEmptyInstance() => create();
-  static $pb.PbList<JoinAssigmentLoopRequest> createRepeated() => $pb.PbList<JoinAssigmentLoopRequest>();
-  static JoinAssigmentLoopRequest getDefault() => _defaultInstance ??= create()..freeze();
-  static JoinAssigmentLoopRequest _defaultInstance;
-
-  $5.User get user => $_getN(0);
-  set user($5.User v) { setField(1, v); }
-  $core.bool hasUser() => $_has(0);
-  void clearUser() => clearField(1);
 }
 

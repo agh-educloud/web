@@ -6,23 +6,22 @@
 
 // ignore_for_file: UNDEFINED_SHOWN_NAME,UNUSED_SHOWN_NAME
 import 'dart:core' as $core show int, dynamic, String, List, Map;
-
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class Status_Code extends $pb.ProtobufEnum {
-  static const Status_Code OK = Status_Code._(0, 'OK');
-  static const Status_Code DENIED = Status_Code._(1, 'DENIED');
-  static const Status_Code SERVER_ERROR = Status_Code._(2, 'SERVER_ERROR');
+class RestStatus_Code extends $pb.ProtobufEnum {
+  static const RestStatus_Code OK = RestStatus_Code._(0, 'OK');
+  static const RestStatus_Code DENIED = RestStatus_Code._(1, 'DENIED');
+  static const RestStatus_Code SERVER_ERROR = RestStatus_Code._(2, 'SERVER_ERROR');
 
-  static const $core.List<Status_Code> values = <Status_Code> [
+  static const $core.List<RestStatus_Code> values = <RestStatus_Code> [
     OK,
     DENIED,
     SERVER_ERROR,
   ];
 
-  static final $core.Map<$core.int, Status_Code> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Status_Code valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, RestStatus_Code> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static RestStatus_Code valueOf($core.int value) => _byValue[value];
 
-  const Status_Code._($core.int v, $core.String n) : super(v, n);
+  const RestStatus_Code._($core.int v, $core.String n) : super(v, n);
 }
 

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "protos/user.proto";
+import "user.proto";
 
 service RestChatService {
     rpc ReceiveMessages (RestUser) returns (stream RestChatMessage);

@@ -10,54 +10,60 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'user.pb.dart' as $0;
 
-class ChatMessage extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatMessage')
-    ..a<$0.User>(1, 'sender', $pb.PbFieldType.OM, $0.User.getDefault, $0.User.create)
-    ..a<Message>(2, 'message', $pb.PbFieldType.OM, Message.getDefault, Message.create)
+class RestChatMessage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestChatMessage')
+    ..a<$0.RestUser>(1, 'sender', $pb.PbFieldType.OM, $0.RestUser.getDefault, $0.RestUser.create)
+    ..a<RestMessage>(2, 'message', $pb.PbFieldType.OM, RestMessage.getDefault, RestMessage.create)
+    ..aOS(3, 'code')
     ..hasRequiredFields = false
   ;
 
-  ChatMessage() : super();
-  ChatMessage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  ChatMessage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  ChatMessage clone() => ChatMessage()..mergeFromMessage(this);
-  ChatMessage copyWith(void Function(ChatMessage) updates) => super.copyWith((message) => updates(message as ChatMessage));
+  RestChatMessage() : super();
+  RestChatMessage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestChatMessage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestChatMessage clone() => RestChatMessage()..mergeFromMessage(this);
+  RestChatMessage copyWith(void Function(RestChatMessage) updates) => super.copyWith((message) => updates(message as RestChatMessage));
   $pb.BuilderInfo get info_ => _i;
-  static ChatMessage create() => ChatMessage();
-  ChatMessage createEmptyInstance() => create();
-  static $pb.PbList<ChatMessage> createRepeated() => $pb.PbList<ChatMessage>();
-  static ChatMessage getDefault() => _defaultInstance ??= create()..freeze();
-  static ChatMessage _defaultInstance;
+  static RestChatMessage create() => RestChatMessage();
+  RestChatMessage createEmptyInstance() => create();
+  static $pb.PbList<RestChatMessage> createRepeated() => $pb.PbList<RestChatMessage>();
+  static RestChatMessage getDefault() => _defaultInstance ??= create()..freeze();
+  static RestChatMessage _defaultInstance;
 
-  $0.User get sender => $_getN(0);
-  set sender($0.User v) { setField(1, v); }
+  $0.RestUser get sender => $_getN(0);
+  set sender($0.RestUser v) { setField(1, v); }
   $core.bool hasSender() => $_has(0);
   void clearSender() => clearField(1);
 
-  Message get message => $_getN(1);
-  set message(Message v) { setField(2, v); }
+  RestMessage get message => $_getN(1);
+  set message(RestMessage v) { setField(2, v); }
   $core.bool hasMessage() => $_has(1);
   void clearMessage() => clearField(2);
+
+  $core.String get code => $_getS(2, '');
+  set code($core.String v) { $_setString(2, v); }
+  $core.bool hasCode() => $_has(2);
+  void clearCode() => clearField(3);
 }
 
-class Message extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Message')
+class RestMessage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestMessage')
     ..aOS(1, 'content')
     ..aOS(2, 'timeStamp')
     ..hasRequiredFields = false
   ;
 
-  Message() : super();
-  Message.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Message.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Message clone() => Message()..mergeFromMessage(this);
-  Message copyWith(void Function(Message) updates) => super.copyWith((message) => updates(message as Message));
+  RestMessage() : super();
+  RestMessage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestMessage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestMessage clone() => RestMessage()..mergeFromMessage(this);
+  RestMessage copyWith(void Function(RestMessage) updates) => super.copyWith((message) => updates(message as RestMessage));
   $pb.BuilderInfo get info_ => _i;
-  static Message create() => Message();
-  Message createEmptyInstance() => create();
-  static $pb.PbList<Message> createRepeated() => $pb.PbList<Message>();
-  static Message getDefault() => _defaultInstance ??= create()..freeze();
-  static Message _defaultInstance;
+  static RestMessage create() => RestMessage();
+  RestMessage createEmptyInstance() => create();
+  static $pb.PbList<RestMessage> createRepeated() => $pb.PbList<RestMessage>();
+  static RestMessage getDefault() => _defaultInstance ??= create()..freeze();
+  static RestMessage _defaultInstance;
 
   $core.String get content => $_getS(0, '');
   set content($core.String v) { $_setString(0, v); }

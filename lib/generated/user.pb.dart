@@ -8,24 +8,24 @@ import 'dart:core' as $core show bool, Deprecated, double, int, List, Map, overr
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class User extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('User')
+class RestUser extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestUser')
     ..aOS(1, 'uuid')
     ..aOS(2, 'name')
     ..hasRequiredFields = false
   ;
 
-  User() : super();
-  User.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  User clone() => User()..mergeFromMessage(this);
-  User copyWith(void Function(User) updates) => super.copyWith((message) => updates(message as User));
+  RestUser() : super();
+  RestUser.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestUser.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestUser clone() => RestUser()..mergeFromMessage(this);
+  RestUser copyWith(void Function(RestUser) updates) => super.copyWith((message) => updates(message as RestUser));
   $pb.BuilderInfo get info_ => _i;
-  static User create() => User();
-  User createEmptyInstance() => create();
-  static $pb.PbList<User> createRepeated() => $pb.PbList<User>();
-  static User getDefault() => _defaultInstance ??= create()..freeze();
-  static User _defaultInstance;
+  static RestUser create() => RestUser();
+  RestUser createEmptyInstance() => create();
+  static $pb.PbList<RestUser> createRepeated() => $pb.PbList<RestUser>();
+  static RestUser getDefault() => _defaultInstance ??= create()..freeze();
+  static RestUser _defaultInstance;
 
   $core.String get uuid => $_getS(0, '');
   set uuid($core.String v) { $_setString(0, v); }

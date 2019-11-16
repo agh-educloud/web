@@ -12,28 +12,28 @@ import 'status.pbenum.dart';
 
 export 'status.pbenum.dart';
 
-class Status extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Status')
-    ..e<Status_Code>(1, 'code', $pb.PbFieldType.OE, Status_Code.OK, Status_Code.valueOf, Status_Code.values)
+class RestStatus extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RestStatus')
+    ..e<RestStatus_Code>(1, 'code', $pb.PbFieldType.OE, RestStatus_Code.OK, RestStatus_Code.valueOf, RestStatus_Code.values)
     ..aOS(2, 'message')
     ..aOS(3, 'details')
     ..hasRequiredFields = false
   ;
 
-  Status() : super();
-  Status.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Status.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Status clone() => Status()..mergeFromMessage(this);
-  Status copyWith(void Function(Status) updates) => super.copyWith((message) => updates(message as Status));
+  RestStatus() : super();
+  RestStatus.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RestStatus.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RestStatus clone() => RestStatus()..mergeFromMessage(this);
+  RestStatus copyWith(void Function(RestStatus) updates) => super.copyWith((message) => updates(message as RestStatus));
   $pb.BuilderInfo get info_ => _i;
-  static Status create() => Status();
-  Status createEmptyInstance() => create();
-  static $pb.PbList<Status> createRepeated() => $pb.PbList<Status>();
-  static Status getDefault() => _defaultInstance ??= create()..freeze();
-  static Status _defaultInstance;
+  static RestStatus create() => RestStatus();
+  RestStatus createEmptyInstance() => create();
+  static $pb.PbList<RestStatus> createRepeated() => $pb.PbList<RestStatus>();
+  static RestStatus getDefault() => _defaultInstance ??= create()..freeze();
+  static RestStatus _defaultInstance;
 
-  Status_Code get code => $_getN(0);
-  set code(Status_Code v) { setField(1, v); }
+  RestStatus_Code get code => $_getN(0);
+  set code(RestStatus_Code v) { setField(1, v); }
   $core.bool hasCode() => $_has(0);
   void clearCode() => clearField(1);
 

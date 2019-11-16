@@ -5,45 +5,53 @@
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name
 
 import 'dart:async' as $async;
-import 'dart:core' as $core show int, String, List;
 
 import 'package:grpc/service_api.dart' as $grpc;
 
-import 'chat.pb.dart';
+import 'dart:core' as $core show int, String, List;
 
+import 'user.pb.dart' as $0;
+import 'chat.pb.dart';
 export 'chat.pb.dart';
 
-class ChatServiceClient extends $grpc.Client {
-  static final _$exchangeMessages =
-      $grpc.ClientMethod<ChatMessage, ChatMessage>(
-          '/ChatService/ExchangeMessages',
-          (ChatMessage value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => ChatMessage.fromBuffer(value));
+class RestChatServiceClient extends $grpc.Client {
+  static final _$receiveMessages =
+      $grpc.ClientMethod<$0.RestUser, RestChatMessage>(
+          '/RestChatService/ReceiveMessages',
+          ($0.RestUser value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => RestChatMessage.fromBuffer(value));
 
-  ChatServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+  RestChatServiceClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseStream<ChatMessage> exchangeMessages(
-      $async.Stream<ChatMessage> request,
+  $grpc.ResponseStream<RestChatMessage> receiveMessages($0.RestUser request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(_$exchangeMessages, request, options: options);
+    final call = $createCall(
+        _$receiveMessages, $async.Stream.fromIterable([request]),
+        options: options);
     return $grpc.ResponseStream(call);
   }
 }
 
-abstract class ChatServiceBase extends $grpc.Service {
-  $core.String get $name => 'ChatService';
+abstract class RestChatServiceBase extends $grpc.Service {
+  $core.String get $name => 'RestChatService';
 
-  ChatServiceBase() {
-    $addMethod($grpc.ServiceMethod<ChatMessage, ChatMessage>(
-        'ExchangeMessages',
-        exchangeMessages,
+  RestChatServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.RestUser, RestChatMessage>(
+        'ReceiveMessages',
+        receiveMessages_Pre,
+        false,
         true,
-        true,
-        ($core.List<$core.int> value) => ChatMessage.fromBuffer(value),
-        (ChatMessage value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.RestUser.fromBuffer(value),
+        (RestChatMessage value) => value.writeToBuffer()));
   }
 
-  $async.Stream<ChatMessage> exchangeMessages(
-      $grpc.ServiceCall call, $async.Stream<ChatMessage> request);
+  $async.Stream<RestChatMessage> receiveMessages_Pre(
+      $grpc.ServiceCall call, $async.Future request) async* {
+    yield* receiveMessages(call, (await request) as $0.RestUser);
+  }
+
+  $async.Stream<RestChatMessage> receiveMessages(
+      $grpc.ServiceCall call, $0.RestUser request);
 }

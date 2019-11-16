@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "protos/status.proto";
+import "status.proto";
 
 service PresenterHomeworkService {
     rpc CreateHomework (CreateRestHomeworkRequest) returns (RestStatus);

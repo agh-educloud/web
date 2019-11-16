@@ -1,10 +1,10 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\SG0306315\Downloads\flutter_windows_v1.9.1+hotfix.5-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\SG0306315\IdeaProjects\web"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_ROOT=/Users/pkardas/tools/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/pkardas/University/inzynierka/web"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build\ios"
-export "FLUTTER_FRAMEWORK_DIR=C:\Users\SG0306315\Downloads\flutter_windows_v1.9.1+hotfix.5-stable\flutter\bin\cache\artifacts\engine\ios"
+export "SYMROOT=${SOURCE_ROOT}/../build/ios"
+export "FLUTTER_FRAMEWORK_DIR=/Users/pkardas/tools/flutter/bin/cache/artifacts/engine/ios"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
