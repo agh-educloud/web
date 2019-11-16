@@ -38,7 +38,7 @@ class StartPresentationPanelContainer extends StatelessWidget {
               color: Color(0xffC4C4C4).withOpacity(0.25),
             ),
             alignment: Alignment.centerLeft,
-            height: height * 0.9,
+            height: height * 0.85,
             width: width * 0.9,
             child: body,
           ),
