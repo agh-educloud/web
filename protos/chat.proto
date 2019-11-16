@@ -1,17 +1,18 @@
 syntax = "proto3";
 
-import "user.proto";
+import "protos/user.proto";
 
-service ChatService {
-    rpc ExchangeMessages (stream ChatMessage) returns (stream ChatMessage);
+service RestChatService {
+    rpc ReceiveMessages (RestUser) returns (stream RestChatMessage);
 }
 
-message ChatMessage {
-    User sender = 1;
-    Message message = 2;
+message RestChatMessage {
+    RestUser sender = 1;
+    RestMessage message = 2;
+    string code = 3;
 }
 
-message Message {
+message RestMessage {
     string content = 1;
     string timeStamp = 2;
 }

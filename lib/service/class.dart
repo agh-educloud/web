@@ -12,8 +12,11 @@ class ClassService {
     Class rqClass = Class()
       ..name = name
       ..topic = description
-      ..presentation = presentationBytes
-      ..quizQuestion.addAll(questions);
+      ..presentation = presentationBytes;
+
+    if(questions.isNotEmpty){
+      rqClass..quizQuestion.addAll(questions);
+    }
 
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
@@ -71,8 +74,8 @@ class ClassService {
     await http.delete('http://localhost:8080/class/' + chosenClass.classUuid.toString());
   }
 
-  Future<void> delegateQuizQuestion( String classUuid,QuizQuestion selected,) async {
-
-//    await http.post('http://localhost:8080/class/' + classUuid.classUuid.toString(), body: body);
+  Future<void> delegateQuizQuestion(String classUuid, QuizQuestion selected) async {
+    await http.post('http://localhost:8080/quizesToDelegate/' + classUuid, body: selected.writeToJson());
   }
+
 }

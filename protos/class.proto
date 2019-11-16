@@ -1,52 +1,63 @@
 syntax = "proto3";
 
-import "status.proto";
-import "quiz.proto";
-import "homework.proto";
-import "chat.proto";
-import "user.proto";
-import "feedback.proto";
+option go_package = "educloud";
+
+import "protos/status.proto";
+import "protos/quiz.proto";
+import "protos/homework.proto";
+import "protos/chat.proto";
+import "protos/user.proto";
 
 
-service PresenterClassService {
+service RestPresenterClassService {
     rpc CreateClass (ClassCreationRequest) returns (ClassCreationResponse);
-    rpc UpdateClass (ClassUpdateRequest) returns (Status);
-    rpc DeleteClass (ClassUuid) returns (Status);
-    rpc GetClass (ClassUuid) returns (Class);
+    rpc UpdateClass (ClassUpdateRequest) returns (RestStatus);
+    rpc DeleteClass (ClassUuid) returns (RestStatus);
+    rpc GetClass (ClassUuid) returns (RestClass);
     rpc GetClasses (Empty) returns (GetClassesResponse);
 
-    rpc StartClass (ClassUuid) returns (stream ChatMessage);
-    rpc EndClass (ClassUuid) returns (Status);
+    rpc StartClass (ClassUuid) returns (stream RestChatMessage);
+    rpc EndClass (ClassUuid) returns (RestStatus);
 }
 
-service UserClassService {
-    rpc JoinClass (JoinClassRequest) returns (Status);
-    rpc JoinAssigmentLoop(JoinAssigmentLoopRequest) returns (stream Assigment);
-    rpc SendMessageToPresenter (ChatMessage) returns (Status);
-    rpc SendFeedback (Feedback) returns (Status);
-}
 
-message Class {
+message RestClass {
     string name = 1;
     string topic = 2;
-    repeated QuizQuestion quizQuestion = 3;
-    repeated Homework homework = 4;
+    repeated QuizQuestionCreation quizQuestion = 3;
+    repeated RestHomework homework = 4;
     bytes presentation = 5;
 }
 
+message QuizQuestionCreation {
+    int32 uuid = 1;
+    RestQuizQuestion question = 2;
+}
+
+message RestQuizQuestion {
+    string question = 1;
+    repeated RestOption option = 3;
+    string hint = 2;
+    RestOption answer = 4;
+}
+
+message RestOption {
+    string value = 1;
+}
+
 message ClassCreationRequest {
-    Class class = 1;
+    RestClass class = 1;
 }
 
 message ClassCreationResponse {
     int32 classUuid = 1;
     int32 secretCode = 2;
-    Status error = 3;
+    RestStatus error = 3;
 }
 
 message ClassUpdateRequest {
     int32 classUuid = 1;
-    Class class = 2;
+    RestClass class = 2;
 }
 
 message ClassUuid {
@@ -59,24 +70,8 @@ message GetClassesResponse{
 
 message ClassWithUuid {
     int32 classUuid = 1;
-    Class class = 2;
+    RestClass class = 2;
 }
 
 message Empty{}
-
-message JoinClassRequest {
-    int32 secretCode = 1;
-    User user = 2;
-}
-
-message Assigment {
-    oneof event {
-        QuizQuestion quizQuestion = 1;
-        Homework homework = 2;
-    }
-}
-
-message JoinAssigmentLoopRequest{
-    User user = 1;
-}
 

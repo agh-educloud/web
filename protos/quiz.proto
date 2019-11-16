@@ -1,41 +1,14 @@
 syntax = "proto3";
 
-import "status.proto";
+import "protos/status.proto";
 
 service PresenterQuizService{
-    rpc DelegateQuizQuestion (QuizQuestion) returns (Status);
-    rpc GetQuizQuestionStatistics (QuizQuestion) returns (stream QuizQuestionStatistics);
+    rpc DelegateQuizQuestion (RestQuizQuestionUuid) returns (RestStatus);
+    rpc GetQuizQuestionStatistics (RestQuizQuestionUuid) returns (stream QuizQuestionStatistics);
 }
 
-service UserQuizService {
-    rpc AnswerQuizQuestion (QuizQuestionAnswer) returns (QuizQuestionResponse);
-}
-
-message QuizQuestion {
+message RestQuizQuestionUuid {
     int32 uuid = 1;
-    string question = 2;
-    string hint = 3;
-    repeated Option option = 4;
-    Option rightAnswer = 5;
-}
-
-message Option {
-    string value = 1;
-}
-
-message QuizQuestionCreation {
-    QuizQuestion quizQuestion = 1;
-    Option answer = 2;
-}
-
-message QuizQuestionAnswer {
-    int32 uuid = 1;
-    Option answer = 2;
-}
-
-message QuizQuestionResponse {
-    int32 questionUuid = 1;
-    Option correctAnswer = 2;
 }
 
 message QuizQuestionStatistics{
