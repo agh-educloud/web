@@ -26,7 +26,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
   bool isAnySelected;
   final List<bool> _selected;
   final List<bool> _delegated;
-  QuizQuestion selected;
+  QuizQuestionCreation selected;
   int selectedIndex;
 
   QuizQuestionListPanelState(this.classToStart, this._selected,
@@ -58,7 +58,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
               itemCount: classToStart.class_2.quizQuestion.length,
               // ignore: missing_return
               itemBuilder: (context, i) {
-                final item = classToStart.class_2.quizQuestion[i];
+                final item = classToStart.class_2.quizQuestion[i].question;
                 return Container(
                     decoration: BoxDecoration(
                         color: getColour(i),
@@ -114,10 +114,11 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                         if (selected != null) {
                           setState(() {
                             _delegated[selectedIndex] = true;
+                            _selected[selectedIndex] = !_selected[selectedIndex];
                             isAnySelected = false;
                           });
                           ClassService().delegateQuizQuestion(
-                              classToStart.classUuid.toString(), selected);
+                              classToStart.classUuid.toString(), RestQuizQuestionUuid()..uuid = selected.uuid);
                         }
                       }),
                 ),
@@ -128,7 +129,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                       color: Colors.blueAccent,
                       child: Text("Szczegóły"),
                       onPressed: () {
-                        getViewOnlyQuestionView(selected);
+                        getViewOnlyQuestionView(selected.question);
                       }),
                 ),
                 Padding(
@@ -148,9 +149,11 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
   }
 
   Color getColour(int i) {
-    if (_delegated[i]) {
+    if (_delegated[i] && _selected[i]) {
+      return Colors.black38;
+    } else if(_delegated[i]){
       return Colors.black12;
-    } else {
+    } else{
         if(_selected[i]){
           return Colors.cyan;
         }else{
@@ -159,8 +162,8 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
     }
   }
 
-  getViewOnlyQuestionView(QuizQuestion selected) {
-    showDialog<QuizQuestion>(
+  getViewOnlyQuestionView(RestQuizQuestion selected) {
+    showDialog<RestQuizQuestion>(
         context: context,
         barrierDismissible: false, // user must tap button for close dialog!
         builder: (BuildContext context) {
@@ -201,9 +204,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "A: " +
-                                      (selected.option[0] != null
+                                      (selected.option == null || selected.option.isEmpty
                                           ? "Brak"
-                                          : selected.option[0]),
+                                          : selected.option[0].value),
                                 )),
                           ),
                           Padding(
@@ -213,9 +216,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "B: " +
-                                      (selected.option[1] != null
+                                      (selected.option.length > 1 && selected.option[1].value.isEmpty
                                           ? "Brak"
-                                          : selected.option[1]),
+                                          : selected.option[1].value),
                                 )),
                           ),
                           Padding(
@@ -225,9 +228,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "C: " +
-                                      (selected.option[2] != null
+                                      (selected.option.length > 2 && selected.option[2].value.isEmpty
                                           ? "Brak"
-                                          : selected.option[2]),
+                                          : selected.option[2].value),
                                 )),
                           ),
                           Padding(
@@ -237,9 +240,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "D: " +
-                                      (selected.option[3] != null
+                                      (selected.option.length > 3 && selected.option[3].value.isEmpty
                                           ? "Brak"
-                                          : selected.option[3]),
+                                          : selected.option[3].value),
                                 )),
                           ),
                           Padding(
@@ -248,8 +251,10 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                 enabled: false ,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.question_answer),
-//                                   TODO
-                                  labelText: "Prawidłowa odpowiedź: Brak",
+                                  labelText: "Prawidłowa odpowiedź: " +
+                                      (selected.answer == null
+                                          ? "Brak"
+                                          : selected.answer.value),
                                 )),
                           ),
                           Padding(

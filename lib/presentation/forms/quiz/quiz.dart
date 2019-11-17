@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web/generated/quiz.pb.dart';
-import 'package:web/generated/quiz.pbgrpc.dart';
+import 'package:web/generated/class.pb.dart';
 
 import '../../create_presentation.dart';
 
-Future<QuizQuestion> waitForQuizQuestion(BuildContext context) async {
+Future<RestQuizQuestion> waitForQuizQuestion(BuildContext context) async {
   final questionController = TextEditingController();
   final aOptionController = TextEditingController();
   final bOptionController = TextEditingController();
@@ -13,7 +12,7 @@ Future<QuizQuestion> waitForQuizQuestion(BuildContext context) async {
   final dOptionController = TextEditingController();
   final rightOptionController = TextEditingController();
 
-  return showDialog<QuizQuestion>(
+  return showDialog<RestQuizQuestion>(
       context: context,
       barrierDismissible: false, // user must tap button for close dialog!
       builder: (BuildContext context) {
@@ -135,7 +134,7 @@ Future<QuizQuestion> waitForQuizQuestion(BuildContext context) async {
       });
 }
 
-Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion questionToEdit) async {
+Future<RestQuizQuestion> waitForQuizQuestionEdit(BuildContext context, RestQuizQuestion questionToEdit) async {
   final questionController = TextEditingController();
   final aOptionController = TextEditingController();
   final bOptionController = TextEditingController();
@@ -143,7 +142,7 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
   final dOptionController = TextEditingController();
   final rightOptionController = TextEditingController();
 
-  return showDialog<QuizQuestion>(
+  return showDialog<RestQuizQuestion>(
       context: context,
       barrierDismissible: false, // user must tap button for close dialog!
       builder: (BuildContext context) {
@@ -169,9 +168,6 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
                                   : questionToEdit.question,
                               hintText: 'Wpisz pytanie',
                             ),
-                            onChanged: (text) {
-                              print("text = $text");
-                            },
                           ),
                         ),
                         Padding(
@@ -183,7 +179,7 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
                               controller: aOptionController,
                               decoration: InputDecoration(
                                 icon: Icon(Icons.create),
-                                labelText: (questionToEdit == null)
+                                labelText: questionToEdit == null || questionToEdit.option.isEmpty
                                     ? 'A'
                                     : questionToEdit.option[0].value.toString(),
                                 hintText: 'Formuła dla A',
@@ -195,7 +191,7 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
                               controller: bOptionController,
                               decoration: InputDecoration(
                                 icon: Icon(Icons.create),
-                                labelText: (questionToEdit == null)
+                                labelText: questionToEdit == null || questionToEdit.option.length < 2
                                     ? 'B'
                                     : questionToEdit.option[1].value.toString(),
                                 hintText: 'Formuła dla B',
@@ -207,7 +203,7 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
                               controller: cOptionController,
                               decoration: InputDecoration(
                                 icon: Icon(Icons.create),
-                                labelText: (questionToEdit == null)
+                                labelText: questionToEdit == null || questionToEdit.option.length < 3
                                     ? 'C'
                                     : questionToEdit.option[2].value.toString(),
                                 hintText: 'Formuła dla C',
@@ -219,7 +215,7 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
                               controller: dOptionController,
                               decoration: InputDecoration(
                                 icon: Icon(Icons.create),
-                                labelText: (questionToEdit == null)
+                                labelText: questionToEdit == null || questionToEdit.option.length < 4
                                     ? 'D'
                                     : questionToEdit.option[3].value.toString(),
                                 hintText: 'Formuła dla D',
@@ -232,9 +228,9 @@ Future<QuizQuestion> waitForQuizQuestionEdit(BuildContext context, QuizQuestion 
                               decoration: InputDecoration(
                                 icon: Icon(Icons.question_answer),
                                 //TODO
-                                labelText: (questionToEdit == null)
+                                labelText: questionToEdit == null || questionToEdit.answer == null
                                     ? 'Prawidłowa odpowiedź'
-                                    : questionToEdit.option[0].value.toString(),
+                                    : questionToEdit.answer.value,
                                 hintText: 'Wpisz A,B,C lub D',
                               )),
                         ),
@@ -285,15 +281,15 @@ void createClass(
     TextEditingController questionController,
     BuildContext context) {
   var options = [
-    Option()..value = aOptionController.text,
-    Option()..value = bOptionController.text,
-    Option()..value = cOptionController.text,
-    Option()..value = dOptionController.text
+    RestOption()..value = aOptionController.text,
+    RestOption()..value = bOptionController.text,
+    RestOption()..value = cOptionController.text,
+    RestOption()..value = dOptionController.text
   ];
-  var rightAnswer = rightOptionController.text;
-  var question = QuizQuestion();
+  var rightAnswer = RestOption()..value = rightOptionController.text;
+  var question = RestQuizQuestion();
+  question..answer = rightAnswer;
   question..question = questionController.text;
-  question..uuid = 1;
   question..option.addAll(options);
 
   Navigator.pop(context, question);
@@ -307,39 +303,42 @@ void editClass(
     TextEditingController rightOptionController,
     TextEditingController questionController,
     BuildContext context,
-    QuizQuestion earlierQuestion) {
+    RestQuizQuestion earlierQuestion) {
   var options = [
-    Option()
+    RestOption()
       ..value = aOptionController.text.isEmpty
-          ? earlierQuestion.option[0].value
+          ? (earlierQuestion.option.isEmpty ? "" : earlierQuestion.option[1].value)
           : aOptionController.text,
-    Option()
+    RestOption()
       ..value = bOptionController.text.isEmpty
-          ? earlierQuestion.option[1].value
+          ? (earlierQuestion.option.length < 2 ? "" : earlierQuestion.option[1].value)
           : bOptionController.text,
-    Option()
+    RestOption()
       ..value = cOptionController.text.isEmpty
-          ? earlierQuestion.option[2].value
+          ? (earlierQuestion.option.length < 3 ? "" : earlierQuestion.option[2].value)
           : cOptionController.text,
-    Option()
+    RestOption()
       ..value = dOptionController.text.isEmpty
-          ? earlierQuestion.option[3].value
+          ? (earlierQuestion.option.length < 4 ? "" : earlierQuestion.option[3].value)
           : dOptionController.text,
   ];
-  var rightAnswer = rightOptionController.text;
-  var question = QuizQuestion();
+
+  var rightAnswer = RestOption()..value = rightOptionController.text;
+  var question = RestQuizQuestion();
+  question..answer = rightAnswer;
   question
     ..question = questionController.text.isEmpty
         ? earlierQuestion.question
         : questionController.text;
-  question..uuid = 1;
   question..option.addAll(options);
+
+  print(question.toString());
 
   Navigator.pop(context, question);
 }
 
-Future<QuizQuestion> getQuizesOptions(BuildContext context) async {
-  return await showDialog<QuizQuestion>(
+Future<RestQuizQuestion> getQuizesOptions(BuildContext context) async {
+  return await showDialog<RestQuizQuestion>(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
@@ -348,15 +347,15 @@ Future<QuizQuestion> getQuizesOptions(BuildContext context) async {
 }
 
 AlertDialog getQuizQuestions(BuildContext context) {
-  QuizQuestion choosenQuiz;
+  RestQuizQuestion choosenQuiz;
   return AlertDialog(
     content:
     Container(
         height: MediaQuery.of(context).size.height * 0.08,
         width: MediaQuery.of(context).size.width * 0.3,
 
-        child: DropdownButton<QuizQuestion>(
-          items: appData.quizQuestions.map((QuizQuestion quiz) => DropdownMenuItem<QuizQuestion>(
+        child: DropdownButton<RestQuizQuestion>(
+          items: appData.quizQuestions.map((RestQuizQuestion quiz) => DropdownMenuItem<RestQuizQuestion>(
             value: quiz,
             child: Text((quiz.question == null || quiz.question.isEmpty) ? "Brak nazwy" : quiz.question),
           )).toList(),

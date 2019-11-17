@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web/generated/quiz.pb.dart';
-import 'package:web/generated/quiz.pbgrpc.dart';
+import 'package:web/generated/class.pb.dart';
 import 'package:web/presentation/forms/quiz/quiz.dart';
 
 import '../create_presentation.dart';
 import 'container/create_presentation_form_container.dart';
 
 class PresentationAssigmentFormButton extends StatefulWidget {
-  final List<QuizQuestion> questionsToHint;
+  final List<RestQuizQuestion> questionsToHint;
 
   const PresentationAssigmentFormButton({Key key, this.questionsToHint}) : super(key: key);
 
@@ -19,7 +18,7 @@ class PresentationAssigmentFormButton extends StatefulWidget {
 class PresentationAssigmentFormButtonStateful
     extends State<PresentationAssigmentFormButton> {
 
-  final List<QuizQuestion> questionsToHint;
+  final List<RestQuizQuestion> questionsToHint;
 
   PresentationAssigmentFormButtonStateful(this.questionsToHint);
 
@@ -66,7 +65,7 @@ class PresentationAssigmentFormButtonStateful
                     textColor: Colors.black,
                     onPressed: () {
                       setState(() async {
-                        QuizQuestion question =
+                        RestQuizQuestion question =
                             await waitForQuizQuestion(context);
                         appData.quizQuestions.add(question);
                       });
@@ -99,9 +98,9 @@ class PresentationAssigmentFormButtonStateful
                     onPressed: () {
                       setState(() async {
                         if (appData.quizQuestions.isNotEmpty) {
-                          QuizQuestion questionToEditOrRemove = await getQuizesOptions(context);
+                          RestQuizQuestion questionToEditOrRemove = await getQuizesOptions(context);
                           if(editAction.edit) {
-                            QuizQuestion editedQuestion = await waitForQuizQuestionEdit(context, questionToEditOrRemove);
+                            RestQuizQuestion editedQuestion = await waitForQuizQuestionEdit(context, questionToEditOrRemove);
                             if(editedQuestion != null){
                               appData.quizQuestions.remove(questionToEditOrRemove);
                               appData.quizQuestions.add(editedQuestion);

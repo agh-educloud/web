@@ -60,7 +60,7 @@ class DelegatedQuizQuestionListState extends State<DelegatedQuizQuestionList> {
                   // if current item is selected show blue color
                   child: ListTile(
                       title: Text(
-                        item.question,
+                        item.question.question,
                         style: Theme
                             .of(context)
                             .textTheme

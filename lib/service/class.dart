@@ -8,16 +8,15 @@ class ClassService {
   List<int> classUuids = [];
 
   Future<void> createClass(String name, String description,
-      List<QuizQuestion> questions, List<int> presentationBytes) async {
-    Class rqClass = Class()
+      List<RestQuizQuestion> questions, List<int> presentationBytes) async {
+    RestClass rqClass = RestClass()
       ..name = name
       ..topic = description
       ..presentation = presentationBytes;
 
     if(questions.isNotEmpty){
-      rqClass..quizQuestion.addAll(questions);
+      rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
-
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
 
@@ -42,11 +41,17 @@ class ClassService {
     return classesResponse.classes;
   }
 
-  Future<void> updateClass(int id, String name, String description, List<QuizQuestion> questions) async {
-    Class rqClass = Class()
+  Future<void> updateClass(int id, String name, String description, List<RestQuizQuestion> questions) async {
+    RestClass rqClass = RestClass()
       ..name = name
-      ..topic = description
-      ..quizQuestion.addAll(questions);
+      ..topic = description;
+
+    if(questions.isNotEmpty){
+      rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
+    }
+
+    debugPrint("Sending:\n" + rqClass.writeToJson());
+
 
     ClassUpdateRequest request = ClassUpdateRequest()
       ..classUuid = id
@@ -74,8 +79,12 @@ class ClassService {
     await http.delete('http://localhost:8080/class/' + chosenClass.classUuid.toString());
   }
 
-  Future<void> delegateQuizQuestion(String classUuid, QuizQuestion selected) async {
-    await http.post('http://localhost:8080/quizesToDelegate/' + classUuid, body: selected.writeToJson());
+  Future<void> delegateQuizQuestion(String classUuid, RestQuizQuestionUuid selected) async {
+    await http.post('http://localhost:8080/quizToDelegate/' + classUuid, body: selected.writeToJson());
+  }
+
+  getPresentedClasses() {
+
   }
 
 }

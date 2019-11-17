@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
-import 'package:web/generated/quiz.pb.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
@@ -50,7 +49,7 @@ class CreatePresentationPanelBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <StatefulWidget>[
           classToHint == null ? BasicDataForm() : BasicDataForm(nameToHint: classToHint.class_2.name,topicToHint: classToHint.class_2.topic,) ,
-          classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: classToHint.class_2.quizQuestion,),
+          classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
 //          PresentationFileForm(),
           CreatePresentationSubmitButton(classUuid: classToHint != null ? classToHint.classUuid : null,)
         ],
@@ -63,6 +62,10 @@ class CreatePresentationPanelBody extends StatelessWidget {
       )),
     );
   }
+
+  List<RestQuizQuestion> buildQuizQuestion(List<QuizQuestionCreation> quizQuestion){
+   return quizQuestion.map((quizQuestion) => quizQuestion.question).toList();
+  }
 }
 
 
@@ -71,7 +74,7 @@ class AppData {
 
   String className = "";
   String classDescription = "";
-  List<QuizQuestion> quizQuestions = [];
+  List<RestQuizQuestion> quizQuestions = [];
   List<int> presentationBytes = [];
 
   factory AppData() {
