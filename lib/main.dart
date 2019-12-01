@@ -1,10 +1,24 @@
+import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/material.dart';
-import 'package:web/main_panel/main_panel.dart';
+import 'package:web/login/login_panel.dart';
 
-void main() => runApp(MyApp());
+main() async {
+  //Use for firebase package development only
+//  await config();
 
+    fb.initializeApp(
+      apiKey: "AIzaSyCirpdgLsezsvNNPAlsU0mC-i5T1d0U1kQ",
+      authDomain: "malopolska-1f008.firebaseapp.com",
+      databaseURL: "https://malopolska-1f008.firebaseio.com",
+      projectId: "malopolska-1f008",
+      storageBucket: "malopolska-1f008.appspot.com",
+    );
+    runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPanel(),
+      home: LoginPanel(),
     );
   }
 }

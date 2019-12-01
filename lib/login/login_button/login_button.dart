@@ -1,12 +1,38 @@
+import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:web/main_panel/main_panel.dart';
 import 'package:web/utils/draw_line.dart';
 
 class LoginWithGoogleButton extends StatelessWidget {
   final String imagePath;
 
-  const LoginWithGoogleButton({Key key, this.imagePath}) : super(key: key);
+  LoginWithGoogleButton({Key key, this.imagePath}) : super(key: key);
+
+  var _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
+  doLogin() async {
+    debugPrint("XXX");
+    var provider = fb.GoogleAuthProvider();
+    try {
+      await fb.auth().signInWithPopup(provider);
+      return true;
+    } catch (e) {
+      print("Error in sign in with google: $e");
+      return false;
+    }
+  }
+
+  doLogout() async {
+    await _googleSignIn.signOut();
+    return 'signOutWithGoogle succeeded....';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +78,14 @@ class LoginWithGoogleButton extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MainPanel()),
-            );
+          onPressed: () async {
+            var succeed = await doLogin();
+            if(succeed){
+              await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPanel()),
+              );
+            }
           },
         ),
         decoration: BoxDecoration(

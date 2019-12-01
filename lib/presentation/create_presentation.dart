@@ -76,6 +76,7 @@ class AppData {
   String classDescription = "";
   List<RestQuizQuestion> quizQuestions = [];
   List<int> presentationBytes = [];
+  String user = "";
 
   factory AppData() {
     return _appData;
@@ -87,6 +88,7 @@ class AppData {
     classDescription = "";
     quizQuestions = [];
     presentationBytes = [];
+    user = "";
   }
 }
 final appData = AppData();
