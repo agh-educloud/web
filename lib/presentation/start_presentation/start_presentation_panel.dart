@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
+import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/questions_to_presenter.dart';
 import 'package:web/presentation/start_presentation/quiz_question_list.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
-
-import '../create_presentation.dart';
 
 class StartPresentationPanel extends StatelessWidget {
   StartPresentationPanel({Key key, this.classToStart}) : super(key: key);
@@ -83,12 +82,12 @@ class EndPresentationButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            appData.presentation = false;
+            presentationData.flush();
             Navigator.pop(context);
           },
         ),
         decoration: BoxDecoration(
-          color: Colors.redAccent,
+          color: Colors.red,
           borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(10.0),
               topRight: const Radius.circular(10.0),

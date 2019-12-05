@@ -67,29 +67,3 @@ class CreatePresentationPanelBody extends StatelessWidget {
    return quizQuestion.map((quizQuestion) => quizQuestion.question).toList();
   }
 }
-
-
-class AppData {
-  static final AppData _appData = AppData._internal();
-
-  String className = "";
-  String classDescription = "";
-  List<RestQuizQuestion> quizQuestions = [];
-  List<int> presentationBytes = [];
-  bool presentation = false;
-  String user = "";
-
-  factory AppData() {
-    return _appData;
-  }
-  AppData._internal();
-
-  void flush() {
-    className = "";
-    classDescription = "";
-    quizQuestions = [];
-    presentationBytes = [];
-    user = "";
-  }
-}
-final appData = AppData();

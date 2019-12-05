@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/common_data.dart';
 import 'package:web/generated/class.pb.dart';
-
-import '../../create_presentation.dart';
 
 Future<RestQuizQuestion> waitForQuizQuestion(BuildContext context) async {
   final questionController = TextEditingController();
@@ -33,7 +32,7 @@ Future<RestQuizQuestion> waitForQuizQuestion(BuildContext context) async {
                         controller: questionController,
                         decoration: InputDecoration(
                           icon: Icon(Icons.question_answer),
-                          hintText: 'Wpisz pytanie',
+                          hintText: ' Wpisz pytanie',
                           labelText: 'Pytanie',
                         ),
                       ),
@@ -84,7 +83,7 @@ Future<RestQuizQuestion> waitForQuizQuestion(BuildContext context) async {
                           controller: rightOptionController,
                           decoration: InputDecoration(
                             icon: Icon(Icons.question_answer),
-                            hintText: 'Wpisz A,B,C lub D',
+                            hintText: ' Wpisz A,B,C lub D',
                             labelText: 'Prawidłowa odpowiedź',
                           )),
                     ),
@@ -202,7 +201,7 @@ Future<RestQuizQuestion> waitForQuizQuestionEdit(
                               labelText: (questionToEdit == null)
                                   ? 'Pytanie'
                                   : questionToEdit.question,
-                              hintText: 'Wpisz pytanie',
+                              hintText: ' Wpisz pytanie',
                             ),
                           ),
                         ),
@@ -272,7 +271,7 @@ Future<RestQuizQuestion> waitForQuizQuestionEdit(
                                         questionToEdit.answer == null
                                     ? 'Prawidłowa odpowiedź'
                                     : questionToEdit.answer.value,
-                                hintText: 'Wpisz A,B,C lub D',
+                                hintText: ' Wpisz A,B,C lub D',
                               )),
                         ),
                         Row(
