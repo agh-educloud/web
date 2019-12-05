@@ -21,7 +21,7 @@ class ClassDescription extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Container(
                   child: Text(
-                'Tematyka zajec',
+                'Tematyka zajęć',
                 style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
               ))),
           Container(

@@ -76,6 +76,7 @@ class AppData {
   String classDescription = "";
   List<RestQuizQuestion> quizQuestions = [];
   List<int> presentationBytes = [];
+  bool presentation = false;
   String user = "";
 
   factory AppData() {

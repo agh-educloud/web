@@ -6,6 +6,8 @@ import 'package:web/presentation/start_presentation/quiz_question_list.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
+import '../create_presentation.dart';
+
 class StartPresentationPanel extends StatelessWidget {
   StartPresentationPanel({Key key, this.classToStart}) : super(key: key);
 
@@ -75,13 +77,14 @@ class EndPresentationButton extends StatelessWidget {
               ),
               children: <TextSpan>[
                 TextSpan(
-                    text:'Zakończ prezentacje',
+                    text:'Zakończ prezentację',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
           onPressed: () {
-
+            appData.presentation = false;
+            Navigator.pop(context);
           },
         ),
         decoration: BoxDecoration(

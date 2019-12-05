@@ -50,20 +50,20 @@ class MainPanelBody extends StatelessWidget {
             MainPanelButton(
               height: buttonHeight,
               width: buttonWidth,
-              text: 'Stwórz prezentacje',
+              text: 'Stwórz prezentację',
               imagePath: 'create_presentation.png',
               statelessWidget: CreatePresentationPanel(classToHint: null),
             ),
             EditPanelButton(
               height: buttonHeight,
               width: buttonWidth,
-              text: 'Edytuj prezentacje',
+              text: 'Edytuj prezentację',
               imagePath: 'edit_presentation.png',
             ),
             StartPanelButton(
                 height: buttonHeight,
                 width: buttonWidth,
-                text: 'Rozpocznij prezentacje',
+                text: 'Rozpocznij prezentację',
                 imagePath: 'start_presentation.png'),
             PresentationHistoryButton(
                 height: buttonHeight,

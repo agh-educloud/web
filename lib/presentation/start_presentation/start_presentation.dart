@@ -5,6 +5,8 @@ import 'package:web/presentation/start_presentation/start_presentation_panel.dar
 import 'package:web/service/class.dart';
 import 'package:web/utils/draw_line.dart';
 
+import '../create_presentation.dart';
+
 class StartPanelButton extends StatelessWidget {
   final double height;
   final double width;
@@ -65,6 +67,7 @@ class StartPanelButton extends StatelessWidget {
               await getPresentationsOptions(context, list).then((ClassWithUuid p) => {
                 if(p != null){
                   ClassService().startClass(p.classUuid.toString()),
+                  appData.presentation = true,
                   Navigator.push(context, MaterialPageRoute(builder: (context) =>
                           StartPresentationPanel(classToStart: p)))
                 }

@@ -43,7 +43,7 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
               ),
               children: <TextSpan>[
                 TextSpan(
-                    text:  classUuid != null ? 'Edytuj prezentacje' : 'Stwórz prezentacje',
+                    text:  classUuid != null ? 'Edytuj prezentację' : 'Stwórz prezentację',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),

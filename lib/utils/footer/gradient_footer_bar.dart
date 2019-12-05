@@ -56,7 +56,6 @@ class GradientFooterBar extends StatelessWidget {
                                 ],
                               ),
                             ),
-//                            TextSpan("Projekt stworzony w ramach Małopolskiej Chmury Edukacyjnej.\n Więcej na "),
                           );
                         }
                     )

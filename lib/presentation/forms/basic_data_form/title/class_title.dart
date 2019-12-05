@@ -22,7 +22,7 @@ class ClassTitle extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Container(
                   child: Text(
-                'Tytul zajec ',
+                'Tytul zajęć ',
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ))),
           Container(
