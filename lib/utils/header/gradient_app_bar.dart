@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/login/login_panel.dart';
+import 'package:web/presentation/create_presentation.dart';
 
 class GradientAppBar extends StatelessWidget {
   final double barHeight;
@@ -30,7 +32,10 @@ class GradientAppBar extends StatelessWidget {
                 color: Colors.white70,
               ),
               FlatButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPanel())),
+                  appData.flush()
+                },
                 padding: EdgeInsets.all(10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
