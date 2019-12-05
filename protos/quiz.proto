@@ -16,4 +16,3 @@ message QuizQuestionStatistics{
     float percentageOfCorrectAnswers = 2;
     int32 participants = 3;
 }
-

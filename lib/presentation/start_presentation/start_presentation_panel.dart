@@ -87,7 +87,7 @@ class EndPresentationButton extends StatelessWidget {
           },
         ),
         decoration: BoxDecoration(
-          color: Colors.redAccent,
+          color: Colors.red,
           borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(10.0),
               topRight: const Radius.circular(10.0),
