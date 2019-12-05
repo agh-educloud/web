@@ -70,12 +70,13 @@ class ClassService {
     }
   }
 
-  Future<void> startClass(String classUuid) async {
+  Future<String> startClass(String classUuid) async {
     ClassUuid classUuid2 = ClassUuid()
         ..classUuid = int.parse(classUuid);
 
     debugPrint('Starting class with id: ' + classUuid);
     await http.post(protocol + hostAndPort + '/class/' + classUuid, body: classUuid2.writeToJson());
+    return "12345";
   }
 
   Future<void> deleteClass(ClassWithUuid chosenClass) async {

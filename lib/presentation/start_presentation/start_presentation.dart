@@ -15,12 +15,13 @@ class StartPanelButton extends StatelessWidget {
   final String text;
   final String imagePath;
 
-  StartPanelButton({Key key,
+  StartPanelButton({
+    Key key,
     this.height,
     this.width,
     this.text,
-    this.imagePath,})
-      : super(key: key);
+    this.imagePath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +66,65 @@ class StartPanelButton extends StatelessWidget {
           ),
           onPressed: () async {
             var list = await ClassService().getClasses();
-            if(list.isNotEmpty) {
-              await getPresentationsOptions(context, list).then((ClassWithUuid p) => {
-                if(p != null){
-                  ClassService().startClass(p.classUuid.toString()),
-                  presentationData.presenting = true,
-                  presentationData.quizQuestions = p.class_2.quizQuestion.map((quizQuestion) => quizQuestion.question).toList(),
-                  poolQuizQuestionStatistics(p),
-                  poolStudentQuestions(p),
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                          StartPresentationPanel(classToStart: p)))
-                }
-              });
-            }          },
+            if (list.isNotEmpty) {
+              await getPresentationsOptions(context, list)
+                  .then((ClassWithUuid classToPresent) => {
+                        if (classToPresent != null)
+                          {
+                            ClassService().startClass(classToPresent.classUuid.toString()).then((code) => {
+                                presentationData.presenting = true,
+                                presentationData.quizQuestions = classToPresent
+                                    .class_2.quizQuestion
+                                    .map((quizQuestion) => quizQuestion.question)
+                                    .toList(),
+                                poolQuizQuestionStatistics(classToPresent),
+                                poolStudentQuestions(classToPresent),
+                                showClassCodeDialog(context,classToPresent),
+                            }),
+                          }
+                      });
+            }
+          },
         ),
       ),
     );
+  }
+
+  Future<void> showClassCodeDialog(BuildContext context, ClassWithUuid classToPresent) {
+    return showDialog<void>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      textColor: Colors.white,
+                                      child: Text('Przejdź do widoku prezentacji'),
+                                      color: Colors.green,
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    StartPresentationPanel(
+                                                        classToStart: classToPresent)));
+                                      },
+                                    ),
+                                  ],
+                                  content: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              'Kod do zajęć: 12345',
+                                          style:
+                                              TextStyle(color: Colors.black),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
   }
 
   StreamSubscription quizStatistics;
@@ -91,13 +135,16 @@ class StartPanelButton extends StatelessWidget {
     quizStatistics = Stream.periodic(const Duration(milliseconds: 1000))
         .takeWhile((_) => presentationData.presenting)
         .listen((_) => {
-          stats = [],
-          classWithUuid.class_2.quizQuestion.forEach((question) => {
-              ClassService().getQuizStatistics(question.uuid.toString())
-            .then((value) => stats.add(value), onError: (_) => debugPrint('Unable to add question stats! '))
-          }),
-          presentationData.quizStatistics = stats
-    });
+              stats = [],
+              classWithUuid.class_2.quizQuestion.forEach((question) => {
+                    ClassService()
+                        .getQuizStatistics(question.uuid.toString())
+                        .then((value) => stats.add(value),
+                            onError: (_) =>
+                                debugPrint('Unable to add question stats! '))
+                  }),
+              presentationData.quizStatistics = stats
+            });
   }
 
   poolStudentQuestions(ClassWithUuid classWithUuid) {
@@ -108,8 +155,8 @@ class StartPanelButton extends StatelessWidget {
   }
 }
 
-
-Future<ClassWithUuid> getPresentationsOptions(BuildContext context, List<ClassWithUuid> list) async {
+Future<ClassWithUuid> getPresentationsOptions(
+    BuildContext context, List<ClassWithUuid> list) async {
   ClassWithUuid chosenClass;
   return showDialog<ClassWithUuid>(
       context: context,
@@ -135,11 +182,13 @@ Future<ClassWithUuid> getPresentationsOptions(BuildContext context, List<ClassWi
             ),
           ],
           content: DropdownButton<ClassWithUuid>(
-            items: list.map((ClassWithUuid classWithUuid) =>
-                DropdownMenuItem<ClassWithUuid>(
-                  value: classWithUuid,
-                  child: Text(classWithUuid.class_2.name),
-                )).toList(),
+            items: list
+                .map((ClassWithUuid classWithUuid) =>
+                    DropdownMenuItem<ClassWithUuid>(
+                      value: classWithUuid,
+                      child: Text(classWithUuid.class_2.name),
+                    ))
+                .toList(),
             iconSize: 24,
             value: chosenClass,
             elevation: 16,
@@ -155,4 +204,3 @@ Future<ClassWithUuid> getPresentationsOptions(BuildContext context, List<ClassWi
         );
       });
 }
-
