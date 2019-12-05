@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
+import 'package:web/generated/quiz.pb.dart';
+import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/start_presentation_panel.dart';
 import 'package:web/service/class.dart';
 import 'package:web/utils/draw_line.dart';
-
-import '../create_presentation.dart';
 
 class StartPanelButton extends StatelessWidget {
   final double height;
@@ -13,7 +15,7 @@ class StartPanelButton extends StatelessWidget {
   final String text;
   final String imagePath;
 
-  const StartPanelButton({Key key,
+  StartPanelButton({Key key,
     this.height,
     this.width,
     this.text,
@@ -67,7 +69,10 @@ class StartPanelButton extends StatelessWidget {
               await getPresentationsOptions(context, list).then((ClassWithUuid p) => {
                 if(p != null){
                   ClassService().startClass(p.classUuid.toString()),
-                  appData.presentation = true,
+                  presentationData.presenting = true,
+                  presentationData.quizQuestions = p.class_2.quizQuestion.map((quizQuestion) => quizQuestion.question).toList(),
+                  poolQuizQuestionStatistics(p),
+                  poolStudentQuestions(p),
                   Navigator.push(context, MaterialPageRoute(builder: (context) =>
                           StartPresentationPanel(classToStart: p)))
                 }
@@ -76,6 +81,30 @@ class StartPanelButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  StreamSubscription quizStatistics;
+  StreamSubscription studentQuestions;
+
+  poolQuizQuestionStatistics(ClassWithUuid classWithUuid) {
+    List<QuizQuestionStatistics> stats = [];
+    quizStatistics = Stream.periodic(const Duration(milliseconds: 1000))
+        .takeWhile((_) => presentationData.presenting)
+        .listen((_) => {
+          stats = [],
+          classWithUuid.class_2.quizQuestion.forEach((question) => {
+              ClassService().getQuizStatistics(question.uuid.toString())
+            .then((value) => stats.add(value), onError: (_) => debugPrint('Unable to add question stats! '))
+          }),
+          presentationData.quizStatistics = stats
+    });
+  }
+
+  poolStudentQuestions(ClassWithUuid classWithUuid) {
+//TODO
+//    studentQuestions = Stream.periodic(const Duration(milliseconds: 1000))
+//        .listen((_) => {
+//    });
   }
 }
 

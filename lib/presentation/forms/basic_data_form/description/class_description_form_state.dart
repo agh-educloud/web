@@ -2,8 +2,8 @@
 // This class holds data related to the form.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/common_data.dart';
 
-import '../../../create_presentation.dart';
 import 'class_description.dart';
 
 class ClassDescriptionFormState extends State<ClassDescriptionForm> {
@@ -35,12 +35,12 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
             TextFormField(
               decoration: InputDecoration(
                 hintStyle: TextStyle(fontSize: 13),
-                hintText: topicToHint == null || topicToHint.isEmpty ? 'Wpisz tematyke klasy' : topicToHint,
+                hintText: topicToHint == null || topicToHint.isEmpty ? ' Wpisz tematyke klasy' : topicToHint,
               ),
               controller: controller,
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Wpisz tutaj';
+                  return ' Wpisz tutaj';
                 }
                 return null;
               },

@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/common_data.dart';
 import 'package:web/login/login_panel.dart';
-import 'package:web/presentation/create_presentation.dart';
-
 class GradientAppBar extends StatelessWidget {
   final double barHeight;
   final Color gradientStartColor = const Color(0xffADA996);

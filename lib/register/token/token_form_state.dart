@@ -27,7 +27,7 @@ class TokenFormState extends State<TokenForm> {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Wpisz tutaj';
+                  return ' Wpisz tutaj';
                 }
                 return null;
               },

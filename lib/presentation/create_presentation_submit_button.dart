@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/common_data.dart';
 import 'package:web/service/class.dart';
-
-import 'create_presentation.dart';
 
 class CreatePresentationSubmitButton extends StatefulWidget {
   final int classUuid;

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
 import 'package:web/generated/quiz.pb.dart';
+import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/start_presentation_panel_container.dart';
 import 'package:web/service/class.dart';
 
@@ -13,9 +14,9 @@ class QuizQuestionListPanel extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     List<bool> _selected =
-    List.generate(classToStart.class_2.quizQuestion.length, (i) => false);
+        List.generate(classToStart.class_2.quizQuestion.length, (i) => false);
     List<bool> _delegated =
-    List.generate(classToStart.class_2.quizQuestion.length, (i) => false);
+        List.generate(classToStart.class_2.quizQuestion.length, (i) => false);
     return QuizQuestionListPanelState(
         classToStart, _selected, false, _delegated, null, null);
   }
@@ -35,25 +36,13 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height * 0.7,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.4,
+      height: MediaQuery.of(context).size.height * 0.7,
+      width: MediaQuery.of(context).size.width * 0.4,
       child: Column(
         children: <Widget>[
           StartPresentationPanelContainer(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.6,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width * 0.4,
+            height: MediaQuery.of(context).size.height * 0.6,
+            width: MediaQuery.of(context).size.width * 0.4,
             body: ListView.builder(
               itemCount: classToStart.class_2.quizQuestion.length,
               // ignore: missing_return
@@ -61,47 +50,42 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                 final item = classToStart.class_2.quizQuestion[i].question;
                 return Container(
                     decoration: BoxDecoration(
-                        color: getColour(i),
+                      color: getColour(i),
                     ),
                     margin: const EdgeInsets.symmetric(vertical: 2),
                     // if current item is selected show blue color
                     child: ListTile(
                         title: Text(
                           item.question,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headline,
+                          style: Theme.of(context).textTheme.headline,
                         ),
-                        onTap: () =>
-                        {
-                          setState(() =>
-                          {
-                            if (isAnySelected){
-                              if (_selected[i]){
-                                _selected[i] = !_selected[i],
-                                isAnySelected = false
-                              }
-                            }
-                            else
-                              {
-                                _selected[i] = !_selected[i],
-                                isAnySelected = true,
-                                selected = classToStart.class_2.quizQuestion[i],
-                                selectedIndex = i
-                              }
-                          }), // reverse bool value
-                        }));
+                        onTap: () => {
+                              setState(() => {
+                                    if (isAnySelected)
+                                      {
+                                        if (_selected[i])
+                                          {
+                                            _selected[i] = !_selected[i],
+                                            isAnySelected = false
+                                          }
+                                      }
+                                    else
+                                      {
+                                        _selected[i] = !_selected[i],
+                                        isAnySelected = true,
+                                        selected = classToStart
+                                            .class_2.quizQuestion[i],
+                                        selectedIndex = i
+                                      }
+                                  }), // reverse bool value
+                            }));
               },
             ),
             text: "Deleguj pytanie",
           ),
           Container(
             margin: EdgeInsets.only(
-                left: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.015),
+                left: MediaQuery.of(context).size.width * 0.015),
             child: Row(
               children: <Widget>[
                 Padding(
@@ -114,11 +98,13 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                         if (selected != null) {
                           setState(() {
                             _delegated[selectedIndex] = true;
-                            _selected[selectedIndex] = !_selected[selectedIndex];
+                            _selected[selectedIndex] =
+                                !_selected[selectedIndex];
                             isAnySelected = false;
                           });
                           ClassService().delegateQuizQuestion(
-                              classToStart.classUuid.toString(), RestQuizQuestionUuid()..uuid = selected.uuid);
+                              classToStart.classUuid.toString(),
+                              RestQuizQuestionUuid()..uuid = selected.uuid);
                         }
                       }),
                 ),
@@ -138,7 +124,92 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                       textColor: Colors.white,
                       color: Colors.orangeAccent,
                       child: Text("Zobacz statystyki"),
-                      onPressed: () {}),
+                      onPressed: () {
+                        if (presentationData.quizStatistics.isNotEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              var participants = presentationData.quizStatistics
+                                  .firstWhere(
+                                      (q) => q.questionUuid == selected.uuid)
+                                  .participants;
+                              var correctAnswersPercentage = presentationData
+                                  .quizStatistics
+                                  .firstWhere(
+                                      (q) => q.questionUuid == selected.uuid)
+                                  .percentageOfCorrectAnswers;
+
+                              participants =
+                                  participants == null ? 0 : participants;
+                              correctAnswersPercentage =
+                                  correctAnswersPercentage == null
+                                      ? 0.0
+                                      : correctAnswersPercentage;
+
+                              String contentText = "Ilość odpowiedzi: " +
+                                  participants.toString() +
+                                  "\n\nProcent poprawynch odpowiedzi: " +
+                                  correctAnswersPercentage.toString() +
+                                  "%";
+
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return AlertDialog(
+                                    title: Text("Statystyki"),
+                                    content: Text(contentText),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        textColor: Colors.white,
+                                        child: Text('Powrót'),
+                                        color: Colors.black38,
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      FlatButton(
+                                        color: Colors.green,
+                                        textColor: Colors.white,
+                                        onPressed: () {
+                                          setState(() {
+                                            var participants = presentationData
+                                                .quizStatistics
+                                                .firstWhere((q) =>
+                                                    q.questionUuid ==
+                                                    selected.uuid)
+                                                .participants;
+                                            var correctAnswersPercentage =
+                                                presentationData.quizStatistics
+                                                    .firstWhere((q) =>
+                                                        q.questionUuid ==
+                                                        selected.uuid)
+                                                    .percentageOfCorrectAnswers;
+                                            participants = participants == null
+                                                ? 0
+                                                : participants;
+                                            correctAnswersPercentage =
+                                                correctAnswersPercentage == null
+                                                    ? 0.0
+                                                    : correctAnswersPercentage;
+
+                                            contentText = "Ilość odpowiedzi: " +
+                                                participants.toString() +
+                                                "\n\nProcent poprawynch odpowiedzi: " +
+                                                correctAnswersPercentage
+                                                    .toString() +
+                                                "%";
+                                          });
+                                        },
+                                        child: Text("Odśwież"),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        }
+                        ;
+                      }),
                 ),
               ],
             ),
@@ -151,14 +222,14 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
   Color getColour(int i) {
     if (_delegated[i] && _selected[i]) {
       return Colors.black38;
-    } else if(_delegated[i]){
+    } else if (_delegated[i]) {
       return Colors.black12;
-    } else{
-        if(_selected[i]){
-          return Colors.cyan;
-        }else{
-          return null;
-        }
+    } else {
+      if (_selected[i]) {
+        return Colors.cyan;
+      } else {
+        return null;
+      }
     }
   }
 
@@ -173,21 +244,15 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                   elevation: 0.0,
                   backgroundColor: Colors.white,
                   content: Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.3,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.75,
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.75,
                     child: Form(
                       child: Column(
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                              enabled: false ,
+                              enabled: false,
                               decoration: InputDecoration(
                                 icon: Icon(Icons.question_answer),
                                 labelText: "Pytanie: " +
@@ -200,11 +265,12 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                              enabled: false ,
+                                enabled: false,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "A: " +
-                                      (selected.option == null || selected.option.isEmpty
+                                      (selected.option == null ||
+                                              selected.option.isEmpty
                                           ? "Brak"
                                           : selected.option[0].value),
                                 )),
@@ -212,11 +278,12 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                                enabled: false ,
+                                enabled: false,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "B: " +
-                                      (selected.option.length > 1 && selected.option[1].value.isEmpty
+                                      (selected.option.length > 1 &&
+                                              selected.option[1].value.isEmpty
                                           ? "Brak"
                                           : selected.option[1].value),
                                 )),
@@ -224,11 +291,12 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                                enabled: false ,
+                                enabled: false,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "C: " +
-                                      (selected.option.length > 2 && selected.option[2].value.isEmpty
+                                      (selected.option.length > 2 &&
+                                              selected.option[2].value.isEmpty
                                           ? "Brak"
                                           : selected.option[2].value),
                                 )),
@@ -236,11 +304,12 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                                enabled: false ,
+                                enabled: false,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.create),
                                   labelText: "D: " +
-                                      (selected.option.length > 3 && selected.option[3].value.isEmpty
+                                      (selected.option.length > 3 &&
+                                              selected.option[3].value.isEmpty
                                           ? "Brak"
                                           : selected.option[3].value),
                                 )),
@@ -248,7 +317,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                                enabled: false ,
+                                enabled: false,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.question_answer),
                                   labelText: "Prawidłowa odpowiedź: " +

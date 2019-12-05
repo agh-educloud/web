@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:web/generated/chat.pb.dart';
 import 'package:web/generated/class.pb.dart';
 import 'package:web/generated/class.pbgrpc.dart';
 import 'package:web/generated/quiz.pb.dart';
@@ -7,6 +8,9 @@ import 'package:web/generated/quiz.pb.dart';
 class ClassService {
   List<int> classUuids = [];
 
+  final String hostAndPort = "localhost:8080";
+  final String protocol = "http://";
+  
   Future<void> createClass(String name, String description,
       List<RestQuizQuestion> questions, List<int> presentationBytes) async {
     RestClass rqClass = RestClass()
@@ -21,7 +25,7 @@ class ClassService {
     debugPrint("Sending:\n" + rqClass.writeToJson());
 
     final response =
-        await http.post('http://localhost:8080/class', body: rqClass.writeToJson());
+        await http.post(protocol + hostAndPort + '/class', body: rqClass.writeToJson());
 
     if (response.statusCode != 201) {
       throw Exception('Failed to create class');
@@ -32,7 +36,7 @@ class ClassService {
 
   Future<List<ClassWithUuid>> getClasses() async {
     debugPrint("Getting classes");
-    final response = await http.get('http://localhost:8080/class');
+    final response = await http.get(protocol + hostAndPort + '/class');
     debugPrint(response.body.toString());
 
     var classesResponse = GetClassesResponse.fromJson(response.body);
@@ -57,9 +61,9 @@ class ClassService {
       ..classUuid = id
       ..class_2 = rqClass;
 
-    debugPrint("Sending to " + 'http://localhost:8080/class/' + id.toString() + "\n" + request.writeToJson());
+    debugPrint("Sending to " + protocol + hostAndPort + '/class/' + id.toString() + "\n" + request.writeToJson());
 
-    final response = await http.patch('http://localhost:8080/class/' + id.toString(), body: request.writeToJson());
+    final response = await http.patch(protocol + hostAndPort + '/class/' + id.toString(), body: request.writeToJson());
 
     if (response.statusCode != 200) {
       throw Exception('Failed to update class');
@@ -71,20 +75,30 @@ class ClassService {
         ..classUuid = int.parse(classUuid);
 
     debugPrint('Starting class with id: ' + classUuid);
-    await http.post('http://localhost:8080/class/' + classUuid, body: classUuid2.writeToJson());
+    await http.post(protocol + hostAndPort + '/class/' + classUuid, body: classUuid2.writeToJson());
   }
 
   Future<void> deleteClass(ClassWithUuid chosenClass) async {
     debugPrint('Deleting class with id: ' + chosenClass.classUuid.toString());
-    await http.delete('http://localhost:8080/class/' + chosenClass.classUuid.toString());
+    await http.delete(protocol + hostAndPort + '/class/' + chosenClass.classUuid.toString());
   }
 
   Future<void> delegateQuizQuestion(String classUuid, RestQuizQuestionUuid selected) async {
-    await http.post('http://localhost:8080/quizToDelegate/' + classUuid, body: selected.writeToJson());
+    await http.post(protocol + hostAndPort + '/quizToDelegate/' + classUuid, body: selected.writeToJson());
   }
 
   getPresentedClasses() {
 
+  }
+
+  Future<QuizQuestionStatistics> getQuizStatistics(String quizUuid) async {
+    final response = await http.get(protocol + hostAndPort + '/quizStatistics/' + quizUuid);
+    return QuizQuestionStatistics.fromJson(response.body);
+  }
+
+  Future<RestChatMessage> getStudentQuestions(String classUuid) async {
+    final response = await http.get(protocol + hostAndPort + '/quizStatistics/' + classUuid);
+    return RestChatMessage.fromJson(response.body);
   }
 
 }
