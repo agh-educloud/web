@@ -1,4 +1,4 @@
-## Backend
+## Web
 This repository stores all components for web application for Małopolska Chmura Edukacyjna.
 
 
@@ -7,10 +7,13 @@ Running application:
 
 Resolve dependecies with
 ```
-pub get
+flutter packages get
 ```
-Run with:
+Enable web:
 ```
-webdev serve
+flutter config --enable-web
 ```
-Open browser and go to `localhost:8080`. 
+Run web:
+```
+flutter run -d chrome
+```
