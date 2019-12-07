@@ -53,7 +53,7 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
               appData.flush();
               Navigator.pop(context);
             }else{
-              await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions, appData.presentationBytes);
+              await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions);
               appData.flush();
               Navigator.pop(context);
             }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
+import 'package:web/presentation/forms/presentation_photo_assigment_form.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
@@ -50,7 +51,7 @@ class CreatePresentationPanelBody extends StatelessWidget {
         children: <StatefulWidget>[
           classToHint == null ? BasicDataForm() : BasicDataForm(nameToHint: classToHint.class_2.name,topicToHint: classToHint.class_2.topic,) ,
           classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
-//          PresentationFileForm(),
+          classToHint == null ? PresentationPhotoAssigmentFormButton() : PresentationPhotoAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
           CreatePresentationSubmitButton(classUuid: classToHint != null ? classToHint.classUuid : null,)
         ],
       ),

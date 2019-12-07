@@ -15,7 +15,7 @@ class PresentationData {
   }
   PresentationData._internal();
 
-  void flush() {
+  void saveAndFlush() {
     quizQuestions = [];
     studentQuestions = [];
     quizStatistics = [];

@@ -12,11 +12,10 @@ class ClassService {
   final String protocol = "http://";
   
   Future<void> createClass(String name, String description,
-      List<RestQuizQuestion> questions, List<int> presentationBytes) async {
+      List<RestQuizQuestion> questions) async {
     RestClass rqClass = RestClass()
       ..name = name
-      ..topic = description
-      ..presentation = presentationBytes;
+      ..topic = description;
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
@@ -75,7 +74,7 @@ class ClassService {
         ..classUuid = int.parse(classUuid);
 
     debugPrint('Starting class with id: ' + classUuid);
-    await http.post(protocol + hostAndPort + '/class/' + classUuid, body: classUuid2.writeToJson());
+    await http.post(protocol + hostAndPort + '/startClass/' + classUuid, body: classUuid2.writeToJson());
     return "12345";
   }
 

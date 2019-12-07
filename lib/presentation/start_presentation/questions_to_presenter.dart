@@ -32,16 +32,6 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                   padding: const EdgeInsets.all(8.0),
                   child: RaisedButton(
                       textColor: Colors.white,
-                      color: Colors.green,
-                      child: Text("Odpowiedz"),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      textColor: Colors.white,
                       color: Colors.blueAccent,
                       child: Text("Szczegóły"),
                       onPressed: () {

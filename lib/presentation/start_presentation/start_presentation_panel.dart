@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
+import 'package:web/main_panel/main_panel.dart';
 import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/questions_to_presenter.dart';
 import 'package:web/presentation/start_presentation/quiz_question_list.dart';
@@ -82,9 +83,11 @@ class EndPresentationButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            presentationData.flush();
-            Navigator.pop(context);
-          },
+            presentationData.saveAndFlush();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainPanel()),
+            );},
         ),
         decoration: BoxDecoration(
           color: Colors.red,
