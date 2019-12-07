@@ -12,13 +12,14 @@ class ClassService {
   final String protocol = "http://";
   
   Future<void> createClass(String name, String description,
-      List<RestQuizQuestion> questions) async {
+      List<RestQuizQuestion> questions, List<RestQuizQuestion> openQuizQuestions) async {
     RestClass rqClass = RestClass()
       ..name = name
       ..topic = description;
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
+      rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
@@ -44,13 +45,14 @@ class ClassService {
     return classesResponse.classes;
   }
 
-  Future<void> updateClass(int id, String name, String description, List<RestQuizQuestion> questions) async {
+  Future<void> updateClass(int id, String name, String description, List<RestQuizQuestion> questions, List<RestQuizQuestion> openQuizQuestions) async {
     RestClass rqClass = RestClass()
       ..name = name
       ..topic = description;
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
+      rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
@@ -96,9 +98,13 @@ class ClassService {
     return QuizQuestionStatistics.fromJson(response.body);
   }
 
-  Future<RestChatMessage> getStudentQuestions(String classUuid) async {
-    final response = await http.get(protocol + hostAndPort + '/quizStatistics/' + classUuid);
-    return RestChatMessage.fromJson(response.body);
+  Future<StudentQuestions> getStudentQuestions(String classUuid) async {
+    final response = await http.get(protocol + hostAndPort + '/studentsQuestion/' + classUuid);
+    return StudentQuestions.fromJson(response.body);
+  }
+
+  Future<void> endClass(String classUuid) async {
+    await http.post(protocol + hostAndPort + '/endClass/' + classUuid);
   }
 
 }

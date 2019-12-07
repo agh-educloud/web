@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/generated/chat.pb.dart';
 import 'package:web/generated/class.pb.dart';
 import 'package:web/generated/quiz.pb.dart';
 import 'package:web/presentation/presentation_common_data.dart';
@@ -73,6 +74,7 @@ class StartPanelButton extends StatelessWidget {
                           {
                             ClassService().startClass(classToPresent.classUuid.toString()).then((code) => {
                                 presentationData.presenting = true,
+                                presentationData.classUuid = classToPresent.classUuid.toString(),
                                 presentationData.quizQuestions = classToPresent
                                     .class_2.quizQuestion
                                     .map((quizQuestion) => quizQuestion.question)
@@ -148,10 +150,14 @@ class StartPanelButton extends StatelessWidget {
   }
 
   poolStudentQuestions(ClassWithUuid classWithUuid) {
-//TODO
-//    studentQuestions = Stream.periodic(const Duration(milliseconds: 1000))
-//        .listen((_) => {
-//    });
+    studentQuestions = Stream.periodic(const Duration(milliseconds: 1000))
+        .listen((_) => {
+      ClassService()
+          .getStudentQuestions(classWithUuid.classUuid.toString())
+          .then((StudentQuestions value) => presentationData.studentQuestions = value.message,
+          onError: (_) =>
+              debugPrint('Unable to add students questions! '))
+    });
   }
 }
 

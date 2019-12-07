@@ -7,7 +7,6 @@ import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/start_presentation_panel_container.dart';
 import 'package:web/service/class.dart';
 
-
 class QuizQuestionListPanel extends StatefulWidget {
   QuizQuestionListPanel({Key key, this.classToStart}) : super(key: key);
 
@@ -42,35 +41,34 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
   ];
 
   final List<Widget> images = imgList
-      .map<Widget>((url) =>
-          Container(
-              margin: EdgeInsets.all(5.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Stack(children: <Widget>[
-                  Image.network(url, fit: BoxFit.cover, width: 1000.0),
-                  Positioned(
-                    bottom: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromARGB(200, 0, 0, 0),
-                            Color.fromARGB(0, 0, 0, 0)
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
+      .map<Widget>((url) => Container(
+            margin: EdgeInsets.all(5.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              child: Stack(children: <Widget>[
+                Image.network(url, fit: BoxFit.cover, width: 1000.0),
+                Positioned(
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(200, 0, 0, 0),
+                          Color.fromARGB(0, 0, 0, 0)
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
                       ),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
                     ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   ),
-                ]),
-              ),
-            ))
+                ),
+              ]),
+            ),
+          ))
       .toList();
 
   QuizQuestionListPanelState(this.classToStart, this._selected,
@@ -118,6 +116,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                         isAnySelected = true,
                                         selected = classToStart
                                             .class_2.quizQuestion[i],
+                                        debugPrint(classToStart.class_2.quizQuestion.toString()),
+                                        debugPrint(i.toString()),
+                                        debugPrint(classToStart.class_2.quizQuestion[i].question.answer.value),
                                         selectedIndex = i
                                       }
                                   }), // reverse bool value
@@ -158,7 +159,10 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                       color: Colors.blueAccent,
                       child: Text("Szczegóły"),
                       onPressed: () {
-                        getViewOnlyQuestionView(selected.question);
+                        debugPrint(selected.question.option.toString());
+                        if(selected.question.option.isNotEmpty){
+                          getViewOnlyQuestionView(selected.question);
+                        }
                       }),
                 ),
                 Padding(
@@ -168,7 +172,11 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                       color: Colors.orangeAccent,
                       child: Text("Zobacz statystyki"),
                       onPressed: () {
-                        if (presentationData.quizStatistics.isNotEmpty) {
+                        var question = classToStart.class_2.quizQuestion[selectedIndex].question;
+                        debugPrint(question.question);
+                        debugPrint(question.option == null ? "" : question.option.toString());
+                        if (presentationData.quizStatistics.isNotEmpty &&
+                            question.option != null && question.option.isNotEmpty) {
                           showDialog(
                             context: context,
                             builder: (context) {
@@ -261,43 +269,46 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                       color: Colors.orangeAccent,
                       child: Text("Zobacz odpowiedzi"),
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return StatefulBuilder(
-                              builder: (context, setState) {
-                                return AlertDialog(
-                                  title: Text("Odpowiedzi"),
-                                  content:
-//                                      Text("x"),
-                                  CarouselSlider(
-                                    items: images.map((image) {
-                                      return Builder(
-                                        builder: (BuildContext context) {
-                                          return image;
-                                        },
-                                      );
-                                    }).toList(),
-                                    autoPlay: false,
-                                    enlargeCenterPage: true,
-                                    viewportFraction: 0.9,
-                                    aspectRatio: 2.0,
-                                  ),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      textColor: Colors.white,
-                                      child: Text('Powrót'),
-                                      color: Colors.black38,
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
+                        var question = classToStart.class_2.quizQuestion[selectedIndex].question;
+                        debugPrint(question.question);
+                        debugPrint(question.option == null ? "" : question.option.toString());
+                        if (question.option == null || question.option.isEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return AlertDialog(
+                                    title: Text("Odpowiedzi"),
+                                    content: CarouselSlider(
+                                      items: images.map((image) {
+                                        return Builder(
+                                          builder: (BuildContext context) {
+                                            return image;
+                                          },
+                                        );
+                                      }).toList(),
+                                      autoPlay: false,
+                                      enlargeCenterPage: true,
+                                      viewportFraction: 0.9,
+                                      aspectRatio: 2.0,
                                     ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                        );
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        textColor: Colors.white,
+                                        child: Text('Powrót'),
+                                        color: Colors.black38,
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        }
                       }),
                 ),
               ],

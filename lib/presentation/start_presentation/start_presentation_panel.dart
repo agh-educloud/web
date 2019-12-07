@@ -5,6 +5,7 @@ import 'package:web/main_panel/main_panel.dart';
 import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/questions_to_presenter.dart';
 import 'package:web/presentation/start_presentation/quiz_question_list.dart';
+import 'package:web/service/class.dart';
 import 'package:web/utils/footer/gradient_footer_bar.dart';
 import 'package:web/utils/header/gradient_app_bar.dart';
 
@@ -83,11 +84,14 @@ class EndPresentationButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            presentationData.saveAndFlush();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MainPanel()),
-            );},
+            ClassService().endClass(presentationData.classUuid).then((_) {
+              presentationData.saveAndFlush();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPanel()),
+              );
+            });
+            },
         ),
         decoration: BoxDecoration(
           color: Colors.red,

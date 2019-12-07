@@ -5,6 +5,7 @@ import 'package:web/generated/quiz.pb.dart';
 class PresentationData {
   static final PresentationData _appData = PresentationData._internal();
 
+  String classUuid = "";
   List<RestQuizQuestion> quizQuestions = [];
   List<QuizQuestionStatistics> quizStatistics = [];
   List<RestChatMessage> studentQuestions = [];
@@ -16,6 +17,7 @@ class PresentationData {
   PresentationData._internal();
 
   void saveAndFlush() {
+    classUuid = "";
     quizQuestions = [];
     studentQuestions = [];
     quizStatistics = [];

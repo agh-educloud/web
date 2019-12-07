@@ -49,11 +49,11 @@ class CreatePresentationSubmitButtonState extends State<CreatePresentationSubmit
           ),
           onPressed: () async {
             if(classUuid != null){
-              await ClassService().updateClass(classUuid, appData.className, appData.classDescription, appData.quizQuestions);
+              await ClassService().updateClass(classUuid, appData.className, appData.classDescription, appData.quizQuestions, appData.openQuizQuestions);
               appData.flush();
               Navigator.pop(context);
             }else{
-              await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions);
+              await ClassService().createClass(appData.className, appData.classDescription, appData.quizQuestions, appData.openQuizQuestions);
               appData.flush();
               Navigator.pop(context);
             }
