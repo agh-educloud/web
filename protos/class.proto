@@ -4,7 +4,6 @@ option go_package = "educloud-web";
 
 import "status.proto";
 import "quiz.proto";
-import "homework.proto";
 import "chat.proto";
 import "user.proto";
 
@@ -27,7 +26,6 @@ message RestClass {
     string topic = 2;
     repeated QuizQuestionCreation quizQuestion = 3;
     repeated QuizQuestionCreation openQuizQuestion = 4;
-    repeated RestHomework homework = 5;
     bytes presentation = 6;
 }
 
