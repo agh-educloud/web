@@ -26,6 +26,12 @@ class PresenterQuizServiceClient extends $grpc.Client {
           (RestQuizQuestionUuid value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               QuizQuestionStatistics.fromBuffer(value));
+  static final _$getOpenQuizQuestionAnswers =
+      $grpc.ClientMethod<RestQuizQuestionUuid, QuizQuestionStatistics>(
+          '/PresenterQuizService/GetOpenQuizQuestionAnswers',
+          (RestQuizQuestionUuid value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              QuizQuestionStatistics.fromBuffer(value));
 
   PresenterQuizServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions options})
@@ -45,6 +51,15 @@ class PresenterQuizServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getQuizQuestionStatistics, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseStream(call);
+  }
+
+  $grpc.ResponseStream<QuizQuestionStatistics> getOpenQuizQuestionAnswers(
+      RestQuizQuestionUuid request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getOpenQuizQuestionAnswers, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseStream(call);
   }
@@ -70,6 +85,15 @@ abstract class PresenterQuizServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 RestQuizQuestionUuid.fromBuffer(value),
             (QuizQuestionStatistics value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<RestQuizQuestionUuid, QuizQuestionStatistics>(
+            'GetOpenQuizQuestionAnswers',
+            getOpenQuizQuestionAnswers_Pre,
+            false,
+            true,
+            ($core.List<$core.int> value) =>
+                RestQuizQuestionUuid.fromBuffer(value),
+            (QuizQuestionStatistics value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RestStatus> delegateQuizQuestion_Pre(
@@ -83,8 +107,16 @@ abstract class PresenterQuizServiceBase extends $grpc.Service {
         call, (await request) as RestQuizQuestionUuid);
   }
 
+  $async.Stream<QuizQuestionStatistics> getOpenQuizQuestionAnswers_Pre(
+      $grpc.ServiceCall call, $async.Future request) async* {
+    yield* getOpenQuizQuestionAnswers(
+        call, (await request) as RestQuizQuestionUuid);
+  }
+
   $async.Future<$0.RestStatus> delegateQuizQuestion(
       $grpc.ServiceCall call, RestQuizQuestionUuid request);
   $async.Stream<QuizQuestionStatistics> getQuizQuestionStatistics(
+      $grpc.ServiceCall call, RestQuizQuestionUuid request);
+  $async.Stream<QuizQuestionStatistics> getOpenQuizQuestionAnswers(
       $grpc.ServiceCall call, RestQuizQuestionUuid request);
 }

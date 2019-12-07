@@ -10,8 +10,15 @@ const RestClass$json = const {
     const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'topic', '3': 2, '4': 1, '5': 9, '10': 'topic'},
     const {'1': 'quizQuestion', '3': 3, '4': 3, '5': 11, '6': '.QuizQuestionCreation', '10': 'quizQuestion'},
-    const {'1': 'homework', '3': 4, '4': 3, '5': 11, '6': '.RestHomework', '10': 'homework'},
-    const {'1': 'presentation', '3': 5, '4': 1, '5': 12, '10': 'presentation'},
+    const {'1': 'openQuizQuestion', '3': 4, '4': 3, '5': 11, '6': '.QuizQuestionCreation', '10': 'openQuizQuestion'},
+    const {'1': 'presentation', '3': 6, '4': 1, '5': 12, '10': 'presentation'},
+  ],
+};
+
+const QuizzesHistoryStatistics$json = const {
+  '1': 'QuizzesHistoryStatistics',
+  '2': const [
+    const {'1': 'quizQuestionStatistics', '3': 1, '4': 3, '5': 11, '6': '.QuizQuestionStatistics', '10': 'quizQuestionStatistics'},
   ],
 };
 
@@ -86,7 +93,10 @@ const ClassWithUuid$json = const {
   ],
 };
 
-const Empty$json = const {
-  '1': 'Empty',
+const ClassCode$json = const {
+  '1': 'ClassCode',
+  '2': const [
+    const {'1': 'code', '3': 1, '4': 1, '5': 9, '10': 'code'},
+  ],
 };
 

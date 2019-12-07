@@ -8,7 +8,7 @@ import 'dart:core' as $core show bool, Deprecated, double, int, List, Map, overr
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'homework.pb.dart' as $3;
+import 'quiz.pb.dart' as $2;
 import 'status.pb.dart' as $0;
 
 class RestClass extends $pb.GeneratedMessage {
@@ -16,8 +16,8 @@ class RestClass extends $pb.GeneratedMessage {
     ..aOS(1, 'name')
     ..aOS(2, 'topic')
     ..pc<QuizQuestionCreation>(3, 'quizQuestion', $pb.PbFieldType.PM,QuizQuestionCreation.create)
-    ..pc<$3.RestHomework>(4, 'homework', $pb.PbFieldType.PM,$3.RestHomework.create)
-    ..a<$core.List<$core.int>>(5, 'presentation', $pb.PbFieldType.OY)
+    ..pc<QuizQuestionCreation>(4, 'openQuizQuestion', $pb.PbFieldType.PM,QuizQuestionCreation.create)
+    ..a<$core.List<$core.int>>(6, 'presentation', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -45,12 +45,33 @@ class RestClass extends $pb.GeneratedMessage {
 
   $core.List<QuizQuestionCreation> get quizQuestion => $_getList(2);
 
-  $core.List<$3.RestHomework> get homework => $_getList(3);
+  $core.List<QuizQuestionCreation> get openQuizQuestion => $_getList(3);
 
   $core.List<$core.int> get presentation => $_getN(4);
   set presentation($core.List<$core.int> v) { $_setBytes(4, v); }
   $core.bool hasPresentation() => $_has(4);
-  void clearPresentation() => clearField(5);
+  void clearPresentation() => clearField(6);
+}
+
+class QuizzesHistoryStatistics extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('QuizzesHistoryStatistics')
+    ..pc<$2.QuizQuestionStatistics>(1, 'quizQuestionStatistics', $pb.PbFieldType.PM,$2.QuizQuestionStatistics.create)
+    ..hasRequiredFields = false
+  ;
+
+  QuizzesHistoryStatistics() : super();
+  QuizzesHistoryStatistics.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  QuizzesHistoryStatistics.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  QuizzesHistoryStatistics clone() => QuizzesHistoryStatistics()..mergeFromMessage(this);
+  QuizzesHistoryStatistics copyWith(void Function(QuizzesHistoryStatistics) updates) => super.copyWith((message) => updates(message as QuizzesHistoryStatistics));
+  $pb.BuilderInfo get info_ => _i;
+  static QuizzesHistoryStatistics create() => QuizzesHistoryStatistics();
+  QuizzesHistoryStatistics createEmptyInstance() => create();
+  static $pb.PbList<QuizzesHistoryStatistics> createRepeated() => $pb.PbList<QuizzesHistoryStatistics>();
+  static QuizzesHistoryStatistics getDefault() => _defaultInstance ??= create()..freeze();
+  static QuizzesHistoryStatistics _defaultInstance;
+
+  $core.List<$2.QuizQuestionStatistics> get quizQuestionStatistics => $_getList(0);
 }
 
 class QuizQuestionCreation extends $pb.GeneratedMessage {
@@ -311,21 +332,27 @@ class ClassWithUuid extends $pb.GeneratedMessage {
   void clearClass_2() => clearField(2);
 }
 
-class Empty extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Empty')
+class ClassCode extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ClassCode')
+    ..aOS(1, 'code')
     ..hasRequiredFields = false
   ;
 
-  Empty() : super();
-  Empty.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
-  Empty.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
-  Empty clone() => Empty()..mergeFromMessage(this);
-  Empty copyWith(void Function(Empty) updates) => super.copyWith((message) => updates(message as Empty));
+  ClassCode() : super();
+  ClassCode.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  ClassCode.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  ClassCode clone() => ClassCode()..mergeFromMessage(this);
+  ClassCode copyWith(void Function(ClassCode) updates) => super.copyWith((message) => updates(message as ClassCode));
   $pb.BuilderInfo get info_ => _i;
-  static Empty create() => Empty();
-  Empty createEmptyInstance() => create();
-  static $pb.PbList<Empty> createRepeated() => $pb.PbList<Empty>();
-  static Empty getDefault() => _defaultInstance ??= create()..freeze();
-  static Empty _defaultInstance;
+  static ClassCode create() => ClassCode();
+  ClassCode createEmptyInstance() => create();
+  static $pb.PbList<ClassCode> createRepeated() => $pb.PbList<ClassCode>();
+  static ClassCode getDefault() => _defaultInstance ??= create()..freeze();
+  static ClassCode _defaultInstance;
+
+  $core.String get code => $_getS(0, '');
+  set code($core.String v) { $_setString(0, v); }
+  $core.bool hasCode() => $_has(0);
+  void clearCode() => clearField(1);
 }
 

@@ -12,7 +12,7 @@ import 'dart:core' as $core show int, String, List;
 
 import 'class.pb.dart';
 import 'status.pb.dart' as $0;
-import 'chat.pb.dart' as $2;
+import 'chat.pb.dart' as $1;
 export 'class.pb.dart';
 
 class RestPresenterClassServiceClient extends $grpc.Client {
@@ -35,14 +35,20 @@ class RestPresenterClassServiceClient extends $grpc.Client {
       '/RestPresenterClassService/GetClass',
       (ClassUuid value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => RestClass.fromBuffer(value));
-  static final _$getClasses = $grpc.ClientMethod<Empty, GetClassesResponse>(
+  static final _$getClasses = $grpc.ClientMethod<$1.Empty, GetClassesResponse>(
       '/RestPresenterClassService/GetClasses',
-      (Empty value) => value.writeToBuffer(),
+      ($1.Empty value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => GetClassesResponse.fromBuffer(value));
-  static final _$startClass = $grpc.ClientMethod<ClassUuid, $2.RestChatMessage>(
+  static final _$getQuizzesHistoryStatistics =
+      $grpc.ClientMethod<ClassUuid, QuizzesHistoryStatistics>(
+          '/RestPresenterClassService/GetQuizzesHistoryStatistics',
+          (ClassUuid value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              QuizzesHistoryStatistics.fromBuffer(value));
+  static final _$startClass = $grpc.ClientMethod<ClassUuid, ClassCode>(
       '/RestPresenterClassService/StartClass',
       (ClassUuid value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $2.RestChatMessage.fromBuffer(value));
+      ($core.List<$core.int> value) => ClassCode.fromBuffer(value));
   static final _$endClass = $grpc.ClientMethod<ClassUuid, $0.RestStatus>(
       '/RestPresenterClassService/EndClass',
       (ClassUuid value) => value.writeToBuffer(),
@@ -84,7 +90,7 @@ class RestPresenterClassServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<GetClassesResponse> getClasses(Empty request,
+  $grpc.ResponseFuture<GetClassesResponse> getClasses($1.Empty request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getClasses, $async.Stream.fromIterable([request]),
@@ -92,12 +98,21 @@ class RestPresenterClassServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseStream<$2.RestChatMessage> startClass(ClassUuid request,
+  $grpc.ResponseFuture<QuizzesHistoryStatistics> getQuizzesHistoryStatistics(
+      ClassUuid request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getQuizzesHistoryStatistics, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<ClassCode> startClass(ClassUuid request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$startClass, $async.Stream.fromIterable([request]),
         options: options);
-    return $grpc.ResponseStream(call);
+    return $grpc.ResponseFuture(call);
   }
 
   $grpc.ResponseFuture<$0.RestStatus> endClass(ClassUuid request,
@@ -140,20 +155,27 @@ abstract class RestPresenterClassServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
         (RestClass value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<Empty, GetClassesResponse>(
+    $addMethod($grpc.ServiceMethod<$1.Empty, GetClassesResponse>(
         'GetClasses',
         getClasses_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => Empty.fromBuffer(value),
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
         (GetClassesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<ClassUuid, $2.RestChatMessage>(
+    $addMethod($grpc.ServiceMethod<ClassUuid, QuizzesHistoryStatistics>(
+        'GetQuizzesHistoryStatistics',
+        getQuizzesHistoryStatistics_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
+        (QuizzesHistoryStatistics value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<ClassUuid, ClassCode>(
         'StartClass',
         startClass_Pre,
         false,
-        true,
+        false,
         ($core.List<$core.int> value) => ClassUuid.fromBuffer(value),
-        ($2.RestChatMessage value) => value.writeToBuffer()));
+        (ClassCode value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<ClassUuid, $0.RestStatus>(
         'EndClass',
         endClass_Pre,
@@ -188,9 +210,14 @@ abstract class RestPresenterClassServiceBase extends $grpc.Service {
     return getClasses(call, await request);
   }
 
-  $async.Stream<$2.RestChatMessage> startClass_Pre(
-      $grpc.ServiceCall call, $async.Future request) async* {
-    yield* startClass(call, (await request) as ClassUuid);
+  $async.Future<QuizzesHistoryStatistics> getQuizzesHistoryStatistics_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return getQuizzesHistoryStatistics(call, await request);
+  }
+
+  $async.Future<ClassCode> startClass_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return startClass(call, await request);
   }
 
   $async.Future<$0.RestStatus> endClass_Pre(
@@ -206,8 +233,10 @@ abstract class RestPresenterClassServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, ClassUuid request);
   $async.Future<RestClass> getClass($grpc.ServiceCall call, ClassUuid request);
   $async.Future<GetClassesResponse> getClasses(
-      $grpc.ServiceCall call, Empty request);
-  $async.Stream<$2.RestChatMessage> startClass(
+      $grpc.ServiceCall call, $1.Empty request);
+  $async.Future<QuizzesHistoryStatistics> getQuizzesHistoryStatistics(
+      $grpc.ServiceCall call, ClassUuid request);
+  $async.Future<ClassCode> startClass(
       $grpc.ServiceCall call, ClassUuid request);
   $async.Future<$0.RestStatus> endClass(
       $grpc.ServiceCall call, ClassUuid request);

@@ -20,3 +20,10 @@ const QuizQuestionStatistics$json = const {
   ],
 };
 
+const OpenQuizQuestionAnswers$json = const {
+  '1': 'OpenQuizQuestionAnswers',
+  '2': const [
+    const {'1': 'url', '3': 1, '4': 3, '5': 9, '10': 'url'},
+  ],
+};
+

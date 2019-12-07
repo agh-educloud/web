@@ -68,3 +68,24 @@ class QuizQuestionStatistics extends $pb.GeneratedMessage {
   void clearParticipants() => clearField(3);
 }
 
+class OpenQuizQuestionAnswers extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('OpenQuizQuestionAnswers')
+    ..pPS(1, 'url')
+    ..hasRequiredFields = false
+  ;
+
+  OpenQuizQuestionAnswers() : super();
+  OpenQuizQuestionAnswers.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  OpenQuizQuestionAnswers.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  OpenQuizQuestionAnswers clone() => OpenQuizQuestionAnswers()..mergeFromMessage(this);
+  OpenQuizQuestionAnswers copyWith(void Function(OpenQuizQuestionAnswers) updates) => super.copyWith((message) => updates(message as OpenQuizQuestionAnswers));
+  $pb.BuilderInfo get info_ => _i;
+  static OpenQuizQuestionAnswers create() => OpenQuizQuestionAnswers();
+  OpenQuizQuestionAnswers createEmptyInstance() => create();
+  static $pb.PbList<OpenQuizQuestionAnswers> createRepeated() => $pb.PbList<OpenQuizQuestionAnswers>();
+  static OpenQuizQuestionAnswers getDefault() => _defaultInstance ??= create()..freeze();
+  static OpenQuizQuestionAnswers _defaultInstance;
+
+  $core.List<$core.String> get url => $_getList(0);
+}
+
