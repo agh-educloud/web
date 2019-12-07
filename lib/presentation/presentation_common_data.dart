@@ -8,6 +8,7 @@ class PresentationData {
   String classUuid = "";
   List<RestQuizQuestion> quizQuestions = [];
   List<QuizQuestionStatistics> quizStatistics = [];
+  List<String> urls = [];
   List<RestChatMessage> studentQuestions = [];
   bool presenting = false;
 
@@ -19,6 +20,7 @@ class PresentationData {
   void saveAndFlush() {
     classUuid = "";
     quizQuestions = [];
+    urls = [];
     studentQuestions = [];
     quizStatistics = [];
     presenting = false;

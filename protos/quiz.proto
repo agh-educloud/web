@@ -5,7 +5,7 @@ import "status.proto";
 service PresenterQuizService{
     rpc DelegateQuizQuestion (RestQuizQuestionUuid) returns (RestStatus);
     rpc GetQuizQuestionStatistics (RestQuizQuestionUuid) returns (stream QuizQuestionStatistics);
-    rpc GetOpenQuizQuestionAnswers (RestQuizQuestionUuid) returns (stream QuizQuestionStatistics);
+    rpc GetOpenQuizQuestionAnswers (RestQuizQuestionUuid) returns (stream OpenQuizQuestionAnswers);
 }
 
 message RestQuizQuestionUuid {

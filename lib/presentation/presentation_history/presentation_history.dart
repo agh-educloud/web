@@ -61,12 +61,10 @@ class PresentationHistoryButton extends StatelessWidget {
             ],
           ),
           onPressed: () async {
-            var list = await ClassService().getPresentedClasses();
+            var list = await ClassService().getClasses();
             if (list.isNotEmpty) {await getPresentationsOptions(context, list)
                   .then((ClassWithUuid p) => {
-                        if (p != null)
-                          {
-                            ClassService().startClass(p.classUuid.toString()),
+                        if (p != null){
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

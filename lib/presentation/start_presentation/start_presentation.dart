@@ -80,8 +80,9 @@ class StartPanelButton extends StatelessWidget {
                                     .map((quizQuestion) => quizQuestion.question)
                                     .toList(),
                                 poolQuizQuestionStatistics(classToPresent),
+                                poolOpenQuizQuestionAnswers(classToPresent),
                                 poolStudentQuestions(classToPresent),
-                                showClassCodeDialog(context,classToPresent),
+                                showClassCodeDialog(context, code.code, classToPresent),
                             }),
                           }
                       });
@@ -92,7 +93,7 @@ class StartPanelButton extends StatelessWidget {
     );
   }
 
-  Future<void> showClassCodeDialog(BuildContext context, ClassWithUuid classToPresent) {
+  Future<void> showClassCodeDialog(BuildContext context, String code, ClassWithUuid classToPresent) {
     return showDialog<void>(
                               context: context,
                               barrierDismissible: false,
@@ -118,7 +119,7 @@ class StartPanelButton extends StatelessWidget {
                                       children: [
                                         TextSpan(
                                           text:
-                                              'Kod do zajęć: 12345',
+                                              'Kod do zajęć: ' + code,
                                           style:
                                               TextStyle(color: Colors.black),
                                         )
@@ -131,6 +132,7 @@ class StartPanelButton extends StatelessWidget {
 
   StreamSubscription quizStatistics;
   StreamSubscription studentQuestions;
+  StreamSubscription studentOpenQuestionAnswers;
 
   poolQuizQuestionStatistics(ClassWithUuid classWithUuid) {
     List<QuizQuestionStatistics> stats = [];
@@ -151,10 +153,24 @@ class StartPanelButton extends StatelessWidget {
 
   poolStudentQuestions(ClassWithUuid classWithUuid) {
     studentQuestions = Stream.periodic(const Duration(milliseconds: 1000))
+        .takeWhile((_) => presentationData.presenting)
         .listen((_) => {
       ClassService()
           .getStudentQuestions(classWithUuid.classUuid.toString())
           .then((StudentQuestions value) => presentationData.studentQuestions = value.message,
+          onError: (_) =>
+              debugPrint('Unable to add students questions! '))
+    });
+  }
+
+  poolOpenQuizQuestionAnswers(ClassWithUuid classWithUuid) {
+
+    studentOpenQuestionAnswers = Stream.periodic(const Duration(milliseconds: 1000))
+        .takeWhile((_) => presentationData.presenting)
+        .listen((_) => {
+      ClassService()
+          .getOpenQuizQuestionAnswers(classWithUuid.classUuid.toString())
+          .then((OpenQuizQuestionAnswers answers) => presentationData.urls = answers.url,
           onError: (_) =>
               debugPrint('Unable to add students questions! '))
     });

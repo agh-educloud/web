@@ -11,31 +11,18 @@ class QuestionsToPresenterPanel extends StatefulWidget {
 }
 
 class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
-
   int selected = -1;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height * 0.7,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.4,
+      height: MediaQuery.of(context).size.height * 0.7,
+      width: MediaQuery.of(context).size.width * 0.4,
       child: Column(
         children: <Widget>[
           StartPresentationPanelContainer(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.6,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width * 0.4,
+            height: MediaQuery.of(context).size.height * 0.6,
+            width: MediaQuery.of(context).size.width * 0.4,
             body: ListView.builder(
               itemCount: presentationData.studentQuestions.length,
               // ignore: missing_return
@@ -43,34 +30,29 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                 final item = presentationData.studentQuestions[i].message;
                 return Container(
                     decoration: BoxDecoration(
-                        color: Colors.cyan
-                    ),
+                        color: selected == i ? Colors.cyan : null),
                     margin: const EdgeInsets.symmetric(vertical: 2),
                     // if current item is selected show blue color
                     child: ListTile(
                         title: Text(
                           item.toString(),
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headline,
+                          style: Theme.of(context).textTheme.headline,
                         ),
-                        onTap: () =>
-                        {
-                          setState(() =>
-                          {
-                            selected = i
-                          }), // reverse bool value
-                        }));
+                        onTap: () => {
+                              setState(() => {
+                                    if (selected == i)
+                                      {selected = -1}
+                                    else
+                                      {selected = i}
+                                  }), // reverse bool value
+                            }));
               },
             ),
             text: "Pytania od uczniów",
           ),
           Container(
-            margin: EdgeInsets.only(left: MediaQuery
-                .of(context)
-                .size
-                .width * 0.015),
+            margin: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.015),
             child: Row(
               children: <Widget>[
                 Padding(
@@ -100,16 +82,19 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: presentationData.studentQuestions[selected].message.content,
-                                          style: TextStyle(
-                                              color: Colors.black),
+                                          text: presentationData
+                                              .studentQuestions[selected]
+                                              .message
+                                              .content,
+                                          style: TextStyle(color: Colors.black),
                                         )
                                       ],
                                     ),
                                   ),
                                 );
                               });
-                        };
+                        }
+                        ;
                       }),
                 ),
                 Padding(
@@ -119,9 +104,7 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                       color: Colors.green,
                       child: Text("Odśwież"),
                       onPressed: () {
-                        setState(() {
-
-                        });
+                        setState(() {});
                       }),
                 ),
               ],
