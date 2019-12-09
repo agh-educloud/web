@@ -12,14 +12,14 @@ class ClassService {
   final String protocol = "http://";
   
   Future<void> createClass(String name, String description,
-      List<RestQuizQuestion> questions, List<int> presentationBytes) async {
+      List<RestQuizQuestion> questions, List<RestQuizQuestion> openQuizQuestions) async {
     RestClass rqClass = RestClass()
       ..name = name
-      ..topic = description
-      ..presentation = presentationBytes;
+      ..topic = description;
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
+      rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
@@ -45,13 +45,14 @@ class ClassService {
     return classesResponse.classes;
   }
 
-  Future<void> updateClass(int id, String name, String description, List<RestQuizQuestion> questions) async {
+  Future<void> updateClass(int id, String name, String description, List<RestQuizQuestion> questions, List<RestQuizQuestion> openQuizQuestions) async {
     RestClass rqClass = RestClass()
       ..name = name
       ..topic = description;
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
+      rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
@@ -70,13 +71,13 @@ class ClassService {
     }
   }
 
-  Future<String> startClass(String classUuid) async {
+  Future<ClassCode> startClass(String classUuid) async {
     ClassUuid classUuid2 = ClassUuid()
         ..classUuid = int.parse(classUuid);
 
     debugPrint('Starting class with id: ' + classUuid);
-    await http.post(protocol + hostAndPort + '/class/' + classUuid, body: classUuid2.writeToJson());
-    return "12345";
+    var response = await http.post(protocol + hostAndPort + '/startClass/' + classUuid, body: classUuid2.writeToJson());
+    return ClassCode.fromJson(response.body);
   }
 
   Future<void> deleteClass(ClassWithUuid chosenClass) async {
@@ -88,8 +89,9 @@ class ClassService {
     await http.post(protocol + hostAndPort + '/quizToDelegate/' + classUuid, body: selected.writeToJson());
   }
 
-  getPresentedClasses() {
-
+  Future<QuizzesHistoryStatistics> getQuizHistoryStatistics(String classUuid) async {
+    final response = await http.get(protocol + hostAndPort + '/quizHistoryStatistics/' + classUuid);
+    return QuizzesHistoryStatistics.fromJson(response.body);
   }
 
   Future<QuizQuestionStatistics> getQuizStatistics(String quizUuid) async {
@@ -97,9 +99,18 @@ class ClassService {
     return QuizQuestionStatistics.fromJson(response.body);
   }
 
-  Future<RestChatMessage> getStudentQuestions(String classUuid) async {
-    final response = await http.get(protocol + hostAndPort + '/quizStatistics/' + classUuid);
-    return RestChatMessage.fromJson(response.body);
+  Future<StudentQuestions> getStudentQuestions(String classUuid) async {
+    final response = await http.get(protocol + hostAndPort + '/studentsQuestion/' + classUuid);
+    return StudentQuestions.fromJson(response.body);
+  }
+
+  Future<void> endClass(String classUuid) async {
+    await http.post(protocol + hostAndPort + '/endClass/' + classUuid);
+  }
+
+  Future<OpenQuizQuestionAnswers> getOpenQuizQuestionAnswers(String classUuid) async {
+    final response = await http.get(protocol + hostAndPort + '/openQuizQuestionAnswers/' + classUuid);
+    return OpenQuizQuestionAnswers.fromJson(response.body);
   }
 
 }

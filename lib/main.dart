@@ -1,6 +1,6 @@
 import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/material.dart';
-import 'package:web/login/login_panel.dart';
+import 'package:web/main_panel/main_panel.dart';
 
 main() async {
   //Use for firebase package development only
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPanel(),
+      home: MainPanel(),
     );
   }
 }

@@ -4,10 +4,7 @@ option go_package = "educloud-web";
 
 import "status.proto";
 import "quiz.proto";
-import "homework.proto";
 import "chat.proto";
-import "user.proto";
-
 
 service RestPresenterClassService {
     rpc CreateClass (ClassCreationRequest) returns (ClassCreationResponse);
@@ -15,6 +12,7 @@ service RestPresenterClassService {
     rpc DeleteClass (ClassUuid) returns (RestStatus);
     rpc GetClass (ClassUuid) returns (RestClass);
     rpc GetClasses (Empty) returns (GetClassesResponse);
+    rpc GetQuizzesHistoryStatistics (ClassUuid) returns (QuizzesHistoryStatistics);
 
     rpc StartClass (ClassUuid) returns (ClassCode);
     rpc EndClass (ClassUuid) returns (RestStatus);
@@ -25,8 +23,12 @@ message RestClass {
     string name = 1;
     string topic = 2;
     repeated QuizQuestionCreation quizQuestion = 3;
-    repeated RestHomework homework = 4;
+    repeated QuizQuestionCreation openQuizQuestion = 4;
     bytes presentation = 5;
+}
+
+message QuizzesHistoryStatistics {
+    repeated QuizQuestionStatistics quizQuestionStatistics = 1;
 }
 
 message QuizQuestionCreation {
@@ -36,8 +38,8 @@ message QuizQuestionCreation {
 
 message RestQuizQuestion {
     string question = 1;
-    repeated RestOption option = 3;
     string hint = 2;
+    repeated RestOption option = 3;
     RestOption answer = 4;
 }
 
@@ -76,6 +78,3 @@ message ClassWithUuid {
 message ClassCode{
     string code = 1;
 }
-
-message Empty{}
-

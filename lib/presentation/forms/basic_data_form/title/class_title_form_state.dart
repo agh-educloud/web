@@ -22,7 +22,7 @@ class ClassTitleFormState extends State<ClassTitleForm> {
 
     // Build a Form widget using the _formKey created above.
     return Container(
-      height: MediaQuery.of(context).size.height * 0.06,
+      height: MediaQuery.of(context).size.height * 0.07,
       width: MediaQuery.of(context).size.width * 0.15,
       color: Colors.white,
       child: Form(
@@ -32,7 +32,7 @@ class ClassTitleFormState extends State<ClassTitleForm> {
             TextFormField(
               decoration: InputDecoration(
                   hintStyle: TextStyle(fontSize: 13),
-                  hintText: nameToHint == null || nameToHint.isEmpty ? '  Wpisz nazwe dla klasy' : nameToHint,
+                  hintText: nameToHint == null || nameToHint.isEmpty ? '  Wpisz nazwę dla klasy' : nameToHint,
 
               ),
               controller: controller,

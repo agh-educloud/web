@@ -24,7 +24,7 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
 
     // Build a Form widget using the _formKey created above.
     return Container(
-      height: MediaQuery.of(context).size.height * 0.06,
+      height: MediaQuery.of(context).size.height * 0.07,
       width: MediaQuery.of(context).size.width * 0.15,
       color: Colors.white,
       child: Form(
@@ -35,7 +35,7 @@ class ClassDescriptionFormState extends State<ClassDescriptionForm> {
             TextFormField(
               decoration: InputDecoration(
                 hintStyle: TextStyle(fontSize: 13),
-                hintText: topicToHint == null || topicToHint.isEmpty ? ' Wpisz tematyke klasy' : topicToHint,
+                hintText: topicToHint == null || topicToHint.isEmpty ? ' Wpisz tematykę klasy' : topicToHint,
               ),
               controller: controller,
               validator: (value) {

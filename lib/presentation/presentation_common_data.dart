@@ -5,8 +5,10 @@ import 'package:web/generated/quiz.pb.dart';
 class PresentationData {
   static final PresentationData _appData = PresentationData._internal();
 
+  String classUuid = "";
   List<RestQuizQuestion> quizQuestions = [];
   List<QuizQuestionStatistics> quizStatistics = [];
+  List<String> urls = [];
   List<RestChatMessage> studentQuestions = [];
   bool presenting = false;
 
@@ -15,8 +17,10 @@ class PresentationData {
   }
   PresentationData._internal();
 
-  void flush() {
+  void saveAndFlush() {
+    classUuid = "";
     quizQuestions = [];
+    urls = [];
     studentQuestions = [];
     quizStatistics = [];
     presenting = false;

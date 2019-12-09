@@ -32,15 +32,6 @@ class AskedQuestionListState extends State<AskedQuestionList>{
                   padding: const EdgeInsets.all(8.0),
                   child: RaisedButton(
                       textColor: Colors.white,
-                      color: Colors.green,
-                      child: Text("Odpowiedz"),
-                      onPressed: () {
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      textColor: Colors.white,
                       color: Colors.blueAccent,
                       child: Text("Szczegóły"),
                       onPressed: () {

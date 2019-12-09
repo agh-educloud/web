@@ -28,7 +28,7 @@ class BasicDataFormState extends State<BasicDataForm> {
   Widget build(BuildContext context) {
     return CreatePresentationFormContainer(
         title: "Podstawowe dane",
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.24,
         child: Container(
             alignment: Alignment.topLeft,
             child: Column(
