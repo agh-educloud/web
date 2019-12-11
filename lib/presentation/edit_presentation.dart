@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web/common_data.dart';
 import 'package:web/generated/class.pb.dart';
 import 'package:web/service/class.dart';
 import 'package:web/utils/draw_line.dart';
@@ -67,6 +68,11 @@ class EditPanelButton extends StatelessWidget {
                   ClassWithUuid p) =>
               {
                 if(p != null){
+                  if(appData.quizQuestions.isEmpty){
+                    debugPrint('XD'),
+                    debugPrint(p.class_2.quizQuestion.toString()),
+                    appData.quizQuestions.addAll(buildQuizQuestion(p.class_2.quizQuestion)),
+                  },
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) =>
                           CreatePresentationPanel(classToHint: p)))
@@ -77,6 +83,9 @@ class EditPanelButton extends StatelessWidget {
         ),
       ),
     );
+  }
+  List<RestQuizQuestion> buildQuizQuestion(List<QuizQuestionCreation> quizQuestion){
+    return quizQuestion.map((quizQuestion) => quizQuestion.question).toList();
   }
 }
 

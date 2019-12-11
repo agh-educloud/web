@@ -43,6 +43,7 @@ class CreatePresentationPanelBody extends StatelessWidget {
     final Color gradientStartColor = const Color(0xffffffff);
     final Color gradientEndColor = const Color(0xffE5E5E5);
 
+
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Column(
@@ -50,8 +51,8 @@ class CreatePresentationPanelBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <StatefulWidget>[
           classToHint == null ? BasicDataForm() : BasicDataForm(nameToHint: classToHint.class_2.name,topicToHint: classToHint.class_2.topic,) ,
-          classToHint == null ? PresentationAssigmentFormButton() : PresentationAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
-          classToHint == null ? PresentationPhotoAssigmentFormButton() : PresentationPhotoAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
+          classToHint == null ? PresentationAssigmentFormButton(questionsToHint: null,) : PresentationAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
+          classToHint == null ? PresentationPhotoAssigmentFormButton(questionsToHint: null,) : PresentationPhotoAssigmentFormButton(questionsToHint: buildQuizQuestion(classToHint.class_2.quizQuestion)),
           CreatePresentationSubmitButton(classUuid: classToHint != null ? classToHint.classUuid : null,)
         ],
       ),
@@ -63,8 +64,7 @@ class CreatePresentationPanelBody extends StatelessWidget {
       )),
     );
   }
-
   List<RestQuizQuestion> buildQuizQuestion(List<QuizQuestionCreation> quizQuestion){
-   return quizQuestion.map((quizQuestion) => quizQuestion.question).toList();
+    return quizQuestion.map((quizQuestion) => quizQuestion.question).toList();
   }
 }

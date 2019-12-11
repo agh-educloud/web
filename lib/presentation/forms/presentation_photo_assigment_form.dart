@@ -24,9 +24,6 @@ class PresentationPhotoAssigmentFormButtonStateful
 
   @override
   Widget build(BuildContext context) {
-    if(questionsToHint != null){
-      appData.quizQuestions.addAll(questionsToHint);
-    }
 
     final double height = MediaQuery.of(context).size.height * 0.18;
     final double width = MediaQuery.of(context).size.width * 0.18;
