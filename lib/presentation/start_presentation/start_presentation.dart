@@ -158,9 +158,10 @@ class StartPanelButton extends StatelessWidget {
       ClassService()
           .getStudentQuestions(classWithUuid.classUuid.toString())
           .then((StudentQuestions value) => presentationData.studentQuestions = value.message,
-          onError: (_) =>
-              debugPrint('Unable to add students questions! '))
-    });
+          onError: (err) =>{
+            debugPrint(err.toString()),
+            debugPrint('Unable to add students questions! ')
+          })});
   }
 
   poolOpenQuizQuestionAnswers(ClassWithUuid classWithUuid) {
@@ -172,7 +173,7 @@ class StartPanelButton extends StatelessWidget {
           .getOpenQuizQuestionAnswers(classWithUuid.classUuid.toString())
           .then((OpenQuizQuestionAnswers answers) => presentationData.urls = answers.url,
           onError: (_) =>
-              debugPrint('Unable to add students questions! '))
+              debugPrint('Unable to open students questions stats! '))
     });
   }
 }

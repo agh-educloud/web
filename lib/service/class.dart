@@ -8,7 +8,7 @@ import 'package:web/generated/quiz.pb.dart';
 class ClassService {
   List<int> classUuids = [];
 
-  final String hostAndPort = "localhost:8080";
+  final String hostAndPort = "192.168.43.114:8080";
   final String protocol = "http://";
   
   Future<void> createClass(String name, String description,
@@ -21,6 +21,8 @@ class ClassService {
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
       rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
+    var c = 0;
+    rqClass..quizQuestion.forEach((question) => question.uuid = c++);
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
 
@@ -54,6 +56,9 @@ class ClassService {
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
       rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
     }
+    var c = 0;
+    rqClass..quizQuestion.forEach((question) => question.uuid = c++);
+
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
 

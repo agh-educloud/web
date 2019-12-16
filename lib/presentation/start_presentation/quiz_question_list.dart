@@ -107,8 +107,10 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                         isAnySelected = true,
                                         selected = classToStart
                                             .class_2.quizQuestion[i],
+                                        selected.uuid = i,
                                         debugPrint(classToStart.class_2.quizQuestion.toString()),
                                         debugPrint(i.toString()),
+//                                        debugPrint(classToStart.class_2.quizQuestion[i].question.),
                                         debugPrint(classToStart.class_2.quizQuestion[i].question.answer.value),
                                         selectedIndex = i
                                       }
@@ -137,7 +139,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                 !_selected[selectedIndex];
                             isAnySelected = false;
                           });
-                          ClassService().delegateQuizQuestion(
+                          debugPrint("XD");
+                          debugPrint(selected.uuid.toString());
+                        ClassService().delegateQuizQuestion(
                               classToStart.classUuid.toString(),
                               RestQuizQuestionUuid()..uuid = selected.uuid);
                         }
@@ -258,7 +262,9 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                       color: Colors.orangeAccent,
                       child: Text("Zobacz odpowiedzi"),
                       onPressed: () {
-                        setState(() {});
+                        setState(() {
+
+                        });
                         var question = classToStart.class_2.quizQuestion[selectedIndex].question;
                         debugPrint(question.question);
                         debugPrint(question.option == null ? "" : question.option.toString());
@@ -291,6 +297,46 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
+                                      ),
+                                      FlatButton(
+                                        color: Colors.green,
+                                        textColor: Colors.white,
+                                        onPressed: () {
+                                          setState(() {
+                                            images = presentationData.urls
+                                                .map<Widget>((url) => Container(
+                                              margin: EdgeInsets.all(5.0),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                child: Stack(children: <Widget>[
+                                                  Image.network(url, fit: BoxFit.cover, width: 1000.0),
+                                                  Positioned(
+                                                    bottom: 0.0,
+                                                    left: 0.0,
+                                                    right: 0.0,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        gradient: LinearGradient(
+                                                          colors: [
+                                                            Color.fromARGB(200, 0, 0, 0),
+                                                            Color.fromARGB(0, 0, 0, 0)
+                                                          ],
+                                                          begin: Alignment.bottomCenter,
+                                                          end: Alignment.topCenter,
+                                                        ),
+                                                      ),
+                                                      padding:
+                                                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                                                    ),
+                                                  ),
+                                                ]),
+                                              ),
+                                            ))
+                                                .toList();
+
+                                          });
+                                        },
+                                        child: Text("Odśwież"),
                                       ),
                                     ],
                                   );
