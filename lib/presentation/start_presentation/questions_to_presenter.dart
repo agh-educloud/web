@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/presentation/presentation_common_data.dart';
@@ -15,6 +17,7 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(Duration(seconds: 1), (Timer t) => setState((){}));
     return Container(
       height: MediaQuery.of(context).size.height * 0.7,
       width: MediaQuery.of(context).size.width * 0.4,
@@ -35,7 +38,8 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                     // if current item is selected show blue color
                     child: ListTile(
                         title: Text(
-                          item.content.substring(8),
+                          //TODO
+                          item.content,
                           style: Theme.of(context).textTheme.headline,
                         ),
                         onTap: () => {
@@ -95,16 +99,6 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                               });
                         }
                         ;
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.green,
-                      child: Text("Odśwież"),
-                      onPressed: () {
-                        setState(() {});
                       }),
                 ),
               ],

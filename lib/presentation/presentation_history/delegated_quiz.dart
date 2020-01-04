@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web/generated/class.pb.dart';
+import 'package:web/presentation/presentation_common_data.dart';
 import 'package:web/presentation/start_presentation/start_presentation_panel_container.dart';
-import 'package:web/service/class.dart';
 
 class DelegatedQuizQuestionList extends StatefulWidget {
   DelegatedQuizQuestionList({Key key, this.classToView}) : super(key: key);
@@ -86,10 +86,8 @@ class DelegatedQuizQuestionListState extends State<DelegatedQuizQuestionList> {
                       color: Colors.orangeAccent,
                       child: Text("Zobacz statystyki"),
                       onPressed: () async {
-                        var stats = await ClassService()
-                            .getQuizHistoryStatistics(
-                                classToView.classUuid.toString());
-                        var stat = stats.quizQuestionStatistics[selected];
+                        var stats = presentationData.quizStatistics;
+                        var stat = stats[selected];
                         await showDialog<void>(
                           context: context,
                           builder: (context) {

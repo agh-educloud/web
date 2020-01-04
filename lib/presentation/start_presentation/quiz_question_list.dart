@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,39 +33,44 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
   QuizQuestionCreation selected;
   int selectedIndex;
 
-  List<Widget> images = presentationData.urls
-      .map<Widget>((url) => Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Stack(children: <Widget>[
-                Image.network(url, fit: BoxFit.cover, width: 1000.0),
-                Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  ),
-                ),
-              ]),
-            ),
-          ))
-      .toList();
+
+  List<Widget> images;
 
   QuizQuestionListPanelState(this.classToStart, this._selected,
-      this.isAnySelected, this._delegated, this.selected, this.selectedIndex);
+      this.isAnySelected, this._delegated, this.selected, this.selectedIndex){
+    Timer.periodic(Duration(seconds: 1), (Timer t) => setState((){
+      images  = presentationData.urls
+          .map<Widget>((url) => Container(
+        margin: EdgeInsets.all(5.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          child: Stack(children: <Widget>[
+            Image.network(url, fit: BoxFit.cover, width: 1000.0),
+            Positioned(
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(200, 0, 0, 0),
+                      Color.fromARGB(0, 0, 0, 0)
+                    ],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                ),
+                padding:
+                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              ),
+            ),
+          ]),
+        ),
+      ))
+          .toList();
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,10 +200,39 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                               String contentText = "Ilość odpowiedzi: " +
                                   participants.toString() +
                                   "\n\nProcent poprawynch odpowiedzi: " +
-                                  correctAnswersPercentage.toString() +
+                                  (correctAnswersPercentage * 100).toString() +
                                   "%";
 
+                              Timer.periodic(Duration(seconds: 1), (Timer t) => setState((){
+                                var participants = presentationData
+                                    .quizStatistics
+                                    .firstWhere((q) =>
+                                q.questionUuid ==
+                                    selected.uuid)
+                                    .participants;
+                                var correctAnswersPercentage =
+                                    presentationData.quizStatistics
+                                        .firstWhere((q) =>
+                                    q.questionUuid ==
+                                        selected.uuid)
+                                        .percentageOfCorrectAnswers;
+                                participants = participants == null
+                                    ? 0
+                                    : participants;
+                                correctAnswersPercentage =
+                                correctAnswersPercentage == null
+                                    ? 0.0
+                                    : correctAnswersPercentage;
+
+                                contentText = "Ilość odpowiedzi: " +
+                                    participants.toString() +
+                                    "\n\nProcent poprawynch odpowiedzi: " +
+                                    (correctAnswersPercentage  * 100)
+                                        .toString() +
+                                    "%";
+                              }));
                               return StatefulBuilder(
+
                                 builder: (context, setState) {
                                   return AlertDialog(
                                     title: Text("Statystyki"),
@@ -209,41 +245,6 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                      ),
-                                      FlatButton(
-                                        color: Colors.green,
-                                        textColor: Colors.white,
-                                        onPressed: () {
-                                          setState(() {
-                                            var participants = presentationData
-                                                .quizStatistics
-                                                .firstWhere((q) =>
-                                                    q.questionUuid ==
-                                                    selected.uuid)
-                                                .participants;
-                                            var correctAnswersPercentage =
-                                                presentationData.quizStatistics
-                                                    .firstWhere((q) =>
-                                                        q.questionUuid ==
-                                                        selected.uuid)
-                                                    .percentageOfCorrectAnswers;
-                                            participants = participants == null
-                                                ? 0
-                                                : participants;
-                                            correctAnswersPercentage =
-                                                correctAnswersPercentage == null
-                                                    ? 0.0
-                                                    : correctAnswersPercentage;
-
-                                            contentText = "Ilość odpowiedzi: " +
-                                                participants.toString() +
-                                                "\n\nProcent poprawynch odpowiedzi: " +
-                                                correctAnswersPercentage
-                                                    .toString() +
-                                                "%";
-                                          });
-                                        },
-                                        child: Text("Odśwież"),
                                       ),
                                     ],
                                   );
@@ -292,51 +293,11 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                     actions: <Widget>[
                                       FlatButton(
                                         textColor: Colors.white,
-                                        child: Text('Powrót'),
+                                        child: Text('Powrót ' + images.length.toString()),
                                         color: Colors.black38,
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                      ),
-                                      FlatButton(
-                                        color: Colors.green,
-                                        textColor: Colors.white,
-                                        onPressed: () {
-                                          setState(() {
-                                            images = presentationData.urls
-                                                .map<Widget>((url) => Container(
-                                              margin: EdgeInsets.all(5.0),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                child: Stack(children: <Widget>[
-                                                  Image.network(url, fit: BoxFit.cover, width: 1000.0),
-                                                  Positioned(
-                                                    bottom: 0.0,
-                                                    left: 0.0,
-                                                    right: 0.0,
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        gradient: LinearGradient(
-                                                          colors: [
-                                                            Color.fromARGB(200, 0, 0, 0),
-                                                            Color.fromARGB(0, 0, 0, 0)
-                                                          ],
-                                                          begin: Alignment.bottomCenter,
-                                                          end: Alignment.topCenter,
-                                                        ),
-                                                      ),
-                                                      padding:
-                                                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                                                    ),
-                                                  ),
-                                                ]),
-                                              ),
-                                            ))
-                                                .toList();
-
-                                          });
-                                        },
-                                        child: Text("Odśwież"),
                                       ),
                                     ],
                                   );

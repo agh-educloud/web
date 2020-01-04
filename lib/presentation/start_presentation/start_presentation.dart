@@ -136,23 +136,24 @@ class StartPanelButton extends StatelessWidget {
 
   poolQuizQuestionStatistics(ClassWithUuid classWithUuid) {
     List<QuizQuestionStatistics> stats = [];
-    quizStatistics = Stream.periodic(const Duration(milliseconds: 1000))
+    quizStatistics = Stream.periodic(const Duration(seconds: 2))
         .takeWhile((_) => presentationData.presenting)
         .listen((_) => {
               stats = [],
-              classWithUuid.class_2.quizQuestion.forEach((question) => {
+              classWithUuid.class_2.quizQuestion.where((q) => q.question.option != null && q.question.option.isNotEmpty
+              ).toList().forEach((question) => {
                     ClassService()
                         .getQuizStatistics(question.uuid.toString())
                         .then((value) => stats.add(value),
                             onError: (_) =>
-                                debugPrint('Unable to add question stats! '))
+                                debugPrint('Question stats not found! '))
                   }),
               presentationData.quizStatistics = stats
             });
   }
 
   poolStudentQuestions(ClassWithUuid classWithUuid) {
-    studentQuestions = Stream.periodic(const Duration(milliseconds: 1000))
+    studentQuestions = Stream.periodic(const Duration(seconds: 2))
         .takeWhile((_) => presentationData.presenting)
         .listen((_) => {
       ClassService()
@@ -160,20 +161,20 @@ class StartPanelButton extends StatelessWidget {
           .then((StudentQuestions value) => presentationData.studentQuestions = value.message,
           onError: (err) =>{
             debugPrint(err.toString()),
-            debugPrint('Unable to add students questions! ')
+            debugPrint('Students questions not found! ')
           })});
   }
 
   poolOpenQuizQuestionAnswers(ClassWithUuid classWithUuid) {
 
-    studentOpenQuestionAnswers = Stream.periodic(const Duration(milliseconds: 1000))
+    studentOpenQuestionAnswers = Stream.periodic(const Duration(seconds: 2))
         .takeWhile((_) => presentationData.presenting)
         .listen((_) => {
       ClassService()
           .getOpenQuizQuestionAnswers(classWithUuid.classUuid.toString())
           .then((OpenQuizQuestionAnswers answers) => presentationData.urls = answers.url,
           onError: (_) =>
-              debugPrint('Unable to open students questions stats! '))
+              debugPrint('Open students questions answers not found! '))
     });
   }
 }

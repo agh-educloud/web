@@ -8,7 +8,7 @@ import 'package:web/generated/quiz.pb.dart';
 class ClassService {
   List<int> classUuids = [];
 
-  final String hostAndPort = "192.168.43.114:8080";
+  final String hostAndPort = "localhost:8080";
   final String protocol = "http://";
   
   Future<void> createClass(String name, String description,
