@@ -1,10 +1,9 @@
 import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/material.dart';
-import 'package:web/main_panel/main_panel.dart';
+import 'package:web/login/login_panel.dart';
 
 main() async {
-  //Use for firebase package development only
-//  await config();
+
 
     fb.initializeApp(
       apiKey: "AIzaSyCirpdgLsezsvNNPAlsU0mC-i5T1d0U1kQ",
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPanel(),
+      home: LoginPanel(),
     );
   }
 }
