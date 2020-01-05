@@ -276,7 +276,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                               return StatefulBuilder(
                                 builder: (context, setState) {
                                   return AlertDialog(
-                                    title: Text("Odpowiedzi"),
+                                    title: Text("Odpowiedzi (" + images.length.toString() + ")" ),
                                     content: CarouselSlider(
                                       items: images.map((image) {
                                         return Builder(
@@ -293,7 +293,7 @@ class QuizQuestionListPanelState extends State<QuizQuestionListPanel> {
                                     actions: <Widget>[
                                       FlatButton(
                                         textColor: Colors.white,
-                                        child: Text('Powrót ' + images.length.toString()),
+                                        child: Text('Powrót '),
                                         color: Colors.black38,
                                         onPressed: () {
                                           Navigator.pop(context);

@@ -38,8 +38,7 @@ class QuestionsToPresenterPanelState extends State<QuestionsToPresenterPanel> {
                     // if current item is selected show blue color
                     child: ListTile(
                         title: Text(
-                          //TODO
-                          item.content,
+                          item.content.substring(8),
                           style: Theme.of(context).textTheme.headline,
                         ),
                         onTap: () => {
