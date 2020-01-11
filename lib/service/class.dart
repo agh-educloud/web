@@ -22,10 +22,10 @@ class ClassService {
       if(openQuizQuestions.isNotEmpty){
         rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
       }
+      var c = 0;
+      rqClass..quizQuestion.forEach((question) => question.uuid = c++);
     }
 
-    var c = 0;
-    rqClass..quizQuestion.forEach((question) => question.uuid = c++);
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
 
@@ -60,10 +60,10 @@ class ClassService {
       if(openQuizQuestions.isNotEmpty){
         rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
       }
-    }
-    var c = 0;
-    rqClass..quizQuestion.forEach((question) => question.uuid = c++);
+      var c = 0;
+      rqClass..quizQuestion.forEach((question) => question.uuid = c++);
 
+    }
 
     debugPrint("Sending:\n" + rqClass.writeToJson());
 
