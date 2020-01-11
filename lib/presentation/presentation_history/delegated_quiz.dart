@@ -109,7 +109,7 @@ class DelegatedQuizQuestionListState extends State<DelegatedQuizQuestionList> {
                             String contentText = "Ilość odpowiedzi: " +
                                 participants.toString() +
                                 "\n\nProcent poprawynch odpowiedzi: " +
-                                correctAnswersPercentage.toString() +
+                                (correctAnswersPercentage * 100).toString() +
                                 "%";
 
                             return StatefulBuilder(
