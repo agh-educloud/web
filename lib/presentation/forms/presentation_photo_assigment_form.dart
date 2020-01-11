@@ -94,7 +94,7 @@ class PresentationPhotoAssigmentFormButtonStateful
                     textColor: Colors.black,
                     onPressed: () {
                       setState(() async {
-                        if (appData.openQuizQuestions.isNotEmpty) {
+                        if (appData.openQuizQuestions != null && appData.openQuizQuestions.isNotEmpty) {
                           RestQuizQuestion questionToEditOrRemove = await getQuizesOptions(context);
                           if(action.edit) {
                             RestQuizQuestion editedQuestion = await waitForQuizQuestionEdit(context, questionToEditOrRemove);
