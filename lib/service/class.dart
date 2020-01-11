@@ -19,8 +19,11 @@ class ClassService {
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
-      rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
+      if(openQuizQuestions.isNotEmpty){
+        rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
+      }
     }
+
     var c = 0;
     rqClass..quizQuestion.forEach((question) => question.uuid = c++);
 
@@ -54,7 +57,9 @@ class ClassService {
 
     if(questions.isNotEmpty){
       rqClass..quizQuestion.addAll(questions.map((question) => QuizQuestionCreation()..question = question).toList());
-      rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
+      if(openQuizQuestions.isNotEmpty){
+        rqClass..quizQuestion.addAll(openQuizQuestions.map((question) => QuizQuestionCreation()..question = question).toList());
+      }
     }
     var c = 0;
     rqClass..quizQuestion.forEach((question) => question.uuid = c++);

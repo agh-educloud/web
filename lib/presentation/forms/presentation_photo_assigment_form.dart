@@ -64,7 +64,9 @@ class PresentationPhotoAssigmentFormButtonStateful
                       setState(() async {
                         RestQuizQuestion question =
                         await waitForQuizQuestion(context);
-                        appData.openQuizQuestions.add(question);
+                        if(question != null){
+                          appData.openQuizQuestions.add(question);
+                        }
                       });
                     },
                   ),
